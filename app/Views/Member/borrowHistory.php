@@ -48,7 +48,6 @@ $fname = $_SESSION['FullName'];
     </tbody>
 </table>
 
-<button onclick="logout()">Logout</button>
 
 <script src="app/Views/Auth/logAuth.js"></script>
 <script src="app/Views/Member/logBorrowHistory.js"></script>

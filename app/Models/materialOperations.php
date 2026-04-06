@@ -94,13 +94,13 @@ function addEbook($data, $staffID) {
 
     $stmt = $conn->prepare("
         INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, EbookFormat, AccessStart, AccessEnd, AddedBy)
-        VALUES (2, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (2, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?, ?)
     ");
     $stmt->bind_param(
-        'sssssssiiissi',
+        'sssssssssi',
         $data['title'], $data['author'], $data['isbn'],
         $data['description'], $data['genre'], $data['publishDate'],
-        $data['publisher'], $data['totalQty'], $data['totalQty'],
+        $data['publisher'],
         $data['ebookFormat'], $data['accessStart'], $data['accessEnd'], $staffID
     );
 

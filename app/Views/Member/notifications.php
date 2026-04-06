@@ -43,9 +43,6 @@ $fname = $_SESSION['FullName'];
         <tr><td colspan="3">Loading...</td></tr>
     </tbody>
 </table>
-
-<button onclick="logout()">Logout</button>
-
 <script src="app/Views/Auth/logAuth.js"></script>
 <script src="app/Views/Member/logNotifications.js"></script>
 

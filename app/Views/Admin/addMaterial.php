@@ -58,8 +58,6 @@ $fname = $_SESSION['FullName'];
         <input type="text" id="ebookGenre" placeholder="Genre"><br><br>
         <input type="date" id="ebookPublishDate"><br><br>
         <input type="text" id="ebookPublisher" placeholder="Publisher"><br><br>
-        <label>Book Quantity</label>
-        <input type="number" id="ebookQty" value="1" min="1"><br><br>
         <select id="ebookFormat">
             <option value="EPUB">EPUB</option>
             <option value="PDF">PDF</option>
@@ -166,7 +164,7 @@ $fname = $_SESSION['FullName'];
             <tr>
                 <th>ID</th><th>Type</th><th>Title</th><th>Author</th>
                 <th>ISBN</th><th>Publisher</th><th>Genre</th>
-                <th>Total Qty</th><th>Available Qty</th><th>Date Added</th><th>Actions</th>
+                <th>Date Added</th><th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -188,7 +186,7 @@ $fname = $_SESSION['FullName'];
 
     <button onclick="location.href='app/Views/Dashboards/adminDashboard.php'">Go Back</button>
 
-    <script src="app/Views/Admin/logMaterial.js?v=2"></script>
+    <script src="app/Views/Admin/logMaterial.js?v=3"></script>
 
 </body>
 </html>

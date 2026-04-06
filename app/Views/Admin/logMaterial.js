@@ -81,8 +81,6 @@ function loadMaterials() {
                     <td>${m.ISBN ?? 'N/A'}</td>
                     <td>${m.Publisher}</td>
                     <td>${m.Genre ?? 'N/A'}</td>
-                    <td>${m.TotalQuantity}</td>
-                    <td>${m.AvailableQuantity}</td>
                     <td>${m.DateAdded}</td>
                     <td>
                         <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -181,7 +179,6 @@ function addEbook() {
             genre: $('#ebookGenre').val().trim(),
             publishDate: $('#ebookPublishDate').val(),
             publisher: publisher,
-            totalQty: $('#ebookQty').val(),
             ebookFormat: $('#ebookFormat').val(),
         },
         dataType: 'json',
@@ -200,8 +197,6 @@ function addEbook() {
 
 function clearEbookForm() {
     $('#ebookTitle, #ebookAuthor, #ebookISBN, #ebookDesc, #ebookGenre, #ebookPublisher').val('');
-    $('#ebookQty').val(1);
-    $('#ebookAccessStart, #ebookAccessEnd').val('');
 }
 
 function addJournal() {
@@ -389,10 +384,13 @@ function renderMaterials(data) {
     if (data.ebooks && data.ebooks.length > 0) {
         data.ebooks.forEach(m => {
             ebookRows += `<tr>
-                <td>${m.MaterialID}</td><td>EBook</td><td>${m.Title}</td>
-                <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
-                <td>${m.Publisher}</td><td>${m.Genre ?? 'N/A'}</td>
-                <td>${m.TotalQuantity}</td><td>${m.AvailableQuantity}</td>
+                <td>${m.MaterialID}</td>
+                <td>EBook</td>
+                <td>${m.Title}</td>
+                <td>${m.Author}</td>
+                <td>${m.ISBN ?? 'N/A'}</td>
+                <td>${m.Publisher}</td>
+                <td>${m.Genre ?? 'N/A'}</td>
                 <td>${m.DateAdded}</td>
                 <td>
                     <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -401,7 +399,7 @@ function renderMaterials(data) {
             </tr>`;
         });
     } else {
-        ebookRows = '<tr><td colspan="11">No ebooks found</td></tr>';
+        ebookRows = '<tr><td colspan="9">No ebooks found</td></tr>';
     }
     $('#ebookTable tbody').html(ebookRows);
 

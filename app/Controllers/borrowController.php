@@ -57,6 +57,11 @@ switch ($action) {
     case 'getHistory':
         echo json_encode(getBorrowHist($memberID));
         break;
+        
+    case 'search':
+        $q = trim($_GET['q'] ?? '');
+        echo json_encode(searchAvailMats($q));
+    break;
 
     default:
         echo json_encode(['success' => false, 'message' => 'Invalid action']);

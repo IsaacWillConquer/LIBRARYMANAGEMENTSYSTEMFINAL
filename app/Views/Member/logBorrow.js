@@ -10,20 +10,30 @@ $(document).ready(function () {
         loadCatalog();
         loadUnreadCount();
     }, 5000);
+
+    let matSearchTimer;
+    $('#matSearch').on('keyup', function () {
+        clearTimeout(matSearchTimer);
+        let q = $(this).val().trim();
+        matSearchTimer = setTimeout(function () {
+            doMatSearch(q);
+        }, 300);
+});
 });
 
-function showTab(tab) {
+function showTab(tab, btn) {
     $('#paneTrending, #paneRecommended, #paneAll').hide();
     if (tab === 'trending') $('#paneTrending').show();
     if (tab === 'recommended') $('#paneRecommended').show();
-    if (tab === 'all') $('#paneAll').show();
+    if (tab === 'all')   $('#paneAll').show();
+    $('.tab-btn').removeClass('active');
+    if (btn) $(btn).addClass('active');
 }
 
 function showError(msg) {
     $('#success_text').hide();
     $('#error_text').text(msg).fadeIn();
 }
-
 function showSuccess(msg) {
     $('#error_text').hide();
     $('#success_text').text(msg).fadeIn();
@@ -46,29 +56,37 @@ function loadCatalog() {
 
 function renderMatTable(selector, mats) {
     if (!mats || mats.length === 0) {
-        $(selector + ' tbody').html('<tr><td colspan="6">No materials found</td></tr>');
+        $(selector + ' tbody').html('<tr><td colspan="6" style="color:#aaa;text-align:center;">No materials found</td></tr>');
         return;
     }
-
     var rows = '';
     mats.forEach(function (m) {
+        var isEbook = m.TypeName === 'EBook';
+        var availCell = isEbook ? '<em style="color:#aaa;">Digital</em>' : m.AvailableQuantity;
+        var btn = isEbook
+            ? '<button class="action-btn" onclick="confirmBorrow(' + m.MaterialID + ', \'' + escapeAttr(m.Title) + '\', true)">Access</button>'
+            : '<button class="action-btn" onclick="confirmBorrow(' + m.MaterialID + ', \'' + escapeAttr(m.Title) + '\', false)">Borrow</button>';
+
         rows += '<tr>' +
             '<td>' + m.Title + '</td>' +
             '<td>' + m.Author + '</td>' +
             '<td>' + m.TypeName + '</td>' +
             '<td>' + (m.Genre || 'N/A') + '</td>' +
-            '<td>' + m.AvailableQuantity + '</td>' +
-            '<td><button onclick="confirmBorrow(' + m.MaterialID + ', \'' + escapeAttr(m.Title) + '\')">Borrow</button></td>' +
+            '<td>' + availCell + '</td>' +
+            '<td>' + btn + '</td>' +
         '</tr>';
     });
-
     $(selector + ' tbody').html(rows);
 }
 
-function confirmBorrow(matID, title) {
-    if (!confirm('Request to borrow "' + title + '"?\n\nYour request will be reviewed by a librarian.')) return;
+function confirmBorrow(matID, title, isEbook) {
+    var msg = isEbook
+        ? 'Access "' + title + '"? This will be logged.'
+        : 'Request to borrow "' + title + '"?';
+    if (!confirm(msg)) return;
     submitBorrow(matID);
 }
+
 
 function submitBorrow(matID) {
     $.ajax({
@@ -96,35 +114,30 @@ function loadMyRequests() {
         dataType: 'json',
         success: function (data) {
             if (!data || data.length === 0) {
-                $('#myRequestsTable tbody').html('<tr><td colspan="5">No requests yet</td></tr>');
+                $('#myRequestsTable tbody').html('<tr><td colspan="5" style="color:#aaa;text-align:center;">No requests yet</td></tr>');
                 return;
             }
-
             var rows = '';
             data.forEach(function (r) {
-                var cancelBtn = '';
-                if (r.Status === 'Pending') {
-                    cancelBtn = '<button onclick="cancelRequest(' + r.RequestID + ')">Cancel</button>';
-                }
-
+                var cancelBtn = r.Status === 'Pending'
+                    ? '<button class="cancel-btn" onclick="cancelRequest(' + r.RequestID + ')">Cancel</button>'
+                    : '';
+                var pill = '<span class="status-pill s-' + r.Status.toLowerCase() + '">' + r.Status + '</span>';
                 rows += '<tr>' +
                     '<td>' + r.Title + '</td>' +
                     '<td>' + r.TypeName + '</td>' +
                     '<td>' + r.RequestDate + '</td>' +
-                    '<td>' + r.Status + '</td>' +
+                    '<td>' + pill + '</td>' +
                     '<td>' + cancelBtn + '</td>' +
                 '</tr>';
             });
-
-            rows += '<tr><td colspan="5"><a href="app/Views/Member/myRequests.php">View All</a></td></tr>';
             $('#myRequestsTable tbody').html(rows);
         }
     });
 }
 
 function cancelRequest(reqID) {
-    if (!confirm('Cancel this borrow request?')) return;
-
+    if (!confirm('Cancel this request?')) return;
     $.ajax({
         url: 'app/Controllers/borrowController.php',
         method: 'POST',
@@ -150,38 +163,32 @@ function loadMyBorrows() {
         dataType: 'json',
         success: function (data) {
             if (!data || data.length === 0) {
-                $('#myBorrowsTable tbody').html('<tr><td colspan="5">No active borrows</td></tr>');
+                $('#myBorrowsTable tbody').html('<tr><td colspan="5" style="color:#aaa;text-align:center;">No active borrows</td></tr>');
                 return;
             }
-
             var rows = '';
             data.forEach(function (b) {
-                var statusStyle = b.Status === 'Overdue' ? 'color:red;font-weight:bold;' : '';
+                var pill = '<span class="status-pill s-' + b.Status.toLowerCase() + '">' + b.Status + '</span>';
                 rows += '<tr>' +
                     '<td>' + b.Title + '</td>' +
                     '<td>' + b.TypeName + '</td>' +
                     '<td>' + b.BorrowDate + '</td>' +
                     '<td>' + b.DueDate + '</td>' +
-                    '<td style="' + statusStyle + '">' + b.Status + '</td>' +
+                    '<td>' + pill + '</td>' +
                 '</tr>';
             });
-
             $('#myBorrowsTable tbody').html(rows);
         }
     });
 }
 
-function escapeAttr(string) {
-    return string.replace(/'/g, "\\'");
-}
-
 function toggleNotifications() {
-    let panel = $('#notificationsPanel');
-    if (panel.is(':hidden')) {
+    var $p = $('#notificationsPanel');
+    if ($p.is(':hidden')) {
         loadNotifications();
-        panel.fadeIn(200);
+        $p.fadeIn(200);
     } else {
-        panel.fadeOut(200);
+        $p.fadeOut(200);
     }
 }
 
@@ -192,10 +199,11 @@ function loadUnreadCount() {
         data: { action: 'getUnreadCount' },
         dataType: 'json',
         success: function (data) {
+            var $badge = $('#unreadBadge');
             if (data.count > 0) {
-                $('#unreadBadge').text('(' + data.count + ')').show();
+                $badge.text(data.count).css('display', 'flex');
             } else {
-                $('#unreadBadge').hide();
+                $badge.hide();
             }
         }
     });
@@ -208,22 +216,20 @@ function loadNotifications() {
         data: { action: 'getNotifications' },
         dataType: 'json',
         success: function (data) {
+            var $body = $('#notifBody');
             if (!data || data.length === 0) {
-                $('#notificationsTable tbody').html('<tr><td colspan="3">No notifications</td></tr>');
+                $body.html('<div class="notif-row">No notifications</div>');
                 return;
             }
-
-            var rows = '';
+            var html = '';
             data.forEach(function (n) {
-                var style = n.IsRead == 0 ? 'font-weight:bold;' : '';
-                rows += '<tr style="' + style + '">' +
-                    '<td>' + n.Message + '</td>' +
-                    '<td>' + n.DateCreated + '</td>' +
-                    '<td>' + (n.IsRead == 0 ? 'Unread' : 'Read') + '</td>' +
-                '</tr>';
+                var cls = n.IsRead == 0 ? 'notif-row unread' : 'notif-row';
+                html += '<div class="' + cls + '">' +
+                    n.Message +
+                    '<div class="notif-date">' + n.DateCreated + '</div>' +
+                '</div>';
             });
-
-            $('#notificationsTable tbody').html(rows);
+            $body.html(html);
         }
     });
 }
@@ -237,6 +243,28 @@ function markAllRead() {
         success: function () {
             loadNotifications();
             loadUnreadCount();
+        }
+    });
+}
+
+function escapeAttr(str) {
+    return str.replace(/'/g, "\\'");
+}
+
+function doMatSearch(q) {
+    if (q === '') {
+        loadCatalog();
+        return;
+    }
+    $.ajax({
+        url: 'app/Controllers/borrowController.php',
+        method: 'GET',
+        data: { action: 'search', q: q },
+        dataType: 'json',
+        success: function (data) {
+            // show results in all tab, switch to it
+            renderMatTable('#allTable', data);
+            showTab('all', $('.tab-btn').last()[0]);
         }
     });
 }

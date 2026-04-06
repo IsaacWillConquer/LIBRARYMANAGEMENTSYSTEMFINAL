@@ -7,11 +7,14 @@ $conn = getConnection();
 function getAvailMats() {
     global $conn;
 
+
+    //All physcial borrow needs qty
     $result = $conn->query("
         SELECT m.*, mt.TypeName
         FROM materials m
         JOIN materialtypes mt ON m.TypeID = mt.TypeID
-        WHERE m.IsArchived = 0 AND m.AvailableQuantity > 0
+        WHERE m.IsArchived = 0
+        AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
         ORDER BY m.DateAdded DESC
     ");
 
@@ -31,7 +34,8 @@ function getTrend() {
         LEFT JOIN borrowrecords br
             ON br.MaterialID = m.MaterialID
             AND br.BorrowDate >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-        WHERE m.IsArchived = 0 AND m.AvailableQuantity > 0
+        WHERE m.IsArchived = 0 
+        AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
         GROUP BY m.MaterialID
         ORDER BY BorrowCount DESC, m.DateAdded DESC
         LIMIT 6
@@ -65,7 +69,7 @@ function getRecs($memberID) {
             SELECT m.*, mt.TypeName
             FROM materials m
             JOIN materialtypes mt ON m.TypeID = mt.TypeID
-            WHERE m.IsArchived = 0 AND m.AvailableQuantity > 0
+            WHERE m.IsArchived = 0 AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
             ORDER BY m.DateAdded DESC
             LIMIT 6
         ");
@@ -83,7 +87,7 @@ function getRecs($memberID) {
         FROM materials m
         JOIN materialtypes mt ON m.TypeID = mt.TypeID
         WHERE m.IsArchived = 0
-          AND m.AvailableQuantity > 0
+          AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
           AND m.Genre IN ($placeholders)
         ORDER BY m.DateAdded DESC
         LIMIT 6
@@ -96,7 +100,6 @@ function getRecs($memberID) {
     while ($row = $result->fetch_assoc()) $data[] = $row;
     return $data;
 }
-
 function getMyReq($memberID) {
     global $conn;
 
@@ -141,7 +144,7 @@ function getMyActBorrows($memberID) {
 function submitReq($memberID, $materialID) {
     global $conn;
 
-    //check if member is active
+    // check member active
     $stmt = $conn->prepare("SELECT StatusID FROM members WHERE MemberID = ?");
     $stmt->bind_param('i', $memberID);
     $stmt->execute();
@@ -151,7 +154,7 @@ function submitReq($memberID, $materialID) {
         return ['success' => false, 'message' => 'Your account is not active'];
     }
 
-    $stmt = $conn->prepare("SELECT AvailableQuantity, IsArchived, Title FROM materials WHERE MaterialID = ?");
+    $stmt = $conn->prepare("SELECT TypeID, IsArchived, Title FROM materials WHERE MaterialID = ?");
     $stmt->bind_param('i', $materialID);
     $stmt->execute();
     $material = $stmt->get_result()->fetch_assoc();
@@ -159,11 +162,18 @@ function submitReq($memberID, $materialID) {
     if (!$material || $material['IsArchived']) {
         return ['success' => false, 'message' => 'Material not found'];
     }
+
+    // ebooks: just log access, skip everything else
+    if ($material['TypeID'] == 2) {
+        logBorrowAction(null, $memberID, $materialID, 'Accessed');
+        return ['success' => true, 'message' => 'EBook access logged. Enjoy your reading!'];
+    }
+
+    // physical borrow flow below
     if ($material['AvailableQuantity'] < 1) {
         return ['success' => false, 'message' => 'No copies available'];
     }
 
-    //check for existing pending request
     $stmt = $conn->prepare("
         SELECT RequestID FROM borrowrequests
         WHERE MemberID = ? AND MaterialID = ? AND Status = 'Pending'
@@ -173,7 +183,7 @@ function submitReq($memberID, $materialID) {
     $stmt->execute();
 
     if ($stmt->get_result()->fetch_assoc()) {
-        return ['success' => false, 'message' => 'You already have a pending or active request for this material'];
+        return ['success' => false, 'message' => 'You already have a pending request for this material'];
     }
 
     $limitRow = $conn->query("SELECT SettingValue FROM settings WHERE SettingKey = 'max_borrow_limit'")->fetch_assoc();
@@ -259,4 +269,28 @@ function logBorrowAction($staffID, $memberID, $materialID, $action) {
     ");
     $stmt->bind_param('iiis', $staffID, $memberID, $materialID, $action);
     $stmt->execute();
+}
+
+function searchAvailMats($q) {
+    global $conn;
+
+    $like = '%' . $conn->real_escape_string($q) . '%';
+
+    $result = $conn->query("
+        SELECT m.*, mt.TypeName
+        FROM materials m
+        JOIN materialtypes mt ON m.TypeID = mt.TypeID
+        WHERE m.IsArchived = 0
+          AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
+          AND (
+              m.Title LIKE '$like' OR
+              m.Author LIKE '$like' OR
+              m.Genre LIKE '$like'
+          )
+        ORDER BY m.DateAdded DESC
+    ");
+
+    $data = [];
+    while ($row = $result->fetch_assoc()) $data[] = $row;
+    return $data;
 }

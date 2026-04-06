@@ -17,122 +17,101 @@ $fname = $_SESSION['FullName'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
+    <link rel="stylesheet" href="app/Views/Member/memberDashboard.css">
     <title>Member Dashboard</title>
 </head>
 <body>
 
-<h1>Library Management System</h1>
-<h2>Welcome <?php echo $fname; ?></h2>
+<header>
+    <h1>Nyle's Library Management System</h1>
+    <div>
+        <div class="notif-wrap" style="display:inline-block;">
+            <button class="nav-btn" onclick="toggleNotifications()">Notifications</button>
+            <span id="unreadBadge"></span>
+        </div>
+        <a href="app/Views/Member/borrowHistory.php">My History</a>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+</header>
 
-<div id="navigation">
-    <h2>Dashboard</h2>
-    <button onclick="logout()">Logout</button>
-    <button onclick="toggleNotifications()">Notifications <span id="unreadBadge" style="color:red;display:none;"></span></button>
-    <button onclick="window.location.href='/LIBRARYMANAGEMENTSYSTEMFINAL/app/Views/Member/borrowHistory.php'">Borrow History</button>
+<div class="welcome">Welcome, <strong><?php echo htmlspecialchars($fname); ?></strong></div>
+
+<div id="error_text"></div>
+<div id="success_text"></div>
+
+<div id="notificationsPanel">
+    <div class="notif-head">
+        Notifications
+        <button class="btn-markread" onclick="markAllRead()">Mark all read</button>
+    </div>
+    <div class="notif-body" id="notifBody">
+        <div class="notif-row">Loading...</div>
+    </div>
 </div>
 
-<div id="notificationsPanel" style="display:none; border:1px solid #ccc; padding:10px;">
-    <h3>Notifications <button onclick="markAllRead()">Mark All as Read</button></h3>
-    <table id="notificationsTable" border="1">
+<main>
+
+    <h2>My Active Borrows</h2>
+    <table id="myBorrowsTable">
         <thead>
             <tr>
-                <th>Message</th>
-                <th>Date</th>
-                <th>Status</th>
+                <th>Title</th><th>Type</th><th>Borrow Date</th><th>Due Date</th><th>Status</th>
             </tr>
         </thead>
-        <tbody>
-            <tr><td colspan="3">Loading...</td></tr>
-        </tbody>
+        <tbody><tr><td colspan="5">Loading...</td></tr></tbody>
     </table>
-</div>
 
-<div id="error_text" style="color:red; display:none;"></div>
-<div id="success_text" style="color:green; display:none;"></div>
-
-<h2>My Active Borrows</h2>
-<table id="myBorrowsTable" border="1">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Borrow Date</th>
-            <th>Due Date</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td colspan="5">Loading...</td></tr>
-    </tbody>
-</table>
-
-<br>
-
-<h2>My Requests</h2>
-<table id="myRequestsTable" border="1">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Request Date</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td colspan="5">Loading...</td></tr>
-    </tbody>
-</table>
-
-<br>
-
-<h2>Browse Materials</h2>
-
-<button id="tabTrending" onclick="showTab('trending')">Trending</button>
-<button id="tabRecommended" onclick="showTab('recommended')">Recommended</button>
-<button id="tabAll" onclick="showTab('all')">All Available</button>
-
-<div id="paneTrending">
-    <h3>Trending</h3>
-    <table id="trendingTable" border="1">
+    <h2>My Requests</h2>
+    <table id="myRequestsTable">
         <thead>
             <tr>
-                <th>Title</th><th>Author</th><th>Type</th>
-                <th>Genre</th><th>Available</th><th>Action</th>
+                <th>Title</th><th>Type</th><th>Request Date</th><th>Status</th><th>Action</th>
             </tr>
         </thead>
-        <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+        <tbody><tr><td colspan="5">Loading...</td></tr></tbody>
     </table>
-</div>
 
-<div id="paneRecommended" style="display:none;">
-    <h3>Recommended For You</h3>
-    <table id="recommendedTable" border="1">
-        <thead>
-            <tr>
-                <th>Title</th><th>Author</th><th>Type</th>
-                <th>Genre</th><th>Available</th><th>Action</th>
-            </tr>
-        </thead>
-        <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
-    </table>
-</div>
+    <h2>Browse Materials</h2>
 
-<div id="paneAll" style="display:none;">
-    <h3>All Available Materials</h3>
-    <table id="allTable" border="1">
-        <thead>
-            <tr>
-                <th>Title</th><th>Author</th><th>Type</th>
-                <th>Genre</th><th>Available</th><th>Action</th>
-            </tr>
-        </thead>
-        <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
-    </table>
-</div>
+
+    <input type="text" id="matSearch" placeholder="Search by title, author, genre...">
+    <div class="tab-bar">
+        <button class="tab-btn active" onclick="showTab('trending', this)">Trending</button>
+        <button class="tab-btn" onclick="showTab('recommended', this)">Recommended</button>
+        <button class="tab-btn" onclick="showTab('all', this)">All Available</button>
+    </div>
+
+    <div id="paneTrending">
+        <table id="trendingTable">
+            <thead>
+                <tr><th>Title</th><th>Author</th><th>Type</th><th>Genre</th><th>Available</th><th>Action</th></tr>
+            </thead>
+            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+    </div>
+
+    <div id="paneRecommended" style="display:none;">
+        <table id="recommendedTable">
+            <thead>
+                <tr><th>Title</th><th>Author</th><th>Type</th><th>Genre</th><th>Available</th><th>Action</th></tr>
+            </thead>
+            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+    </div>
+
+    <div id="paneAll" style="display:none;">
+        <table id="allTable">
+            <thead>
+                <tr><th>Title</th><th>Author</th><th>Type</th><th>Genre</th><th>Available</th><th>Action</th></tr>
+            </thead>
+            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+        </table>
+    </div>
+
+</main>
 
 <script src="app/Views/Auth/logAuth.js"></script>
-<script src="app/Views/Member/logBorrow.js?v=1"></script>
+<script src="app/Views/Member/logBorrow.js?v=3"></script>
 
 </body>
 </html>
