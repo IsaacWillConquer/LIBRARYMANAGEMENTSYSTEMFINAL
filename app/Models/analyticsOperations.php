@@ -7,12 +7,13 @@ $conn = getConnection();
 function borrowMontly() {
     global $conn;
 
+    // last 6 months
     $res = $conn->query("
         SELECT DATE_FORMAT(BorrowDate, '%b %Y') AS Month,
-            DATE_FORMAT(BorrowDate, '%Y-%m') AS MonthSort,
-            COUNT(*) AS Total
+               DATE_FORMAT(BorrowDate, '%Y-%m') AS MonthSort,
+               COUNT(*) AS Total
         FROM borrowrecords
-        WHERE BorrowDate >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
+        WHERE BorrowDate >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
         GROUP BY MonthSort, Month
         ORDER BY MonthSort ASC
     ");
@@ -26,10 +27,11 @@ function topBorrow() {
     global $conn;
 
     $res = $conn->query("
-        SELECT m.Title, COUNT(br.RecordID) AS BorrowCount
+        SELECT m.Title, mt.TypeName, COUNT(br.RecordID) AS BorrowCount
         FROM borrowrecords br
         JOIN materials m ON br.MaterialID = m.MaterialID
-        GROUP BY br.MaterialID, m.Title
+        JOIN materialtypes mt ON mt.TypeID = m.TypeID
+        GROUP BY br.MaterialID, m.Title, mt.TypeName
         ORDER BY BorrowCount DESC
         LIMIT 5
     ");
@@ -72,15 +74,78 @@ function matType() {
 function summaryStats() {
     global $conn;
 
-    $members = $conn->query("SELECT COUNT(*) AS cnt FROM members")->fetch_assoc()['cnt'];
-    $materials = $conn->query("SELECT COUNT(*) AS cnt FROM materials WHERE IsArchived = 0")->fetch_assoc()['cnt'];
-    $active = $conn->query("SELECT COUNT(*) AS cnt FROM borrowrecords WHERE Status IN ('Borrowed','Overdue')")->fetch_assoc()['cnt'];
-    $overdue = $conn->query("SELECT COUNT(*) AS cnt FROM borrowrecords WHERE Status = 'Overdue'")->fetch_assoc()['cnt'];
+    $stats = $conn->query("
+        SELECT
+            (SELECT COUNT(*) FROM members) AS members,
+            (SELECT COUNT(*) FROM materials WHERE IsArchived = 0) AS materials,
+            (SELECT COUNT(*) FROM borrowrecords WHERE Status IN ('Borrowed','Overdue')) AS active,
+            (SELECT COUNT(*) FROM borrowrecords WHERE Status = 'Overdue') AS overdue,
+            (SELECT COALESCE(SUM(OverdueFine), 0) FROM borrowrecords WHERE OverdueFine > 0) AS fines,
+            (SELECT COUNT(*) FROM borrowrequests WHERE Status = 'Pending') AS pending,
+            (SELECT COUNT(*) FROM donations WHERE Status = 'Pending') AS donations
+    ")->fetch_assoc();
 
     return [
-        'totalMembers' => $members,
-        'totalMaterials' => $materials,
-        'activeBorrows' => $active,
-        'overdueCount' => $overdue
+        'totalMembers' => $stats['members'],
+        'totalMaterials' => $stats['materials'],
+        'activeBorrows' => $stats['active'],
+        'overdueCount' => $stats['overdue'],
+        'totalFines' => number_format($stats['fines'], 2),
+        'pendingReqs' => $stats['pending'],
+        'pendingDonations' => $stats['donations']
     ];
+}
+function genreStats() {
+    global $conn;
+
+    $res = $conn->query("
+        SELECT m.Genre, COUNT(br.RecordID) AS BorrowCount
+        FROM borrowrecords br
+        JOIN materials m ON br.MaterialID = m.MaterialID
+        WHERE m.Genre IS NOT NULL AND m.Genre != ''
+        GROUP BY m.Genre
+        ORDER BY BorrowCount DESC
+        LIMIT 6
+    ");
+
+    $data = [];
+    while ($row = $res->fetch_assoc()) $data[] = $row;
+    return $data;
+}
+
+function topMembers() {
+    global $conn;
+
+    $res = $conn->query("
+        SELECT CONCAT(m.FirstName, ' ', m.LastName) AS MemberName,
+               COUNT(br.RecordID) AS BorrowCount
+        FROM borrowrecords br
+        JOIN members m ON m.MemberID = br.MemberID
+        GROUP BY br.MemberID, MemberName
+        ORDER BY BorrowCount DESC
+        LIMIT 5
+    ");
+
+    $data = [];
+    while ($row = $res->fetch_assoc()) $data[] = $row;
+    return $data;
+}
+
+function recentActivity() {
+    global $conn;
+
+    $res = $conn->query("
+        SELECT bl.Action, bl.LogTime,
+               CONCAT(m.FirstName, ' ', m.LastName) AS MemberName,
+               mat.Title
+        FROM borrowlogs bl
+        JOIN members m ON m.MemberID = bl.MemberID
+        JOIN materials mat ON mat.MaterialID = bl.MaterialID
+        ORDER BY bl.LogTime DESC
+        LIMIT 10
+    ");
+
+    $data = [];
+    while ($row = $res->fetch_assoc()) $data[] = $row;
+    return $data;
 }

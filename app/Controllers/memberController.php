@@ -42,6 +42,8 @@ switch ($action) {
             echo json_encode(['success' => false, 'message' => 'All fields are required']);
             break;
         }
+
+        //FILTER.... Checks the input email valid
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo json_encode(['success' => false, 'message' => 'Invalid email format']);
             break;

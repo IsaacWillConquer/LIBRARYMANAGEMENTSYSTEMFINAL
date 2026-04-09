@@ -3,10 +3,13 @@ require_once __DIR__ . "/../../../core/auth.php";
 
 mustBeStaff();
 
+adminOnly();
+
 if (isDefaultPassword()) {
     header('Location: /../Auth/changePass.php');
     exit();
 }
+
 
 $role = $_SESSION['Role'];
 $fname = $_SESSION['FullName'];
@@ -29,13 +32,13 @@ $fname = $_SESSION['FullName'];
         <h2>Dashboard</h2>
     </div>
 
-    <button onclick="window.location.href='app/Views/Admin/addStaff.php'">Add Staff</button>
-    <button onclick="window.location.href='app/Views/Admin/addMember.php'">Add Member</button>
-    <button onclick="window.location.href='app/Views/Admin/addMaterial.php'">Add Material</button>
-    <button onclick="window.location.href='app/Views/Circulation/manageBorrows.php'">Manage Borrow Requests</button>
-    <button onclick="window.location.href='app/Views/Dashboards/analystDashboard.php'">Analytics</button>
-    <button onclick="logout()">Logout</button>
+        <a href="app/Views/Admin/addStaff.php">Add Staff</a>
+        <a href="app/Views/Admin/addMember.php">Add Member</a>
+        <a href="app/Views/Admin/addMaterial.php">Add Material</a>
+        <a href="app/Views/Circulation/manageBorrows.php">Manage Borrow Requests</a>
+        <a href="app/Views/Dashboards/analystDashboard.php">Analytics</a>
+        <button onclick="logout()">Logout</button>
 
-    <script src="app/Views/Auth/logAuth.js"></script>
+    <script src="app/Views/Auth/logAuth.js?v=2"></script>
 </body>
 </html>

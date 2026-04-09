@@ -45,6 +45,8 @@ $fname = $_SESSION['FullName'];
         <input type="text" id="bookPublisher" placeholder="Publisher"><br><br>
         <label>Book Quantity</label>
         <input type="number" id="bookQty" value="1" min="1"><br><br>
+        <label>Replacement Cost (₱)</label>
+        <input type="number" id="bookReplacementCost" value="0.00" min="0" step="0.01"><br><br>
         <button onclick="addBook()">Save</button>
         <button onclick="hideAllForms()">Cancel</button>
     </div>
@@ -64,6 +66,8 @@ $fname = $_SESSION['FullName'];
             <option value="AZW3">AZW3</option>
             <option value="MOBI">MOBI</option>
         </select><br><br>
+        <label>Replacement Cost (₱)</label>
+        <input type="number" id="ebookReplacementCost" value="0.00" min="0" step="0.01"><br><br>
         <button onclick="addEbook()">Save</button>
         <button onclick="hideAllForms()">Cancel</button>
     </div>
@@ -91,6 +95,8 @@ $fname = $_SESSION['FullName'];
             <option value="Monthly">Monthly</option>
             <option value="Quarterly">Quarterly</option>
         </select><br><br>
+        <label>Replacement Cost (₱)</label>
+        <input type="number" id="journalReplacementCost" value="0.00" min="0" step="0.01"><br><br>
         <button onclick="addJournal()">Save</button>
         <button onclick="hideAllForms()">Cancel</button>
     </div>
@@ -107,6 +113,8 @@ $fname = $_SESSION['FullName'];
         <input type="text" id="editPublisher" placeholder="Publisher"><br><br>
         <input type="number" id="editTotalQty" placeholder="Total Qty"><br><br>
         <input type="number" id="editAvailableQty" placeholder="Available Qty"><br><br>
+        <label>Replacement Cost (₱)</label>
+        <input type="number" id="editReplacementCost" value="0.00" min="0" step="0.01"><br><br>
 
         <div id="ebookFields">
             <label>EBook Format</label>
@@ -152,7 +160,7 @@ $fname = $_SESSION['FullName'];
             <tr>
                 <th>ID</th><th>Type</th><th>Title</th><th>Author</th>
                 <th>ISBN</th><th>Publisher</th><th>Genre</th>
-                <th>Total Qty</th><th>Available Qty</th><th>Date Added</th><th>Actions</th>
+                <th>Total Qty</th><th>Available Qty</th><th>Replacement Cost</th><th>Date Added</th><th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -164,7 +172,7 @@ $fname = $_SESSION['FullName'];
             <tr>
                 <th>ID</th><th>Type</th><th>Title</th><th>Author</th>
                 <th>ISBN</th><th>Publisher</th><th>Genre</th>
-                <th>Date Added</th><th>Actions</th>
+                <th>Replacement Cost</th><th>Date Added</th><th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -176,7 +184,7 @@ $fname = $_SESSION['FullName'];
             <tr>
                 <th>ID</th><th>Type</th><th>Title</th><th>Author</th>
                 <th>ISBN</th><th>Publisher</th><th>Type</th>
-                <th>Total Qty</th><th>Available Qty</th><th>Date Added</th><th>Actions</th>
+                <th>Total Qty</th><th>Available Qty</th><th>Replacement Cost</th><th>Date Added</th><th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -186,7 +194,7 @@ $fname = $_SESSION['FullName'];
 
     <button onclick="location.href='app/Views/Dashboards/adminDashboard.php'">Go Back</button>
 
-    <script src="app/Views/Admin/logMaterial.js?v=3"></script>
+    <script src="app/Views/Admin/logMaterial.js?v=4"></script>
 
 </body>
 </html>

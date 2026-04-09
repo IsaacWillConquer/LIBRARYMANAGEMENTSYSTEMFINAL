@@ -16,6 +16,7 @@ header('Content-Type: application/json');
 
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
+
 switch ($action) {
     case 'loginDaUser':
         login();
@@ -69,10 +70,7 @@ function login() {
                 $redirect = 'app/Views/Dashboards/adminDashboard.php';
                 break;
             case 'CirculationLibrarian':
-                $redirect = 'app/Views/Dashboards/circulationDashboard.php';
-                break;
-            case 'MaterialLibrarian':
-                $redirect = 'app/Views/Dashboards/adminDashboard.php';
+                $redirect = 'app/Views/Circulation/manageBorrows.php';
                 break;
             case 'DataAnalyst':
                 $redirect = 'app/Views/Dashboards/analystDashboard.php';
@@ -150,7 +148,7 @@ function changepass() {
                 $redirect = 'app/Views/Dashboards/adminDashboard.php';
                 break;
             case 'CirculationLibrarian':
-                $redirect = 'app/Views/Dashboards/circulationDashboard.php';
+                $redirect = 'app/Views/Circulation/manageBorrow.php';
                 break;
             case 'DataAnalyst':
                 $redirect = 'app/Views/Dashboards/analystDashboard.php';

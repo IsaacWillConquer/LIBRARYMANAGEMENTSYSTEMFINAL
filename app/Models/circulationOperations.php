@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../../config/dbConn.php";
 require_once __DIR__ . "/notificationOperations.php";
+require_once __DIR__ . "/borrowOperations.php";
 
 $conn = getConnection();
 
@@ -24,53 +25,145 @@ function getPendingReq() {
     return $data;
 }
 
-function approveReq($requestID, $staffID) {
+function approveReq($requestID, $staffID, $claimDeadline) {
     global $conn;
 
-    $stmt = $conn->prepare("
-        SELECT rq.MemberID, rq.MaterialID, m.AvailableQuantity, m.Title
-        FROM borrowrequests rq
-        JOIN materials m ON rq.MaterialID = m.MaterialID
-        WHERE rq.RequestID = ? AND rq.Status = 'Pending'
-    ");
+    $stmt = $conn->prepare("SELECT MemberID, MaterialID FROM borrowrequests WHERE RequestID=? AND Status='Pending'");
     $stmt->bind_param('i', $requestID);
     $stmt->execute();
-    $req = $stmt->get_result()->fetch_assoc();
+    $row = $stmt->get_result()->fetch_assoc();
 
-    if (!$req) {
-        return ['success' => false, 'message' => 'Request not found or already processed'];
-    }
-    if ($req['AvailableQuantity'] < 1) {
-        return ['success' => false, 'message' => 'No copies available'];
-    }
+    if (!$row) return ['success' => false, 'message' => 'Request not found'];
 
-    $stmt = $conn->prepare("
-        UPDATE borrowrequests
-        SET Status = 'Approved', ProcessedBy = ?, ProcessedDate = NOW()
-        WHERE RequestID = ?
-    ");
-    $stmt->bind_param('ii', $staffID, $requestID);
+    $memberID = $row['MemberID'];
+    $materialID = $row['MaterialID'];
+
+    $stmt = $conn->prepare("UPDATE borrowrequests SET Status='Approved', ProcessedBy=?, ProcessedDate=NOW(), ClaimDeadline=? WHERE RequestID=?");
+    $stmt->bind_param('isi', $staffID, $claimDeadline, $requestID);
     $stmt->execute();
 
-    $stmt = $conn->prepare("
-        INSERT INTO borrowrecords (RequestID, MemberID, MaterialID, BorrowedBy, BorrowDate, DueDate, Status)
-        VALUES (?, ?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 14 DAY), 'Borrowed')
-    ");
-    $stmt->bind_param('iiii', $requestID, $req['MemberID'], $req['MaterialID'], $staffID);
+    $stmt = $conn->prepare("UPDATE materials SET AvailableQuantity = AvailableQuantity - 1 WHERE MaterialID=?");
+    $stmt->bind_param('i', $materialID);
     $stmt->execute();
 
-    $stmt = $conn->prepare("
-        UPDATE materials SET AvailableQuantity = AvailableQuantity - 1 WHERE MaterialID = ?
-    ");
-    $stmt->bind_param('i', $req['MaterialID']);
+    $msg = "Your borrow request has been approved. Claim the book at the library by $claimDeadline.";
+    $stmt = $conn->prepare("INSERT INTO notifications (UserID, UserType, Message) VALUES (?, 'Member', ?)");
+    $stmt->bind_param('is', $memberID, $msg);
     $stmt->execute();
 
-    logCirculationAction($staffID, $req['MemberID'], $req['MaterialID'], 'Approved');
+    $stmt = $conn->prepare("INSERT INTO borrowlogs (StaffID, MemberID, MaterialID, Action) VALUES (?, ?, ?, 'Approved')");
+    $stmt->bind_param('iii', $staffID, $memberID, $materialID);
+    $stmt->execute();
 
     return ['success' => true, 'message' => 'Request approved'];
 }
 
-function rejectReq($requestID, $staffID) {
+function markClaimed($requestID, $staffID) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT br.MemberID, br.MaterialID, m.Title
+        FROM borrowrequests br
+        JOIN materials m ON m.MaterialID = br.MaterialID
+        WHERE br.RequestID=? AND br.Status='Approved' AND br.ClaimedAt IS NULL");
+    $stmt->bind_param('i', $requestID);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    if (!$row) return ['success' => false, 'message' => 'Already claimed or not found'];
+
+    $memberID = $row['MemberID'];
+    $materialID = $row['MaterialID'];
+    $title = $row['Title'];
+
+    $res = $conn->query("SELECT SettingValue FROM settings WHERE SettingKey='max_borrow_days'");
+    $days = $res->fetch_assoc()['SettingValue'] ?? 14;
+    $dueDate = date('Y-m-d', strtotime("+{$days} days"));
+
+    $stmt = $conn->prepare("UPDATE borrowrequests SET ClaimedAt=NOW() WHERE RequestID=?");
+    $stmt->bind_param('i', $requestID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO borrowrecords (RequestID, MemberID, MaterialID, BorrowedBy, BorrowDate, DueDate, Status)
+        VALUES (?, ?, ?, ?, NOW(), ?, 'Borrowed')");
+    $stmt->bind_param('iiiis', $requestID, $memberID, $materialID, $staffID, $dueDate);
+    $stmt->execute();
+
+    $res = $conn->query("SELECT AvailableQuantity FROM materials WHERE MaterialID=$materialID");
+    $qty = $res->fetch_assoc()['AvailableQuantity'];
+
+    if ($qty <= 0) {
+        $staffRes = $conn->query("SELECT s.StaffID FROM staffs s
+            JOIN staffroles r ON r.RoleID = s.RoleID
+            WHERE r.RoleName IN ('Admin','CirculationLibrarian') AND s.StatusID=1");
+
+        while ($s = $staffRes->fetch_assoc()) {
+            $notif = "\"$title\" is now out of stock.";
+            $n = $conn->prepare("INSERT INTO notifications (UserID, UserType, Message) VALUES (?, 'Staff', ?)");
+            $n->bind_param('is', $s['StaffID'], $notif);
+            $n->execute();
+        }
+    }
+
+    $msg = "You have claimed \"$title\". Due date: $dueDate. Enjoy!";
+    $stmt = $conn->prepare("INSERT INTO notifications (UserID, UserType, Message) VALUES (?, 'Member', ?)");
+    $stmt->bind_param('is', $memberID, $msg);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO borrowlogs (StaffID, MemberID, MaterialID, Action) VALUES (?, ?, ?, 'Claimed')");
+    $stmt->bind_param('iii', $staffID, $memberID, $materialID);
+    $stmt->execute();
+
+    return ['success' => true, 'message' => "\"$title\" marked as claimed. {$days}-day borrow started."];
+}
+
+function markUnclaimed() {
+    global $conn;
+
+    $res = $conn->query("SELECT br.RequestID, br.MemberID, br.MaterialID, m.Title
+        FROM borrowrequests br
+        JOIN materials m ON m.MaterialID = br.MaterialID
+        WHERE br.Status='Approved' AND br.ClaimedAt IS NULL AND br.ClaimDeadline < CURDATE()");
+
+    while ($row = $res->fetch_assoc()) {
+        $stmt = $conn->prepare("UPDATE borrowrequests SET Status='Cancelled' WHERE RequestID=?");
+        $stmt->bind_param('i', $row['RequestID']);
+        $stmt->execute();
+
+        $stmt = $conn->prepare("UPDATE materials SET AvailableQuantity = AvailableQuantity + 1
+            WHERE MaterialID=? AND AvailableQuantity < TotalQuantity");
+        $stmt->bind_param('i', $row['MaterialID']);
+        $stmt->execute();
+
+        $msg = "Your claim for \"{$row['Title']}\" has expired and was automatically cancelled.";
+        $stmt = $conn->prepare("INSERT INTO notifications (UserID, UserType, Message) VALUES (?, 'Member', ?)");
+        $stmt->bind_param('is', $row['MemberID'], $msg);
+        $stmt->execute();
+
+        $stmt = $conn->prepare("INSERT INTO borrowlogs (MemberID, MaterialID, Action) VALUES (?, ?, 'Unclaimed')");
+        $stmt->bind_param('ii', $row['MemberID'], $row['MaterialID']);
+        $stmt->execute();
+    }
+}
+
+function getApprovedClaims() {
+    global $conn;
+
+    $res = $conn->query("SELECT br.RequestID,
+        CONCAT(m.FirstName, ' ', m.LastName) AS MemberName,
+        mat.Title, mat.Author, mat.Description, mat.AvailableQuantity,
+        mt.TypeName, br.ProcessedDate, br.ClaimDeadline
+        FROM borrowrequests br
+        JOIN members m ON m.MemberID = br.MemberID
+        JOIN materials mat ON mat.MaterialID = br.MaterialID
+        JOIN materialtypes mt ON mt.TypeID = mat.TypeID
+        WHERE br.Status='Approved' AND br.ClaimedAt IS NULL AND mt.TypeID != 2
+        ORDER BY br.ClaimDeadline ASC");
+
+    $rows = [];
+    while ($r = $res->fetch_assoc()) $rows[] = $r;
+    return $rows;
+}
+
+function rejectReq($requestID, $staffID, $remarks = '') {
     global $conn;
 
     $stmt = $conn->prepare("
@@ -83,20 +176,22 @@ function rejectReq($requestID, $staffID) {
     $stmt->execute();
     $req = $stmt->get_result()->fetch_assoc();
 
-    if (!$req) {
-        return ['success' => false, 'message' => 'Request not found or already processed'];
-    }
+    if (!$req) return ['success' => false, 'message' => 'Request not found or already processed'];
 
     $stmt = $conn->prepare("
         UPDATE borrowrequests
-        SET Status = 'Rejected', ProcessedBy = ?, ProcessedDate = NOW()
+        SET Status = 'Rejected', ProcessedBy = ?, ProcessedDate = NOW(), Remarks = ?
         WHERE RequestID = ?
     ");
-    $stmt->bind_param('ii', $staffID, $requestID);
+    $stmt->bind_param('isi', $staffID, $remarks, $requestID);
     $stmt->execute();
 
     logCirculationAction($staffID, $req['MemberID'], $req['MaterialID'], 'Rejected');
-    createNotification($req['MemberID'], 'Member', 'Your borrow request for "' . $req['Title'] . '" has been rejected. Please contact the library for more information.');
+
+    $msg = "Your borrow request for \"{$req['Title']}\" has been rejected.";
+    if ($remarks) $msg .= " Reason: $remarks";
+
+    createNotification($req['MemberID'], 'Member', $msg);
 
     return ['success' => true, 'message' => 'Request rejected'];
 }
@@ -104,10 +199,7 @@ function rejectReq($requestID, $staffID) {
 function logCirculationAction($staffID, $memberID, $materialID, $action) {
     global $conn;
 
-    $stmt = $conn->prepare("
-        INSERT INTO borrowlogs (StaffID, MemberID, MaterialID, Action)
-        VALUES (?, ?, ?, ?)
-    ");
+    $stmt = $conn->prepare("INSERT INTO borrowlogs (StaffID, MemberID, MaterialID, Action) VALUES (?, ?, ?, ?)");
     $stmt->bind_param('iiis', $staffID, $memberID, $materialID, $action);
     $stmt->execute();
 }
@@ -117,7 +209,7 @@ function getActiveBorrow() {
 
     $res = $conn->query("
         SELECT br.*, m.Title, m.Author, mt.TypeName,
-               CONCAT(mb.FirstName, ' ', mb.LastName) AS MemberName
+            CONCAT(mb.FirstName, ' ', mb.LastName) AS MemberName
         FROM borrowrecords br
         JOIN materials m ON br.MaterialID = m.MaterialID
         JOIN materialtypes mt ON m.TypeID = mt.TypeID
@@ -162,16 +254,13 @@ function returnBook($recordID, $staffID) {
     $stmt->execute();
     $record = $stmt->get_result()->fetch_assoc();
 
-    if (!$record) {
-        return ['success' => false, 'message' => 'Record not found or already returned'];
-    }
+    if (!$record) return ['success' => false, 'message' => 'Record not found or already returned'];
 
     $fine = 0;
     $overdueDays = 0;
     $today = new DateTime();
     $due = new DateTime($record['DueDate']);
 
-    //5 pesos per day we ffinna ball!!!!!!!!!!!!
     if ($today > $due) {
         $overdueDays = $today->diff($due)->days;
         $rateRow = $conn->query("SELECT SettingValue FROM settings WHERE SettingKey = 'overdue_rate_per_day'")->fetch_assoc();
@@ -189,9 +278,7 @@ function returnBook($recordID, $staffID) {
     $stmt->bind_param('dii', $fine, $staffID, $recordID);
     $stmt->execute();
 
-    $stmt = $conn->prepare("
-        UPDATE materials SET AvailableQuantity = AvailableQuantity + 1 WHERE MaterialID = ?
-    ");
+    $stmt = $conn->prepare("UPDATE materials SET AvailableQuantity = AvailableQuantity + 1 WHERE MaterialID = ?");
     $stmt->bind_param('i', $record['MaterialID']);
     $stmt->execute();
 
@@ -206,7 +293,7 @@ function returnBook($recordID, $staffID) {
 
     return [
         'success' => true,
-        'message' => 'Book returned' . ($fine > 0 ? '. Overdue by ' . $overdueDays . ' day(s) × ₱' . $rate . '/day = ₱' . number_format($fine, 2) : ''),
+        'message' => 'Book returned' . ($fine > 0 ? '. Fine: ₱' . number_format($fine, 2) : ''),
         'fine' => $fine,
         'overdueDays' => $overdueDays,
         'rate' => $rate ?? 5.00

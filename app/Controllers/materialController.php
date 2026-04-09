@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 ob_start();
 
 session_start();
@@ -15,6 +12,7 @@ checkStaffAccess();
 
 $role = $_SESSION['Role'];
 $staffID = $_SESSION['StaffID'];
+
 
 if ($role !== 'Admin' && $role !== 'CirculationLibrarian') {
     ob_end_clean();
@@ -42,13 +40,20 @@ switch ($action) {
 
     case 'addBook':
         $data = collectBase();
-        if ($data['error']) { echo json_encode(['success' => false, 'message' => $data['error']]); break; }
+        if ($data['error']) { 
+            echo json_encode(['success' => false, 'message' => $data['error']]);
+             break; 
+        }
+
         echo json_encode(addBook($data, $staffID));
         break;
 
     case 'addEbook':
         $data = collectBase();
-        if ($data['error']) { echo json_encode(['success' => false, 'message' => $data['error']]); break; }
+        if ($data['error']) { 
+            echo json_encode(['success' => false, 'message' => $data['error']]); 
+            break; 
+        }
 
         $data['ebookFormat'] = trim($_POST['ebookFormat'] ?? '');
         $data['accessStart'] = trim($_POST['accessStart'] ?? '');
@@ -63,13 +68,23 @@ switch ($action) {
 
     case 'addJournal':
         $data = collectBase();
-        if ($data['error']) { echo json_encode(['success' => false, 'message' => $data['error']]); break; }
+        if ($data['error']) { 
+            echo json_encode(['success' => false, 'message' => $data['error']]);
+             break; 
+        }
 
         $data['journalType'] = trim($_POST['journalType'] ?? '');
         $data['journalInterval'] = trim($_POST['journalInterval'] ?? '');
 
-        if (!$data['journalType']) { echo json_encode(['success' => false, 'message' => 'Journal type is required']); break; }
-        if (!$data['journalInterval']) { echo json_encode(['success' => false, 'message' => 'Journal interval is required']); break; }
+        if (!$data['journalType']) {
+            echo json_encode(['success' => false, 'message' => 'Journal type is required']); 
+            break;
+        }
+
+        if (!$data['journalInterval']) {
+            echo json_encode(['success' => false, 'message' => 'Journal interval is required']);
+            break;
+        }
 
         echo json_encode(addJournal($data, $staffID));
         break;
@@ -84,15 +99,27 @@ switch ($action) {
         $data['journalType'] = trim($_POST['journalType'] ?? '');
         $data['journalInterval'] = trim($_POST['journalInterval'] ?? '');
 
-        if (!$data['materialID']) { echo json_encode(['success' => false, 'message' => 'Invalid material ID']); break; }
-        if ($data['error']) { echo json_encode(['success' => false, 'message' => $data['error']]); break; }
+        if (!$data['materialID']) { 
+            echo json_encode(['success' => false, 'message' => 'Invalid material ID']); 
+            break; 
+        }
+        
+        if ($data['error']) { 
+            echo json_encode(['success' => false, 'message' => $data['error']]);
+            break;
+        }
 
         echo json_encode(updMaterial($data, $staffID));
         break;
 
     case 'archiveMaterial':
         $materialID = intval($_POST['materialID'] ?? 0);
-        if (!$materialID) { echo json_encode(['success' => false, 'message' => 'Invalid material ID']); break; }
+
+        if (!$materialID) {
+            echo json_encode(['success' => false, 'message' => 'Invalid material ID']);
+            break; 
+        }
+
         echo json_encode(archiveMaterial($materialID, $staffID));
         break;
 
@@ -120,12 +147,17 @@ function collectBase() {
         'publishDate' => trim($_POST['publishDate'] ?? ''),
         'publisher' => trim($_POST['publisher'] ?? ''),
         'totalQty' => intval($_POST['totalQty'] ?? 1),
+        'replacementCost' => floatval($_POST['replacementCost'] ?? 0),
         'error' => null,
     ];
 
-    if (!$data['title']) $data['error'] = 'Title is required';
-    else if (!$data['author']) $data['error'] = 'Author is required';
-    else if (!$data['publisher']) $data['error'] = 'Publisher is required';
+    if (!$data['title']){
+        $data['error'] = 'Title is required';
+    } else if (!$data['author']) { 
+        $data['error'] = 'Author is required';
+    } else if (!$data['publisher']) {
+        $data['error'] = 'Publisher is required';
+    } 
 
     return $data;
 }

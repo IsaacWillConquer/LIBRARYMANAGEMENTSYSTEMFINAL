@@ -1,22 +1,28 @@
 <?php
 
-
 session_start();
 
     function mustBeStaff ($role = null) {
         if (!isset($_SESSION['StaffID'])) {
-            header('Location: /index.php');
+            header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/index.php');
             exit();
         }
         if ($role && ($_SESSION['Role'] ?? '') !== $role) {
-            header('Location: /index.php');
+            header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/index.php');
             exit();
         }
     }
 
     function mustBeMember () {
         if (!isset($_SESSION['MemberID'])) {
-            header('Location: /index.php');
+            header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/index.php');
+            exit();
+        }
+    }
+
+    function adminOnly() {
+        if (!isset($_SESSION['Role']) || $_SESSION['Role'] !== 'Admin') {
+            header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/index.php');
             exit();
         }
     }

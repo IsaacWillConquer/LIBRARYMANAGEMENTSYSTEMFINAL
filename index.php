@@ -1,4 +1,4 @@
-<!-- index.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1 id="title">MOFO"S Library Management System</h1>
+<h1 id="title">Library Management System</h1>
 
 <div id="error_text" style="color:red; display:none;"></div>
 

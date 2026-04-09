@@ -4,11 +4,10 @@ require_once __DIR__ . "/../../config/dbConn.php";
 
 $conn = getConnection();
 
+
 function getAvailMats() {
     global $conn;
 
-
-    //All physcial borrow needs qty
     $result = $conn->query("
         SELECT m.*, mt.TypeName
         FROM materials m
@@ -23,7 +22,6 @@ function getAvailMats() {
     return $data;
 }
 
-//popular borrowed within a month
 function getTrend() {
     global $conn;
 
@@ -34,7 +32,7 @@ function getTrend() {
         LEFT JOIN borrowrecords br
             ON br.MaterialID = m.MaterialID
             AND br.BorrowDate >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-        WHERE m.IsArchived = 0 
+        WHERE m.IsArchived = 0
         AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
         GROUP BY m.MaterialID
         ORDER BY BorrowCount DESC, m.DateAdded DESC
@@ -63,7 +61,6 @@ function getRecs($memberID) {
     $genres = [];
     while ($row = $result->fetch_assoc()) $genres[] = $row;
 
-    //no borrow history, just show latest
     if (empty($genres)) {
         $result = $conn->query("
             SELECT m.*, mt.TypeName
@@ -78,9 +75,9 @@ function getRecs($memberID) {
         return $data;
     }
 
-    $genreValues = array_column($genres, 'Genre');
+    $genreValues  = array_column($genres, 'Genre');
     $placeholders = implode(',', array_fill(0, count($genreValues), '?'));
-    $types = str_repeat('s', count($genreValues));
+    $types        = str_repeat('s', count($genreValues));
 
     $stmt = $conn->prepare("
         SELECT m.*, mt.TypeName
@@ -100,6 +97,7 @@ function getRecs($memberID) {
     while ($row = $result->fetch_assoc()) $data[] = $row;
     return $data;
 }
+
 function getMyReq($memberID) {
     global $conn;
 
@@ -115,7 +113,7 @@ function getMyReq($memberID) {
     $stmt->bind_param('i', $memberID);
     $stmt->execute();
 
-    $data = [];
+    $data   = [];
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) $data[] = $row;
     return $data;
@@ -135,7 +133,7 @@ function getMyActBorrows($memberID) {
     $stmt->bind_param('i', $memberID);
     $stmt->execute();
 
-    $data = [];
+    $data   = [];
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) $data[] = $row;
     return $data;
@@ -144,7 +142,6 @@ function getMyActBorrows($memberID) {
 function submitReq($memberID, $materialID) {
     global $conn;
 
-    // check member active
     $stmt = $conn->prepare("SELECT StatusID FROM members WHERE MemberID = ?");
     $stmt->bind_param('i', $memberID);
     $stmt->execute();
@@ -154,7 +151,7 @@ function submitReq($memberID, $materialID) {
         return ['success' => false, 'message' => 'Your account is not active'];
     }
 
-    $stmt = $conn->prepare("SELECT TypeID, IsArchived, Title FROM materials WHERE MaterialID = ?");
+    $stmt = $conn->prepare("SELECT TypeID, IsArchived, AvailableQuantity FROM materials WHERE MaterialID = ?");
     $stmt->bind_param('i', $materialID);
     $stmt->execute();
     $material = $stmt->get_result()->fetch_assoc();
@@ -163,13 +160,11 @@ function submitReq($memberID, $materialID) {
         return ['success' => false, 'message' => 'Material not found'];
     }
 
-    // ebooks: just log access, skip everything else
+    // ebook - just return ok, JS opens reader modal
     if ($material['TypeID'] == 2) {
-        logBorrowAction(null, $memberID, $materialID, 'Accessed');
-        return ['success' => true, 'message' => 'EBook access logged. Enjoy your reading!'];
+        return ['success' => true, 'ebook' => true];
     }
 
-    // physical borrow flow below
     if ($material['AvailableQuantity'] < 1) {
         return ['success' => false, 'message' => 'No copies available'];
     }
@@ -187,11 +182,10 @@ function submitReq($memberID, $materialID) {
     }
 
     $limitRow = $conn->query("SELECT SettingValue FROM settings WHERE SettingKey = 'max_borrow_limit'")->fetch_assoc();
-    $limit = $limitRow ? intval($limitRow['SettingValue']) : 3;
+    $limit    = $limitRow ? intval($limitRow['SettingValue']) : 3;
 
     $stmt = $conn->prepare("
-        SELECT COUNT(*) AS cnt
-        FROM borrowrecords
+        SELECT COUNT(*) AS cnt FROM borrowrecords
         WHERE MemberID = ? AND Status IN ('Borrowed', 'Overdue')
     ");
     $stmt->bind_param('i', $memberID);
@@ -202,10 +196,7 @@ function submitReq($memberID, $materialID) {
         return ['success' => false, 'message' => "You have reached the borrow limit ($limit items)"];
     }
 
-    $stmt = $conn->prepare("
-        INSERT INTO borrowrequests (MemberID, MaterialID, Status)
-        VALUES (?, ?, 'Pending')
-    ");
+    $stmt = $conn->prepare("INSERT INTO borrowrequests (MemberID, MaterialID, Status) VALUES (?, ?, 'Pending')");
     $stmt->bind_param('ii', $memberID, $materialID);
 
     if (!$stmt->execute()) return ['success' => false, 'message' => $conn->error];
@@ -213,6 +204,50 @@ function submitReq($memberID, $materialID) {
     logBorrowAction(null, $memberID, $materialID, 'Requested');
 
     return ['success' => true, 'message' => 'Borrow request submitted. Please wait for approval.'];
+}
+
+// log ebook access and return material info for reader modal
+function accessEbook($memberID, $materialID) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT MaterialID, Title, Author, Description, Genre FROM materials WHERE MaterialID=? AND TypeID=2 AND IsArchived=0");
+    $stmt->bind_param('i', $materialID);
+    $stmt->execute();
+    $mat = $stmt->get_result()->fetch_assoc();
+    if (!$mat) return ['success' => false, 'message' => 'EBook not found'];
+
+    // upsert - increment count each time they open it
+    $stmt = $conn->prepare("
+        INSERT INTO ebookaccess (MemberID, MaterialID, AccessCount, LastAccessed)
+        VALUES (?, ?, 1, NOW())
+        ON DUPLICATE KEY UPDATE AccessCount = AccessCount + 1, LastAccessed = NOW()
+    ");
+    $stmt->bind_param('ii', $memberID, $materialID);
+    $stmt->execute();
+
+    return ['success' => true, 'material' => $mat];
+}
+
+// last 3 ebooks this member opened
+function getCurrentlyReading($memberID) {
+    global $conn;
+
+    $stmt = $conn->prepare("
+        SELECT m.MaterialID, m.Title, m.Author, m.Genre,
+               ea.AccessCount, ea.LastAccessed
+        FROM ebookaccess ea
+        JOIN materials m ON m.MaterialID = ea.MaterialID
+        WHERE ea.MemberID = ?
+        ORDER BY ea.LastAccessed DESC
+        LIMIT 3
+    ");
+    $stmt->bind_param('i', $memberID);
+    $stmt->execute();
+
+    $data   = [];
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) $data[] = $row;
+    return $data;
 }
 
 function cancelReq($memberID, $requestID) {
@@ -226,9 +261,7 @@ function cancelReq($memberID, $requestID) {
     $stmt->execute();
     $req = $stmt->get_result()->fetch_assoc();
 
-    if (!$req) {
-        return ['success' => false, 'message' => 'Request not found or cannot be cancelled'];
-    }
+    if (!$req) return ['success' => false, 'message' => 'Request not found or cannot be cancelled'];
 
     $stmt = $conn->prepare("UPDATE borrowrequests SET Status = 'Cancelled' WHERE RequestID = ?");
     $stmt->bind_param('i', $requestID);
@@ -238,6 +271,32 @@ function cancelReq($memberID, $requestID) {
     logBorrowAction(null, $memberID, $req['MaterialID'], 'Cancelled');
 
     return ['success' => true, 'message' => 'Request cancelled'];
+}
+
+function cancelPendingClaim($requestID, $memberID) {
+    global $conn;
+
+    $stmt = $conn->prepare("
+        SELECT MaterialID FROM borrowrequests
+        WHERE RequestID = ? AND MemberID = ? AND Status = 'Approved' AND ClaimedAt IS NULL
+    ");
+    $stmt->bind_param('ii', $requestID, $memberID);
+    $stmt->execute();
+    $req = $stmt->get_result()->fetch_assoc();
+
+    if (!$req) return ['success' => false, 'message' => 'Claim not found or cannot be cancelled'];
+
+    $stmt = $conn->prepare("UPDATE borrowrequests SET Status = 'Cancelled' WHERE RequestID = ?");
+    $stmt->bind_param('i', $requestID);
+    if (!$stmt->execute()) return ['success' => false, 'message' => $conn->error];
+
+    $stmt = $conn->prepare("UPDATE materials SET AvailableQuantity = AvailableQuantity + 1 WHERE MaterialID = ?");
+    $stmt->bind_param('i', $req['MaterialID']);
+    $stmt->execute();
+
+    logBorrowAction(null, $memberID, $req['MaterialID'], 'Cancelled');
+
+    return ['success' => true, 'message' => 'Claim cancelled. The book has been returned to stock.'];
 }
 
 function getBorrowHist($memberID) {
@@ -254,10 +313,91 @@ function getBorrowHist($memberID) {
     $stmt->bind_param('i', $memberID);
     $stmt->execute();
 
-    $data = [];
+    $data   = [];
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) $data[] = $row;
     return $data;
+}
+
+function getMemberPendingClaims($memberID) {
+    global $conn;
+
+    $stmt = $conn->prepare("
+        SELECT rq.RequestID, rq.ProcessedDate, rq.ClaimDeadline,
+               m.Title, m.Author, m.AvailableQuantity, m.Description,
+               mt.TypeName
+        FROM borrowrequests rq
+        JOIN materials m ON rq.MaterialID = m.MaterialID
+        JOIN materialtypes mt ON m.TypeID = mt.TypeID
+        WHERE rq.MemberID = ?
+          AND rq.Status = 'Approved'
+          AND rq.ClaimedAt IS NULL
+          AND mt.TypeID != 2
+        ORDER BY rq.ClaimDeadline ASC
+    ");
+    $stmt->bind_param('i', $memberID);
+    $stmt->execute();
+
+    $data   = [];
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) $data[] = $row;
+    return $data;
+}
+
+function submitDonation($memberID, $title, $author, $genre, $description, $condition) {
+    global $conn;
+
+    if (!$title || !$author) return ['success' => false, 'message' => 'Title and author are required'];
+
+    $stmt = $conn->prepare("
+        INSERT INTO donations (MemberID, Title, Author, Genre, Description, BookCondition)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ");
+    $stmt->bind_param('isssss', $memberID, $title, $author, $genre, $description, $condition);
+
+    if (!$stmt->execute()) return ['success' => false, 'message' => $conn->error];
+
+    return ['success' => true, 'message' => 'Donation submitted! The librarian will review your request.'];
+}
+
+function getPendingDonations() {
+    global $conn;
+
+    $res = $conn->query("
+        SELECT d.*, CONCAT(m.FirstName, ' ', m.LastName) AS MemberName
+        FROM donations d
+        JOIN members m ON m.MemberID = d.MemberID
+        WHERE d.Status = 'Pending'
+        ORDER BY d.DateSubmitted ASC
+    ");
+
+    $rows = [];
+    while ($r = $res->fetch_assoc()) $rows[] = $r;
+    return $rows;
+}
+
+function reviewDonation($donationID, $staffID, $status) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT MemberID, Title FROM donations WHERE DonationID=? AND Status='Pending'");
+    $stmt->bind_param('i', $donationID);
+    $stmt->execute();
+    $don = $stmt->get_result()->fetch_assoc();
+    if (!$don) return ['success' => false, 'message' => 'Donation not found'];
+
+    $stmt = $conn->prepare("UPDATE donations SET Status=?, ReviewedBy=?, ReviewedDate=NOW() WHERE DonationID=?");
+    $stmt->bind_param('sii', $status, $staffID, $donationID);
+    $stmt->execute();
+
+    $msg = $status === 'Accepted'
+        ? "Your donation of \"{$don['Title']}\" has been accepted. Thank you!"
+        : "Your donation of \"{$don['Title']}\" was not accepted at this time.";
+
+    $stmt = $conn->prepare("INSERT INTO notifications (UserID, UserType, Message) VALUES (?, 'Member', ?)");
+    $stmt->bind_param('is', $don['MemberID'], $msg);
+    $stmt->execute();
+
+    return ['success' => true, 'message' => "Donation $status"];
 }
 
 function logBorrowAction($staffID, $memberID, $materialID, $action) {
@@ -271,10 +411,14 @@ function logBorrowAction($staffID, $memberID, $materialID, $action) {
     $stmt->execute();
 }
 
-function searchAvailMats($q) {
+function searchAvailMats($q, $type = '') {
     global $conn;
 
-    $like = '%' . $conn->real_escape_string($q) . '%';
+    $like       = '%' . $conn->real_escape_string($q) . '%';
+    $typeFilter = '';
+    if ($type && in_array($type, ['Book', 'EBook', 'Journal'])) {
+        $typeFilter = "AND mt.TypeName = '" . $conn->real_escape_string($type) . "'";
+    }
 
     $result = $conn->query("
         SELECT m.*, mt.TypeName
@@ -282,11 +426,8 @@ function searchAvailMats($q) {
         JOIN materialtypes mt ON m.TypeID = mt.TypeID
         WHERE m.IsArchived = 0
           AND (m.AvailableQuantity > 0 OR m.TypeID = 2)
-          AND (
-              m.Title LIKE '$like' OR
-              m.Author LIKE '$like' OR
-              m.Genre LIKE '$like'
-          )
+          $typeFilter
+          AND (m.Title LIKE '$like' OR m.Author LIKE '$like' OR m.Genre LIKE '$like')
         ORDER BY m.DateAdded DESC
     ");
 

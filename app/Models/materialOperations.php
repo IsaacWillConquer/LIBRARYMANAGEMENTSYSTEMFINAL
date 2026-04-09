@@ -71,14 +71,15 @@ function addBook($data, $staffID) {
     global $conn;
 
     $stmt = $conn->prepare("
-        INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, AddedBy)
-        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, ReplacementCost, AddedBy)
+        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->bind_param(
-        'sssssssiii',
+        'sssssssiidi',
         $data['title'], $data['author'], $data['isbn'],
         $data['description'], $data['genre'], $data['publishDate'],
-        $data['publisher'], $data['totalQty'], $data['totalQty'], $staffID
+        $data['publisher'], $data['totalQty'], $data['totalQty'],
+        $data['replacementCost'], $staffID
     );
 
     if (!$stmt->execute()) {
@@ -93,15 +94,16 @@ function addEbook($data, $staffID) {
     global $conn;
 
     $stmt = $conn->prepare("
-        INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, EbookFormat, AccessStart, AccessEnd, AddedBy)
-        VALUES (2, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?, ?)
+        INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, EbookFormat, AccessStart, AccessEnd, ReplacementCost, AddedBy)
+        VALUES (2, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?, ?, ?)
     ");
     $stmt->bind_param(
-        'sssssssssi',
+        'sssssssssdi',
         $data['title'], $data['author'], $data['isbn'],
         $data['description'], $data['genre'], $data['publishDate'],
         $data['publisher'],
-        $data['ebookFormat'], $data['accessStart'], $data['accessEnd'], $staffID
+        $data['ebookFormat'], $data['accessStart'], $data['accessEnd'],
+        $data['replacementCost'], $staffID
     );
 
     if (!$stmt->execute()) {
@@ -116,15 +118,16 @@ function addJournal($data, $staffID) {
     global $conn;
 
     $stmt = $conn->prepare("
-        INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, JournalType, JournalInterval, AddedBy)
-        VALUES (3, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO materials (TypeID, Title, Author, ISBN, Description, Genre, PublishDate, Publisher, TotalQuantity, AvailableQuantity, JournalType, JournalInterval, ReplacementCost, AddedBy)
+        VALUES (3, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->bind_param(
-        'sssssssiissi',
+        'sssssssiissdi',
         $data['title'], $data['author'], $data['isbn'],
         $data['description'], $data['genre'], $data['publishDate'],
         $data['publisher'], $data['totalQty'], $data['totalQty'],
-        $data['journalType'], $data['journalInterval'], $staffID
+        $data['journalType'], $data['journalInterval'],
+        $data['replacementCost'], $staffID
     );
 
     if (!$stmt->execute()) {
@@ -142,15 +145,17 @@ function updMaterial($data, $staffID) {
         UPDATE materials
         SET Title=?, Author=?, ISBN=?, Description=?, Genre=?,
             PublishDate=?, Publisher=?, TotalQuantity=?, AvailableQuantity=?,
+            ReplacementCost=?,
             EbookFormat=?, AccessStart=?, AccessEnd=?,
             JournalType=?, JournalInterval=?
         WHERE MaterialID=?
     ");
     $stmt->bind_param(
-        'sssssssiisisssi',
+        'sssssssiidssssi',
         $data['title'], $data['author'], $data['isbn'],
         $data['description'], $data['genre'], $data['publishDate'],
         $data['publisher'], $data['totalQty'], $data['availableQty'],
+        $data['replacementCost'],
         $data['ebookFormat'], $data['accessStart'], $data['accessEnd'],
         $data['journalType'], $data['journalInterval'], $data['materialID']
     );

@@ -10,12 +10,12 @@ header('Content-Type: application/json');
 
 mustBeStaff();
 
-$role = $_SESSION['Role'];
+$role   = $_SESSION['Role'];
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 if ($role !== 'Admin' && $role !== 'DataAnalyst') {
     ob_end_clean();
-    echo json_encode(['success' => false, 'message' => 'Access denied, You cant be here!']);
+    echo json_encode(['success' => false, 'message' => 'Access denied']);
     exit();
 }
 
@@ -42,7 +42,19 @@ switch ($action) {
         echo json_encode(matType());
         break;
 
+    case 'getGenreStats':
+        echo json_encode(genreStats());
+        break;
+
+    case 'getTopMembers':
+        echo json_encode(topMembers());
+        break;
+
+    case 'getRecentActivity':
+        echo json_encode(recentActivity());
+        break;
+
     default:
-        echo json_encode(['success' => false, 'message' => 'Invalid action bro.']);
+        echo json_encode(['success' => false, 'message' => 'Invalid action']);
         break;
 }

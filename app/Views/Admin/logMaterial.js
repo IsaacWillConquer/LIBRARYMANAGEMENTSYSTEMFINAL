@@ -62,6 +62,7 @@ function loadMaterials() {
                     <td>${m.Genre ?? 'N/A'}</td>
                     <td>${m.TotalQuantity}</td>
                     <td>${m.AvailableQuantity}</td>
+                    <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                     <td>${m.DateAdded}</td>
                     <td>
                         <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -81,6 +82,7 @@ function loadMaterials() {
                     <td>${m.ISBN ?? 'N/A'}</td>
                     <td>${m.Publisher}</td>
                     <td>${m.Genre ?? 'N/A'}</td>
+                    <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                     <td>${m.DateAdded}</td>
                     <td>
                         <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -102,6 +104,7 @@ function loadMaterials() {
                     <td>${m.JournalType ?? 'N/A'}</td>
                     <td>${m.TotalQuantity}</td>
                     <td>${m.AvailableQuantity}</td>
+                    <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                     <td>${m.DateAdded}</td>
                     <td>
                         <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -137,6 +140,7 @@ function addBook() {
             publishDate: $('#bookPublishDate').val(),
             publisher: publisher,
             totalQty: $('#bookQty').val(),
+            replacementCost: $('#bookReplacementCost').val(),
         },
         dataType: 'json',
         success: function (res) {
@@ -155,6 +159,7 @@ function addBook() {
 function clearBookForm() {
     $('#bookTitle, #bookAuthor, #bookISBN, #bookDesc, #bookGenre, #bookPublisher').val('');
     $('#bookQty').val(1);
+    $('#bookReplacementCost').val('0.00');
 }
 
 function addEbook() {
@@ -180,6 +185,7 @@ function addEbook() {
             publishDate: $('#ebookPublishDate').val(),
             publisher: publisher,
             ebookFormat: $('#ebookFormat').val(),
+            replacementCost: $('#ebookReplacementCost').val(),
         },
         dataType: 'json',
         success: function (res) {
@@ -197,6 +203,7 @@ function addEbook() {
 
 function clearEbookForm() {
     $('#ebookTitle, #ebookAuthor, #ebookISBN, #ebookDesc, #ebookGenre, #ebookPublisher').val('');
+    $('#ebookReplacementCost').val('0.00');
 }
 
 function addJournal() {
@@ -224,6 +231,7 @@ function addJournal() {
             totalQty: $('#journalQty').val(),
             journalType: $('#journalType').val(),
             journalInterval: $('#journalInterval').val(),
+            replacementCost: $('#journalReplacementCost').val(),
         },
         dataType: 'json',
         success: function (res) {
@@ -242,6 +250,7 @@ function addJournal() {
 function clearJournalForm() {
     $('#journalTitle, #journalAuthor, #journalISBN, #journalDesc, #journalGenre, #journalPublisher').val('');
     $('#journalQty').val(1);
+    $('#journalReplacementCost').val('0.00');
 }
 
 function loadEdit(id) {
@@ -261,9 +270,8 @@ function loadEdit(id) {
             $('#editPublisher').val(m.Publisher);
             $('#editTotalQty').val(m.TotalQuantity);
             $('#editAvailableQty').val(m.AvailableQuantity);
+            $('#editReplacementCost').val(parseFloat(m.ReplacementCost ?? 0).toFixed(2));
             $('#editEbookFormat').val(m.EbookFormat ?? '');
-            $('#editAccessStart').val(m.AccessStart ?? '');
-            $('#editAccessEnd').val(m.AccessEnd ?? '');
             $('#editJournalType').val(m.JournalType ?? '');
             $('#editJournalInterval').val(m.JournalInterval ?? '');
 
@@ -303,6 +311,7 @@ function updMaterial() {
         publisher: publisher,
         totalQty: $('#editTotalQty').val(),
         availableQty: $('#editAvailableQty').val(),
+        replacementCost: $('#editReplacementCost').val(),
     };
 
     if (typeID == 2) data.ebookFormat = $('#editEbookFormat').val();
@@ -368,6 +377,7 @@ function renderMaterials(data) {
                 <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
                 <td>${m.Publisher}</td><td>${m.Genre ?? 'N/A'}</td>
                 <td>${m.TotalQuantity}</td><td>${m.AvailableQuantity}</td>
+                <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                 <td>${m.DateAdded}</td>
                 <td>
                     <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -376,7 +386,7 @@ function renderMaterials(data) {
             </tr>`;
         });
     } else {
-        bookRows = '<tr><td colspan="11">No books found</td></tr>';
+        bookRows = '<tr><td colspan="12">No books found</td></tr>';
     }
     $('#materialTable tbody').html(bookRows);
 
@@ -384,13 +394,10 @@ function renderMaterials(data) {
     if (data.ebooks && data.ebooks.length > 0) {
         data.ebooks.forEach(m => {
             ebookRows += `<tr>
-                <td>${m.MaterialID}</td>
-                <td>EBook</td>
-                <td>${m.Title}</td>
-                <td>${m.Author}</td>
-                <td>${m.ISBN ?? 'N/A'}</td>
-                <td>${m.Publisher}</td>
-                <td>${m.Genre ?? 'N/A'}</td>
+                <td>${m.MaterialID}</td><td>EBook</td><td>${m.Title}</td>
+                <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
+                <td>${m.Publisher}</td><td>${m.Genre ?? 'N/A'}</td>
+                <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                 <td>${m.DateAdded}</td>
                 <td>
                     <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -399,7 +406,7 @@ function renderMaterials(data) {
             </tr>`;
         });
     } else {
-        ebookRows = '<tr><td colspan="9">No ebooks found</td></tr>';
+        ebookRows = '<tr><td colspan="10">No ebooks found</td></tr>';
     }
     $('#ebookTable tbody').html(ebookRows);
 
@@ -411,6 +418,7 @@ function renderMaterials(data) {
                 <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
                 <td>${m.Publisher}</td><td>${m.JournalType ?? 'N/A'}</td>
                 <td>${m.TotalQuantity}</td><td>${m.AvailableQuantity}</td>
+                <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                 <td>${m.DateAdded}</td>
                 <td>
                     <button onclick="loadEdit(${m.MaterialID})">Edit</button>
@@ -419,7 +427,7 @@ function renderMaterials(data) {
             </tr>`;
         });
     } else {
-        journalRows = '<tr><td colspan="11">No journals found</td></tr>';
+        journalRows = '<tr><td colspan="12">No journals found</td></tr>';
     }
     $('#journalTable tbody').html(journalRows);
 }

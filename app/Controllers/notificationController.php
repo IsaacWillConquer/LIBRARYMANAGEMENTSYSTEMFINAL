@@ -11,12 +11,15 @@ $conn = getConnection();
 
 header('Content-Type: application/json');
 
+
+
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
+
 
 if (isset($_SESSION['MemberID'])) {
     $userID = $_SESSION['MemberID'];
     $userType = 'Member';
-} elseif (isset($_SESSION['StaffID'])) {
+} else if (isset($_SESSION['StaffID'])) {
     $userID = $_SESSION['StaffID'];
     $userType = 'Staff';
 } else {
@@ -25,8 +28,9 @@ if (isset($_SESSION['MemberID'])) {
     exit();
 }
 
-switch ($action) {
 
+
+switch ($action) {
     case 'getNotifications':
         ob_end_clean();
         echo json_encode(getNotifications($userID, $userType));

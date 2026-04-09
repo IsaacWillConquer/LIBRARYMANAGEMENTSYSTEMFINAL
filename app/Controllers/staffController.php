@@ -78,7 +78,7 @@ switch ($action) {
 
     case 'search':
         $q = trim($_GET['q'] ?? '');
-        if ($q === '') {
+        if ($q ==='') {
             echo json_encode(getStaff($adminID));
         } else {
             echo json_encode(searchStaff($q));
