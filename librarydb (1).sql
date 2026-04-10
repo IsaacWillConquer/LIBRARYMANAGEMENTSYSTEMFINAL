@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2026 at 03:09 PM
+-- Generation Time: Apr 10, 2026 at 05:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -159,7 +159,24 @@ INSERT INTO `archives` (`ArchiveID`, `EntityType`, `EntityID`, `ArchivedData`, `
 (17, 'Member', 2, '{\"MemberID\":2,\"FirstName\":\"Member\",\"LastName\":\"Nigga\",\"Email\":\"MemberNigga@gmail.com\",\"Password\":\"$2y$10$QBWX1LzwNfeGfyT3EDvn6uoBb\\/RxZDlj6O1t9KLpsOkwz3vFN0zpS\",\"DefaultPassword\":1,\"StatusID\":1,\"DateCreated\":\"2026-04-01 23:00:18\"}', '2026-04-01 23:10:48'),
 (18, 'Staff', 4, '{\"StaffID\":4,\"FirstName\":\"Cir\",\"LastName\":\"Librarian\",\"Email\":\"CirLibrarian@gmail.com\",\"Password\":\"$2b$10$3FkQO8a5Mp3iXt7umHho6.itaHGmOTnYQQnU9mRrKZeZunl1ckQtS\\r\\n\",\"DefaultPassword\":1,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-01 01:05:27\"}', '2026-04-02 16:28:25'),
 (19, 'Staff', 5, '{\"StaffID\":5,\"FirstName\":\"Data\",\"LastName\":\"Analyst\",\"Email\":\"DataAnalyst@gmail.com\",\"Password\":\"$2b$10$3FkQO8a5Mp3iXt7umHho6.itaHGmOTnYQQnU9mRrKZeZunl1ckQtS\\r\\n\",\"DefaultPassword\":1,\"RoleID\":4,\"StatusID\":1,\"DateCreated\":\"2026-04-01 01:05:27\"}', '2026-04-02 16:28:27'),
-(20, 'Staff', 17, '{\"StaffID\":17,\"FirstName\":\"Nyle\",\"LastName\":\"Librarian\",\"Email\":\"NyleLib@gmail.com\",\"Password\":\"$2y$10$NjCkC5YX0tp2e6Lw3dntAe6G1wRzP1rFwERWseIbYXGW5ljoHh2li\",\"DefaultPassword\":1,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-02 21:13:41\"}', '2026-04-02 21:13:50');
+(20, 'Staff', 17, '{\"StaffID\":17,\"FirstName\":\"Nyle\",\"LastName\":\"Librarian\",\"Email\":\"NyleLib@gmail.com\",\"Password\":\"$2y$10$NjCkC5YX0tp2e6Lw3dntAe6G1wRzP1rFwERWseIbYXGW5ljoHh2li\",\"DefaultPassword\":1,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-02 21:13:41\"}', '2026-04-02 21:13:50'),
+(21, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:20:51'),
+(22, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:20:58'),
+(23, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:21:00'),
+(24, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:21:12'),
+(25, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:23:27'),
+(26, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:24:50'),
+(27, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:25:43'),
+(28, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:26:22'),
+(29, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:28:49'),
+(30, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:32:06'),
+(31, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:32:08'),
+(32, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:32:12'),
+(33, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:32:20'),
+(35, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:34:17'),
+(36, 'Member', 8, '{\"MemberID\":8,\"FirstName\":\"Delete\",\"LastName\":\"test\",\"Email\":\"Delete@gmail.com\",\"Password\":\"$2y$10$zwNRHwUn6NfNNVfCY\\/an\\/.sARCAJkbsG3AcLh3tvAkFni.tcBkmbG\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 22:36:45\"}', '2026-04-10 22:37:18'),
+(37, 'Staff', 21, '{\"StaffID\":21,\"FirstName\":\"Delete\",\"LastName\":\"Test\",\"Email\":\"Delete@gmail.com\",\"Password\":\"$2y$10$HsQNZd9Z4lk44s6gcLY\\/TO1Ylc3bzw\\/AdZsH9Pf2heE\\/VRe9LZnrS\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-10 22:38:03\"}', '2026-04-10 22:38:31'),
+(38, 'Staff', 20, '{\"StaffID\":20,\"FirstName\":\"Nyle2\",\"LastName\":\"Dalay\",\"Email\":\"Nyle2Test@gmail.com\",\"Password\":\"$2y$10$LrOxY9oOXWIbmf4aSqyarO5nmOXJNXJPyGuw3QLeLSV1UFc4NkuQi\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-10 21:47:05\"}', '2026-04-10 22:51:26');
 
 -- --------------------------------------------------------
 
@@ -359,10 +376,10 @@ INSERT INTO `borrowlogs` (`LogID`, `StaffID`, `MemberID`, `MaterialID`, `Action`
 (176, 3, 6, 169, 'Approved', '2026-04-10 20:01:19'),
 (177, 3, 6, 169, 'Claimed', '2026-04-10 20:01:55'),
 (178, 3, 6, 169, '', '2026-04-10 20:02:01'),
-(179, NULL, 7, 7, 'Requested', '2026-04-10 20:11:46'),
-(180, 3, 7, 7, 'Approved', '2026-04-10 20:12:29'),
-(181, 3, 7, 7, 'Claimed', '2026-04-10 20:12:47'),
-(182, 3, 7, 7, 'Returned', '2026-04-10 20:12:52');
+(183, NULL, 1, 7, 'Requested', '2026-04-10 21:36:24'),
+(184, 16, 1, 7, 'Approved', '2026-04-10 21:37:20'),
+(185, 16, 1, 7, 'Claimed', '2026-04-10 21:37:36'),
+(186, 16, 1, 7, 'Returned', '2026-04-10 21:37:47');
 
 -- --------------------------------------------------------
 
@@ -429,7 +446,7 @@ INSERT INTO `borrowrecords` (`RecordID`, `RequestID`, `MemberID`, `MaterialID`, 
 (38, 47, 1, 173, 3, '2026-04-10 15:41:58', '2026-04-24', '2026-04-10 15:42:02', 'Lost', 0.00, 3),
 (39, 48, 5, 213, 3, '2026-04-10 15:42:17', '2026-04-24', '2026-04-10 15:42:20', 'Damaged', 0.00, 3),
 (40, 49, 6, 169, 3, '2026-04-10 20:01:55', '2026-04-24', '2026-04-10 20:02:01', 'Lost', 430.00, 3),
-(41, 50, 7, 7, 3, '2026-04-10 20:12:47', '2026-04-24', '2026-04-10 20:12:52', 'Returned', 0.00, 3);
+(42, 51, 1, 7, 16, '2026-04-10 21:37:36', '2026-04-24', '2026-04-10 21:37:47', 'Returned', 0.00, 16);
 
 -- --------------------------------------------------------
 
@@ -504,7 +521,7 @@ INSERT INTO `borrowrequests` (`RequestID`, `MemberID`, `MaterialID`, `Status`, `
 (47, 1, 173, 'Approved', '2026-04-10 15:38:19', 3, '2026-04-10 15:41:43', '2026-04-16', '2026-04-10 15:41:58', NULL),
 (48, 5, 213, 'Approved', '2026-04-10 15:41:24', 3, '2026-04-10 15:41:47', '2026-04-16', '2026-04-10 15:42:17', NULL),
 (49, 6, 169, 'Approved', '2026-04-10 16:59:43', 3, '2026-04-10 20:01:19', '2026-04-13', '2026-04-10 20:01:55', NULL),
-(50, 7, 7, 'Approved', '2026-04-10 20:11:46', 3, '2026-04-10 20:12:29', '2026-04-16', '2026-04-10 20:12:47', NULL);
+(51, 1, 7, 'Approved', '2026-04-10 21:36:24', 16, '2026-04-10 21:37:20', '2026-04-16', '2026-04-10 21:37:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -526,6 +543,13 @@ CREATE TABLE `donations` (
   `DateSubmitted` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `donations`
+--
+
+INSERT INTO `donations` (`DonationID`, `MemberID`, `Title`, `Author`, `Genre`, `Description`, `BookCondition`, `Status`, `ReviewedBy`, `ReviewedDate`, `DateSubmitted`) VALUES
+(1, 5, 'Donation', 'Test', 'Horror', 'i love this book ngl', 'Fair', 'Accepted', 3, '2026-04-10 22:40:47', '2026-04-10 22:40:43');
+
 -- --------------------------------------------------------
 
 --
@@ -546,9 +570,8 @@ CREATE TABLE `ebookaccess` (
 
 INSERT INTO `ebookaccess` (`AccessID`, `MemberID`, `MaterialID`, `AccessCount`, `LastAccessed`) VALUES
 (1, 5, 26, 3, '2026-04-10 19:55:50'),
-(3, 1, 26, 13, '2026-04-10 19:37:01'),
-(16, 1, 180, 1, '2026-04-10 19:37:14'),
-(18, 7, 26, 1, '2026-04-10 20:11:38');
+(3, 1, 26, 14, '2026-04-10 22:49:28'),
+(16, 1, 180, 2, '2026-04-10 21:36:15');
 
 -- --------------------------------------------------------
 
@@ -726,7 +749,60 @@ INSERT INTO `loginlogs` (`LogID`, `UserType`, `UserID`, `Email`, `Status`, `IPAd
 (153, 'Member', 1, 'MemberNyle@gmail.com', 'Success', '::1', '2026-04-10 20:30:58'),
 (154, 'Staff', 18, 'AnalLibrarian@gmail.com', 'Success', '::1', '2026-04-10 20:37:14'),
 (155, 'Member', 5, 'MemberDalay@gmail.com', 'Success', '::1', '2026-04-10 20:44:31'),
-(156, 'Staff', 18, 'AnalLibrarian@gmail.com', 'Success', '::1', '2026-04-10 20:52:33');
+(156, 'Staff', 18, 'AnalLibrarian@gmail.com', 'Success', '::1', '2026-04-10 20:52:33'),
+(157, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 21:21:56'),
+(158, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 21:24:04'),
+(159, 'Member', 1, 'MemberNyle@gmail.com', 'Success', '::1', '2026-04-10 21:36:07'),
+(160, 'Staff', 16, 'CircLib@gmail.com', 'Success', '::1', '2026-04-10 21:36:58'),
+(161, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 21:37:56'),
+(162, 'Staff', 16, 'CircLib@gmail.com', 'Success', '::1', '2026-04-10 21:40:28'),
+(163, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 21:40:44'),
+(164, 'Member', NULL, 'NyleTest@gmaill.com', 'Failed', '::1', '2026-04-10 21:41:32'),
+(165, 'Member', NULL, 'nyleTest@gmaill.com', 'Failed', '::1', '2026-04-10 21:41:41'),
+(166, 'Member', NULL, 'TestNyle@gmaill.com', 'Failed', '::1', '2026-04-10 21:41:46'),
+(167, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 21:42:07'),
+(168, 'Staff', 19, 'NyleTest@gmail.com', 'Success', '::1', '2026-04-10 21:42:15'),
+(169, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 21:46:42'),
+(170, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 21:47:24'),
+(171, 'Staff', 16, 'CircLib@gmail.com', 'Success', '::1', '2026-04-10 21:51:35'),
+(172, 'Staff', 16, 'CircLib@gmail.com', 'Success', '::1', '2026-04-10 21:52:04'),
+(173, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 21:53:00'),
+(174, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 21:55:44'),
+(175, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 21:56:50'),
+(176, 'Staff', NULL, 'Nyle2Test@gmail.com', 'Failed', '::1', '2026-04-10 21:59:39'),
+(177, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 21:59:45'),
+(178, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:00:08'),
+(179, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:01:11'),
+(180, 'Staff', 19, 'NyleTest@gmail.com', 'Success', '::1', '2026-04-10 22:02:47'),
+(181, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:03:31'),
+(182, 'Staff', 16, 'CircLib@gmail.com', 'Success', '::1', '2026-04-10 22:07:25'),
+(183, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:07:53'),
+(184, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:08:07'),
+(185, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:11:39'),
+(186, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:12:06'),
+(187, 'Staff', 19, 'NyleTest@gmail.com', 'Success', '::1', '2026-04-10 22:15:06'),
+(188, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:15:33'),
+(189, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:17:29'),
+(190, 'Staff', 19, 'NyleTest@gmail.com', 'Success', '::1', '2026-04-10 22:18:19'),
+(191, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:18:32'),
+(192, 'Staff', 16, 'CircLib@gmail.com', 'Success', '::1', '2026-04-10 22:19:43'),
+(193, 'Staff', 18, 'AnalLibrarian@gmail.com', 'Success', '::1', '2026-04-10 22:19:57'),
+(194, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:20:34'),
+(195, 'Member', NULL, 'Test@gmail.com', 'Failed', '::1', '2026-04-10 22:23:46'),
+(196, 'Member', 7, 'Test@gmail.com', 'Success', '::1', '2026-04-10 22:23:50'),
+(197, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:35:24'),
+(198, 'Member', 5, 'MemberDalay@gmail.com', 'Success', '::1', '2026-04-10 22:35:41'),
+(199, 'Member', 8, 'Delete@gmail.com', 'Success', '::1', '2026-04-10 22:37:03'),
+(200, 'Member', NULL, 'Delete@gmail.com', 'Failed', '::1', '2026-04-10 22:37:30'),
+(201, 'Staff', 21, 'Delete@gmail.com', 'Success', '::1', '2026-04-10 22:38:15'),
+(202, 'Member', NULL, 'Delete@gmail.com', 'Failed', '::1', '2026-04-10 22:38:45'),
+(203, 'Member', NULL, 'MemberDalay@gmail.com', 'Failed', '::1', '2026-04-10 22:40:16'),
+(204, 'Member', 5, 'MemberDalay@gmail.com', 'Success', '::1', '2026-04-10 22:40:19'),
+(205, 'Staff', 20, 'Nyle2Test@gmail.com', 'Success', '::1', '2026-04-10 22:49:05'),
+(206, 'Member', 1, 'MemberNyle@gmail.com', 'Success', '::1', '2026-04-10 22:49:22'),
+(207, 'Staff', NULL, 'AdminNyle@gmail.com', 'Failed', '::1', '2026-04-10 22:49:46'),
+(208, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:49:49'),
+(209, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:55:55');
 
 -- --------------------------------------------------------
 
@@ -760,7 +836,9 @@ INSERT INTO `materiallogs` (`LogID`, `StaffID`, `MaterialID`, `Action`, `LogTime
 (11, 3, 35, 'Added', '2026-04-02 21:32:03'),
 (12, 3, 36, 'Added', '2026-04-03 18:12:34'),
 (13, 3, 36, 'Archived', '2026-04-03 18:12:43'),
-(14, 3, 35, 'Archived', '2026-04-03 18:12:54');
+(14, 3, 35, 'Archived', '2026-04-03 18:12:54'),
+(15, 3, 218, 'Added', '2026-04-10 22:39:25'),
+(16, 3, 218, 'Archived', '2026-04-10 22:39:32');
 
 -- --------------------------------------------------------
 
@@ -873,7 +951,8 @@ INSERT INTO `materials` (`MaterialID`, `TypeID`, `Title`, `Author`, `ISBN`, `Des
 (214, 3, 'BusinessWorld', 'Various Authors', 'N/A', 'Philippine business and financial daily.', 'Business', '1967-01-01', 'BusinessWorld Publishing', 5, 5, NULL, NULL, NULL, NULL, 'Newspaper', 'Daily', 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 250.00),
 (215, 3, 'Philippine Daily Inquirer', 'Various Authors', 'N/A', 'Major Philippine broadsheet.', 'Current Events', '1985-12-09', 'Inquirer Publications', 5, 5, NULL, NULL, NULL, NULL, 'Newspaper', 'Daily', 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 250.00),
 (216, 3, 'Discover Magazine', 'Various Authors', '0274-7529', 'Science for the curious.', 'Science', '1980-01-01', 'Kalmbach Publishing', 5, 5, NULL, NULL, NULL, NULL, 'Magazine', 'Monthly', 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 250.00),
-(217, 3, 'PC Magazine', 'Various Authors', '0888-8507', 'Technology product reviews and news.', 'Technology', '1982-02-01', 'Ziff Davis', 5, 5, NULL, NULL, NULL, NULL, 'Magazine', 'Monthly', 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 250.00);
+(217, 3, 'PC Magazine', 'Various Authors', '0888-8507', 'Technology product reviews and news.', 'Technology', '1982-02-01', 'Ziff Davis', 5, 5, NULL, NULL, NULL, NULL, 'Magazine', 'Monthly', 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 250.00),
+(218, 1, 'DELETE', 'TEST', '', '', '', '0000-00-00', 'DELETE', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 22:39:25', 1, '2026-04-10 22:39:32', 0.00);
 
 -- --------------------------------------------------------
 
@@ -915,9 +994,7 @@ CREATE TABLE `memberlogs` (
 
 INSERT INTO `memberlogs` (`LogID`, `StaffID`, `AffectedMemberID`, `Action`, `LogTime`) VALUES
 (5, 3, 5, 'Created', '2026-04-03 19:46:58'),
-(6, 3, 6, 'Created', '2026-04-04 01:00:45'),
-(7, 3, 7, 'Created', '2026-04-10 18:06:20'),
-(8, 3, 7, 'Updated', '2026-04-10 18:06:26');
+(6, 3, 6, 'Created', '2026-04-04 01:00:45');
 
 -- --------------------------------------------------------
 
@@ -943,8 +1020,7 @@ CREATE TABLE `members` (
 INSERT INTO `members` (`MemberID`, `FirstName`, `LastName`, `Email`, `Password`, `DefaultPassword`, `StatusID`, `DateCreated`) VALUES
 (1, 'Member', 'Nyle', 'MemberNyle@gmail.com', '$2y$10$UC.N4kY1VfgMG58Q1lqvvucPApGn9/PqGb5vWNksd6AhUuzGG7LiW', 0, 1, '2026-04-01 01:04:33'),
 (5, 'Member', 'Dalay', 'MemberDalay@gmail.com', '$2y$10$w65jf/sizhMfGUWpdD8DEuZagqhoXK5C/PB5NIXgiXX8uCARxycx2', 0, 1, '2026-04-03 19:46:58'),
-(6, 'Member', 'Adriel', 'MemberAdriel@gmail.com', '$2y$10$jebp2kB1f5sHrE9AYVaES.Tx0.USv9x6pj.D9tUEIHle6UoCMJrMW', 0, 1, '2026-04-04 01:00:45'),
-(7, 'Member', 'Test', 'Test@gmail.com', '$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm', 0, 1, '2026-04-10 18:06:20');
+(6, 'Member', 'Adriel', 'MemberAdriel@gmail.com', '$2y$10$jebp2kB1f5sHrE9AYVaES.Tx0.USv9x6pj.D9tUEIHle6UoCMJrMW', 0, 1, '2026-04-04 01:00:45');
 
 -- --------------------------------------------------------
 
@@ -1039,19 +1115,23 @@ INSERT INTO `notifications` (`NotificationID`, `UserID`, `UserType`, `Message`, 
 (53, 1, 'Member', '\"To Kill a Mockingbird\" has been returned.', 1, '2026-04-10 03:05:38'),
 (54, 1, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-13.', 1, '2026-04-10 12:39:25'),
 (55, 1, 'Member', 'You have claimed \"Dune\". Due date: 2026-04-24. Enjoy!', 1, '2026-04-10 15:37:54'),
-(56, 1, 'Member', '\"Dune\" has been returned.', 0, '2026-04-10 15:41:08'),
-(57, 1, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-16.', 0, '2026-04-10 15:41:43'),
+(56, 1, 'Member', '\"Dune\" has been returned.', 1, '2026-04-10 15:41:08'),
+(57, 1, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-16.', 1, '2026-04-10 15:41:43'),
 (58, 5, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-16.', 0, '2026-04-10 15:41:47'),
-(59, 1, 'Member', 'You have claimed \"The 48 Laws of Power\". Due date: 2026-04-24. Enjoy!', 0, '2026-04-10 15:41:58'),
-(60, 1, 'Member', '\"The 48 Laws of Power\" has been marked as lost.', 0, '2026-04-10 15:42:02'),
+(59, 1, 'Member', 'You have claimed \"The 48 Laws of Power\". Due date: 2026-04-24. Enjoy!', 1, '2026-04-10 15:41:58'),
+(60, 1, 'Member', '\"The 48 Laws of Power\" has been marked as lost.', 1, '2026-04-10 15:42:02'),
 (61, 5, 'Member', 'You have claimed \"Vogue Philippines\". Due date: 2026-04-24. Enjoy!', 0, '2026-04-10 15:42:17'),
 (62, 5, 'Member', '\"Vogue Philippines\" has been marked as damaged.', 0, '2026-04-10 15:42:20'),
 (63, 6, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-13.', 0, '2026-04-10 20:01:19'),
 (64, 6, 'Member', 'You have claimed \"The Lean Startup\". Due date: 2026-04-24. Enjoy!', 0, '2026-04-10 20:01:55'),
 (65, 6, 'Member', '\"The Lean Startup\" has been marked as lost. A replacement fine of ₱430.00 has been applied.', 0, '2026-04-10 20:02:01'),
-(66, 7, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-16.', 0, '2026-04-10 20:12:29'),
-(67, 7, 'Member', 'You have claimed \"To Kill a Mockingbird\". Due date: 2026-04-24. Enjoy!', 0, '2026-04-10 20:12:47'),
-(68, 7, 'Member', '\"To Kill a Mockingbird\" has been returned.', 0, '2026-04-10 20:12:52');
+(66, 7, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-16.', 1, '2026-04-10 20:12:29'),
+(67, 7, 'Member', 'You have claimed \"To Kill a Mockingbird\". Due date: 2026-04-24. Enjoy!', 1, '2026-04-10 20:12:47'),
+(68, 7, 'Member', '\"To Kill a Mockingbird\" has been returned.', 1, '2026-04-10 20:12:52'),
+(69, 1, 'Member', 'Your borrow request has been approved. Claim the book at the library by 2026-04-16.', 1, '2026-04-10 21:37:20'),
+(70, 1, 'Member', 'You have claimed \"To Kill a Mockingbird\". Due date: 2026-04-24. Enjoy!', 1, '2026-04-10 21:37:36'),
+(71, 1, 'Member', '\"To Kill a Mockingbird\" has been returned.', 1, '2026-04-10 21:37:47'),
+(72, 5, 'Member', 'Your donation of \"Donation\" has been accepted. Thank you!', 0, '2026-04-10 22:40:47');
 
 -- --------------------------------------------------------
 
@@ -1094,7 +1174,8 @@ CREATE TABLE `stafflogs` (
 
 INSERT INTO `stafflogs` (`LogID`, `AdminID`, `AffectedStaffID`, `Action`, `LogTime`) VALUES
 (22, 3, 16, 'Created', '2026-04-02 16:28:46'),
-(25, 3, 18, 'Created', '2026-04-10 01:00:13');
+(25, 3, 18, 'Created', '2026-04-10 01:00:13'),
+(26, 3, 19, 'Created', '2026-04-10 21:41:20');
 
 -- --------------------------------------------------------
 
@@ -1140,8 +1221,9 @@ CREATE TABLE `staffs` (
 
 INSERT INTO `staffs` (`StaffID`, `FirstName`, `LastName`, `Email`, `Password`, `DefaultPassword`, `RoleID`, `StatusID`, `DateCreated`) VALUES
 (3, 'Admin', 'Nyle', 'AdminNyle@gmail.com', '$2b$10$3FkQO8a5Mp3iXt7umHho6.itaHGmOTnYQQnU9mRrKZeZunl1ckQtS', 0, 1, 1, '2026-04-01 01:04:09'),
-(16, 'Circ', 'Librarian', 'CircLib@gmail.com', '$2y$10$13/pUT5w6yyA0EdUsBfIGugMqvgQ7mSFjLSICzIKqg4OjUIxdvJti', 0, 2, 1, '2026-04-02 16:28:46'),
-(18, 'Anly', 'Librarian', 'AnalLibrarian@gmail.com', '$2y$10$y3IEOwnyL/R53PZiAxJhxO7blJrkmX2L7jGfTGA3S0.DKJoaIjKIi', 0, 4, 1, '2026-04-10 01:00:13');
+(16, 'Circ', 'Librarian', 'CircLib@gmail.com', '$2y$10$pdpsQqfQjg8DKaFFWofi..X/s44x9bgxjasEny.lPoUgX08IXpQ2.', 0, 2, 1, '2026-04-02 16:28:46'),
+(18, 'Anly', 'Librarian', 'AnalLibrarian@gmail.com', '$2y$10$r0emjoj5cRLucFtHO.izM.elzMrbTL5zOG.lSbVqpaW0o0Zuw4Th2', 0, 4, 1, '2026-04-10 01:00:13'),
+(19, 'Nyle', 'Test', 'NyleTest@gmail.com', '$2y$10$jVQzIh8O4nnL/BAjeNMWFeYZFogVP9bRB1UB3a7j6wTcmyPR4r6Su', 0, 4, 1, '2026-04-10 21:41:20');
 
 -- --------------------------------------------------------
 
@@ -1318,55 +1400,55 @@ ALTER TABLE `staffstatus`
 -- AUTO_INCREMENT for table `archives`
 --
 ALTER TABLE `archives`
-  MODIFY `ArchiveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ArchiveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `borrowlogs`
 --
 ALTER TABLE `borrowlogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `borrowrecords`
 --
 ALTER TABLE `borrowrecords`
-  MODIFY `RecordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `RecordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `borrowrequests`
 --
 ALTER TABLE `borrowrequests`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `DonationID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DonationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ebookaccess`
 --
 ALTER TABLE `ebookaccess`
-  MODIFY `AccessID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `AccessID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `loginlogs`
 --
 ALTER TABLE `loginlogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 
 --
 -- AUTO_INCREMENT for table `materiallogs`
 --
 ALTER TABLE `materiallogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
 
 --
 -- AUTO_INCREMENT for table `materialtypes`
@@ -1378,13 +1460,13 @@ ALTER TABLE `materialtypes`
 -- AUTO_INCREMENT for table `memberlogs`
 --
 ALTER TABLE `memberlogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `memberstatus`
@@ -1396,7 +1478,7 @@ ALTER TABLE `memberstatus`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `NotificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `NotificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1408,7 +1490,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `stafflogs`
 --
 ALTER TABLE `stafflogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `staffroles`
@@ -1420,7 +1502,7 @@ ALTER TABLE `staffroles`
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `StaffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `StaffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `staffstatus`
