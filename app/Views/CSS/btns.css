@@ -1,0 +1,24 @@
+.btn-edit {
+    padding: 4px 10px;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+    margin-right: 4px;
+    font-family: Arial, sans-serif;
+}
+.btn-edit:hover { background: #219150; }
+
+.btn-archive {
+    padding: 4px 10px;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+    font-family: Arial, sans-serif;
+}
+.btn-archive:hover { background: #c0392b; }

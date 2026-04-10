@@ -2,8 +2,25 @@
 
 LIBRARY MANAGEMENT SYSTEMM NI NYLE
 
+CREATE A Database in phpmyadmin 
+LibraryDB
+then inport the provided sql
+
+
+
 
 ADMIN DETAILS
 Email : AdminNyle@gmail.com
 Password: Password
 
+MEMBER DETAILS
+NyleDalay@gmail.com
+Password: Password
+
+
+STAFFS
+LelouchLibrarian@gmail.com
+Password: Password
+
+IsaacLibrarian@gmail.com
+Password: Password

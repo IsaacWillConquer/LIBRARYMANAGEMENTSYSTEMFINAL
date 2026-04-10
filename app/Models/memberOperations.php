@@ -128,43 +128,48 @@ function searchMembers($q) {
     return $data;
 }
 
-//hard delete with json snapshot saved to archives
 function archiveMember($memberID, $adminID) {
     global $conn;
-
     $member = getMemberByID($memberID);
     if (!$member) {
         return ['success' => false, 'message' => 'Member not found'];
     }
+    $conn->begin_transaction();
+    try {
+        $json = $conn->real_escape_string(json_encode($member));
+        $conn->query("
+            INSERT INTO archives (EntityType, EntityID, ArchivedData)
+            VALUES ('Member', $memberID, '$json')
+        ");
+        logMemberAction($adminID, $memberID, 'Archived');
 
-    $json = $conn->real_escape_string(json_encode($member));
-    $archiveResult = $conn->query("
-        INSERT INTO archives (EntityType, EntityID, ArchivedData)
-        VALUES ('Member', $memberID, '$json')
-    ");
+        $tablesWithMemberID = [
+            'borrowrecords',  
+            'borrowlogs',
+            'ebookaccess',
+            'borrowrequests',
+            'donations', 
+        ];
+        foreach ($tablesWithMemberID as $table) {
+            $stmt = $conn->prepare("DELETE FROM $table WHERE MemberID = ?");
+            $stmt->bind_param('i', $memberID);
+            $stmt->execute();
+        }
+        $stmt = $conn->prepare("DELETE FROM memberlogs WHERE AffectedMemberID = ?");
+        $stmt->bind_param('i', $memberID);
+        $stmt->execute();
 
-    if (!$archiveResult) {
-        return ['success' => false, 'message' => 'Archive failed: ' . $conn->error];
+        $stmt = $conn->prepare("DELETE FROM members WHERE MemberID = ?");
+        $stmt->bind_param('i', $memberID);
+        $stmt->execute();
+
+        $conn->commit();
+        return ['success' => true, 'message' => 'Member archived and deleted successfully'];
+    } catch (Exception $e) {
+        $conn->rollback();
+        return ['success' => false, 'message' => $e->getMessage()];
     }
-
-    //log before delete so FK doesnt blow up
-    logMemberAction($adminID, $memberID, 'Archived');
-
-    $stmt = $conn->prepare("DELETE FROM memberlogs WHERE AffectedMemberID = ?");
-    $stmt->bind_param('i', $memberID);
-    $stmt->execute();
-
-    $stmt = $conn->prepare("DELETE FROM members WHERE MemberID = ?");
-    $stmt->bind_param('i', $memberID);
-
-    if (!$stmt->execute()) {
-        return ['success' => false, 'message' => $conn->error];
-    }
-
-    return ['success' => true, 'message' => 'Member archived successfully'];
 }
-
-//log member actions
 function logMemberAction($adminID, $memberID, $action) {
     global $conn;
 

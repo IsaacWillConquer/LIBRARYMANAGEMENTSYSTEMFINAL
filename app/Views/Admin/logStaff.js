@@ -56,8 +56,8 @@ function loadStaff() {
                     <td>${s.DefaultPassword == 1 ? 'Yes' : 'No'}</td>
                     <td>${s.DateCreated}</td>
                     <td>
-                        <button onclick="loadEdit(${s.StaffID})">Edit</button>
-                        <button onclick="archiveStaff(${s.StaffID})">Archive</button>
+                        <button class="btn-edit" onclick="loadEdit(${s.StaffID})">Edit</button>
+                        <button class="btn-archive" onclick="archiveStaff(${s.StaffID})">Archive</button>
                     </td>
                 </tr>`;
             });

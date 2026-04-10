@@ -1,0 +1,20 @@
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; color: #222; font-size: .85rem; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .box { background: #fff; border-radius: 5px; padding: 28px 26px; width: 340px; }
+        .box h2 { font-size: 1rem; color: #1a2744; margin-bottom: 6px; }
+        .box p  { font-size: .82rem; color: #777; margin-bottom: 18px; }
+        .box label { display: block; font-size: .78rem; font-weight: bold; color: #666; margin-bottom: 3px; margin-top: 10px; }
+        .box input {
+            width: 100%; padding: 7px 9px; border: 1px solid #ccc; border-radius: 3px;
+            font-size: .84rem; font-family: Arial, sans-serif;
+        }
+        .box input:focus { outline: none; border-color: #4e73df; }
+        #changebtn {
+            width: 100%; margin-top: 16px; background: #1a2744; color: #fff;
+            border: none; border-radius: 3px; padding: 9px;
+            font-size: .88rem; font-family: Arial, sans-serif; cursor: pointer;
+        }
+        #changebtn:hover { background: #243358; }
+        #error_text   { display:none; margin-top:10px; padding:7px 9px; border-radius:3px; font-size:.82rem; background:#fdecea; color:#c0392b; }
+        #success_text { display:none; margin-top:10px; padding:7px 9px; border-radius:3px; font-size:.82rem; background:#edf7f1; color:#1a7a4a; }
+        .brand { font-size: .82rem; color: #aaa; margin-bottom: 16px; }

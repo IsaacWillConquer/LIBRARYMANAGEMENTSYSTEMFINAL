@@ -151,7 +151,7 @@ function updMaterial($data, $staffID) {
         WHERE MaterialID=?
     ");
     $stmt->bind_param(
-        'sssssssiidssssi',
+        'sssssssiidsssssi',
         $data['title'], $data['author'], $data['isbn'],
         $data['description'], $data['genre'], $data['publishDate'],
         $data['publisher'], $data['totalQty'], $data['availableQty'],

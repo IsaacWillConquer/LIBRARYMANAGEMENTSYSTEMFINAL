@@ -41,7 +41,8 @@
 
 <div id="notificationsPanel">
     <div class="notif-head">Notifications <button class="btn-markread" onclick="markAllRead()">Mark all read</button></div>
-    <div class="notif-body" id="notifBody"><div class="notif-row">Loading...</div></div>
+    <div class="notif-body" id="notifBody">
+        <div class="notif-row">Loading...</div></div>
 </div>
 
 <div class="subbar"><span>Manage Borrow Requests</span></div>
@@ -49,7 +50,6 @@
 <div id="msg-ok"></div>
 <div id="msg-err"></div>
 
-<!-- approve modal -->
 <div class="modal-overlay" id="approveModal">
     <div class="modal-box">
         <h3>Approve Request</h3>
@@ -63,7 +63,6 @@
     </div>
 </div>
 
-<!-- reject modal -->
 <div class="modal-overlay" id="rejectModal">
     <div class="modal-box">
         <h3>Reject Request</h3>
@@ -76,7 +75,6 @@
     </div>
 </div>
 
-<!-- return modal -->
 <div class="modal-overlay" id="returnModal">
     <div class="modal-box">
         <h3>Return Book</h3>
@@ -89,7 +87,6 @@
     </div>
 </div>
 
-<!-- lost/damaged modal -->
 <div class="modal-overlay" id="lostModal">
     <div class="modal-box">
         <h3 id="lostModalTitle">Mark as Lost/Damaged</h3>
@@ -101,7 +98,6 @@
     </div>
 </div>
 
-<!-- claim popup -->
 <div class="modal-overlay" id="claimPopup">
     <div class="modal-box">
         <h3 id="popupTitle"></h3>
@@ -130,10 +126,19 @@
         <table id="pendingTable">
             <thead>
                 <tr>
-                    <th>Member</th><th>Title</th><th>Type</th><th>Author</th><th>Request Date</th><th>Action</th>
+                    <th>Member</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Author</th>
+                    <th>Request Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+            <tbody>
+                <tr>
+                    <td colspan="6">Loading...</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
@@ -142,10 +147,19 @@
         <table id="claimsTable">
             <thead>
                 <tr>
-                    <th>Member</th><th>Title</th><th>Type</th><th>Approved Date</th><th>Claim Deadline</th><th>Action</th>
+                    <th>Member</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Approved Date</th>
+                    <th>Claim Deadline</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+            <tbody>
+                <tr>
+                    <td colspan="6">Loading...</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
@@ -153,10 +167,20 @@
         <table id="activeBorrowsTable">
             <thead>
                 <tr>
-                    <th>Member</th><th>Title</th><th>Type</th><th>Borrow Date</th><th>Due Date</th><th>Status</th><th>Action</th>
+                    <th>Member</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Borrow Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody><tr><td colspan="7">Loading...</td></tr></tbody>
+            <tbody>
+                <tr>
+                    <td colspan="7">Loading...</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
@@ -164,10 +188,20 @@
         <table id="donationsTable">
             <thead>
                 <tr>
-                    <th>Member</th><th>Title</th><th>Author</th><th>Genre</th><th>Condition</th><th>Date</th><th>Action</th>
+                    <th>Member</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Condition</th>
+                    <th>Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody><tr><td colspan="7">Loading...</td></tr></tbody>
+            <tbody>
+                <tr>
+                    <td colspan="7">Loading...</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </main>

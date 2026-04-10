@@ -18,8 +18,10 @@ $fname = $_SESSION['FullName'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
-    <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <link rel="stylesheet" href="app/Views/CSS/generalize.css?v=2">
     <link rel="stylesheet" href="app/Views/CSS/analyist.css">
+    <link rel="stylesheet" href="app/Views/CSS/btns.css">
+
 
     <title>Staff - Member Management</title>
 </head>
@@ -96,6 +98,6 @@ $fname = $_SESSION['FullName'];
 </main>
 
 <script src="app/Views/Auth/logAuth.js"></script>
-<script src="app/Views/Admin/logMember.js"></script>
+<script src="app/Views/Admin/logMember.js?v=1"></script>
 </body>
 </html>

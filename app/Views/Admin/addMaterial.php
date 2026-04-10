@@ -18,8 +18,10 @@ $fname = $_SESSION['FullName'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
-    <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <link rel="stylesheet" href="app/Views/CSS/generalize.css?v=2">
     <link rel="stylesheet" href="app/Views/CSS/analyist.css">
+    <link rel="stylesheet" href="app/Views/CSS/btns.css">
+
 
     <title>Staff - Material Management</title>
 </head>
@@ -116,16 +118,46 @@ $fname = $_SESSION['FullName'];
         <div id="editForm" class="form-box">
             <h3>Edit Material</h3>
             <input type="hidden" id="editMaterialID">
-            <div class="form-row"><label>Title *</label><input type="text" id="editTitle" placeholder="Title"></div>
-            <div class="form-row"><label>Author *</label><input type="text" id="editAuthor" placeholder="Author"></div>
-            <div class="form-row"><label>ISBN</label><input type="text" id="editISBN" placeholder="ISBN"></div>
-            <div class="form-row"><label>Description</label><textarea id="editDesc" placeholder="Description"></textarea></div>
-            <div class="form-row"><label>Genre</label><input type="text" id="editGenre" placeholder="Genre"></div>
-            <div class="form-row"><label>Publish Date</label><input type="date" id="editPublishDate"></div>
-            <div class="form-row"><label>Publisher *</label><input type="text" id="editPublisher" placeholder="Publisher"></div>
-            <div class="form-row"><label>Total Qty</label><input type="number" id="editTotalQty"></div>
-            <div class="form-row"><label>Available Qty</label><input type="number" id="editAvailableQty"></div>
-            <div class="form-row"><label>Replacement Cost (₱)</label><input type="number" id="editReplacementCost" value="0.00" min="0" step="0.01"></div>
+            <div class="form-row"><label>Title *</label>
+            <input type="text" id="editTitle" placeholder="Title">
+            </div>
+
+            <div class="form-row"><label>Author *</label>
+            <input type="text" id="editAuthor" placeholder="Author">
+            </div> 
+
+            <div class="form-row"><label>ISBN</label>
+            <input type="text" id="editISBN" placeholder="ISBN">
+            </div>
+
+            <div class="form-row"><label>Description</label>
+            <textarea id="editDesc" placeholder="Description"></textarea>
+            </div>
+
+            <div class="form-row"><label>Genre</label>
+            <input type="text" id="editGenre" placeholder="Genre">
+            </div>
+
+            <div class="form-row"><label>Publish Date</label>
+            <input type="date" id="editPublishDate">
+            </div>
+
+            <div class="form-row"><label>Publisher *</label>
+            <input type="text" id="editPublisher" placeholder="Publisher">
+            </div>
+
+            <div class="form-row"><label>Total Qty</label>
+            <input type="number" id="editTotalQty">
+            </div>
+
+            <div class="form-row"><label>Available Qty</label>
+            <input type="number" id="editAvailableQty">
+            </div>
+            
+            <div class="form-row"><label>Replacement Cost (₱)</label>
+            <input type="number" id="editReplacementCost" value="0.00" min="0" step="0.01">
+            </div>
+
             <div id="ebookFields" style="display:none;">
                 <div class="form-row"><label>EBook Format</label>
                     <select id="editEbookFormat">
@@ -198,7 +230,18 @@ $fname = $_SESSION['FullName'];
     <div class="section-label" style="margin-top:14px;">EBooks</div>
     <table id="ebookTable">
         <thead>
-            <tr><th>ID</th><th>Type</th><th>Title</th><th>Author</th><th>ISBN</th><th>Publisher</th><th>Genre</th><th>Cost</th><th>Date Added</th><th>Actions</th></tr>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Publisher</th>
+                <th>Genre</th>
+                <th>Cost</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody></tbody>
     </table>
@@ -206,7 +249,20 @@ $fname = $_SESSION['FullName'];
     <div class="section-label" style="margin-top:14px;">Journals</div>
     <table id="journalTable">
         <thead>
-            <tr><th>ID</th><th>Type</th><th>Title</th><th>Author</th><th>ISBN</th><th>Publisher</th><th>Type</th><th>Total</th><th>Available</th><th>Cost</th><th>Date Added</th><th>Actions</th></tr>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Publisher</th>
+                <th>Type</th>
+                <th>Total</th>
+                <th>Available</th>
+                <th>Cost</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody></tbody>
     </table>

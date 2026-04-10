@@ -1,0 +1,64 @@
+#jsonModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+#jsonModal.open {
+    display: flex;
+}
+
+#jsonBox {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: min(680px, 90vw);
+    max-height: 75vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+}
+
+#closeJson {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: #cdd6f4;
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+#closeJson:hover {
+    color: #f38ba8;
+}
+
+#jsonContent {
+    margin: 0;
+    font-size: 0.82rem;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+.btn-view-json {
+    background: #8783d6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-view-json:hover {
+    background: #4338ca;
+}

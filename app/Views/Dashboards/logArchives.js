@@ -11,6 +11,10 @@ $(document).ready(function () {
     bindSearch('searchArchivesStaff','tblArchivesStaff','countArchivesStaff');
     bindSearch('searchArchivesMember','tblArchivesMember','countArchivesMember');
 
+
+    $(document).on('click', '.btn-view-json', function () {
+        viewJson($(this).attr('data-json'));
+    });
 });
 
 function switchTab(tabKey, el) {
@@ -167,7 +171,7 @@ function renderArchives(data, tblId, countId) {
             '<td>' + badge(r.EntityType) + '</td>' +
             '<td>' + r.EntityID + '</td>' +
             '<td><span class="archive-data">' + esc(shortData) + '</span></td>' +
-            '<td><button class="btn-view-json" onclick="viewJson(' + "'" + esc(r.ArchivedData) + "'" + ')">View</button></td>' +
+            '<td><button class="btn-view-json" data-json=\'' + esc(r.ArchivedData) + '\'>View</button></td>' +
         '</tr>';
     });
     $('#' + tblId + ' tbody').html(html);

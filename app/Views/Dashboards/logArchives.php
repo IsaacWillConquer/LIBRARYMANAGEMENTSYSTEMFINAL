@@ -145,14 +145,6 @@ $backLink = ($role === 'Admin')
     </div>
 
 
-
-
-
-
-
-
-
-
     <div class="page-pane" id="pane-memberLogs">
         <div class="section-label">Member Logs</div>
         <div class="log-toolbar">
@@ -170,7 +162,6 @@ $backLink = ($role === 'Admin')
         </div>
     </div>
 
-    <!-- MATERIAL LOGS -->
     <div class="page-pane" id="pane-materialLogs">
         <div class="section-label">Material Logs</div>
         <div class="log-toolbar">
@@ -188,7 +179,6 @@ $backLink = ($role === 'Admin')
         </div>
     </div>
 
-    <!-- STAFF ARCHIVES -->
     <div class="page-pane" id="pane-archivesStaff">
         <div class="section-label">Archived Staff</div>
         <div class="log-toolbar">
@@ -206,7 +196,6 @@ $backLink = ($role === 'Admin')
         </div>
     </div>
 
-    <!-- MEMBER ARCHIVES -->
     <div class="page-pane" id="pane-archivesMember">
         <div class="section-label">Archived Members</div>
         <div class="log-toolbar">
@@ -226,7 +215,6 @@ $backLink = ($role === 'Admin')
 
 </main>
 
-<!-- JSON Modal -->
 <div id="jsonModal">
     <div id="jsonBox">
         <button id="closeJson" onclick="closeJson()">✕</button>
