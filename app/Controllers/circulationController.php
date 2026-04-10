@@ -25,6 +25,7 @@ switch ($action) {
     case 'approveReq':
         $requestID = intval($_POST['requestID'] ?? 0);
         $claimDeadline = trim($_POST['claimDeadline'] ?? '');
+
         if (!$requestID || !$claimDeadline) {
             echo json_encode(['success' => false, 'message' => 'Missing request ID or claim-deadline']);
             break;
@@ -34,6 +35,7 @@ switch ($action) {
         break;
 
     case 'rejectReq':
+
         $requestID = intval($_POST['requestID'] ?? 0);
         $remarks = trim($_POST['remarks'] ?? '');
 
@@ -57,6 +59,7 @@ switch ($action) {
         break;
 
     case 'markClaimed':
+
         $requestID = intval($_POST['requestID'] ?? 0);
         if (!$requestID) {
             echo json_encode(['success' => false, 'message' => 'Invalid request']);
@@ -67,11 +70,26 @@ switch ($action) {
 
     case 'returnBook':
         $recordID = intval($_POST['recordID'] ?? 0);
+
         if (!$recordID) {
             echo json_encode(['success' => false, 'message' => 'Invalid record']);
             break;
         }
+
         echo json_encode(returnBook($recordID, $staffID));
+        break;
+
+    case 'markLostDamaged':
+
+        $recordID  = intval($_POST['recordID'] ?? 0);
+        $condition = trim($_POST['condition'] ?? '');
+
+        if (!$recordID || !$condition) {
+            echo json_encode(['success' => false, 'message' => 'Missing record ID or condition']);
+            break;
+        }
+
+        echo json_encode(markLostDamaged($recordID, $staffID, $condition));
         break;
 
     case 'getPendingDonations':
@@ -81,10 +99,12 @@ switch ($action) {
     case 'reviewDonation':
         $donationID = intval($_POST['donationID'] ?? 0);
         $status = trim($_POST['status'] ?? '');
+
         if (!$donationID || !in_array($status, ['Accepted', 'Rejected'])) {
             echo json_encode(['success' => false, 'message' => 'Invalid donation review']);
             break;
         }
+        
         echo json_encode(reviewDonation($donationID, $staffID, $status));
         break;
 

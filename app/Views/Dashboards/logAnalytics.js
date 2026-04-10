@@ -1,5 +1,5 @@
-// chart instances so we can destroy + recreate on refresh
-var chartInstances = {};
+
+let chartInstances = {};
 
 $(document).ready(function () {
     loadAll();
@@ -15,11 +15,10 @@ function loadAll() {
     loadTopMembers();
     loadRecentActivity();
 
-    var now = new Date();
+    let now = new Date();
     $('#lastUpdated').text('Updated ' + now.toLocaleTimeString());
 }
 
-// destroy old chart instance before making a new one
 function makeChart(id, config) {
     if (chartInstances[id]) {
         chartInstances[id].destroy();
@@ -52,8 +51,8 @@ function loadBorrowsMonthly() {
         data: { action: 'getBorrowsMonthly' },
         dataType: 'json',
         success: function (data) {
-            var labels = data.map(function (d) { return d.Month; });
-            var values = data.map(function (d) { return parseInt(d.Total); });
+            let labels = data.map(function (d) { return d.Month; });
+            let values = data.map(function (d) { return parseInt(d.Total); });
 
             makeChart('chartBorrowsPerMonth', {
                 type: 'line',
@@ -90,11 +89,10 @@ function loadTopBorrowed() {
         data: { action: 'getTopBorrow' },
         dataType: 'json',
         success: function (data) {
-            var labels = data.map(function (d) {
-                // truncate long titles
+            let labels = data.map(function (d) {
                 return d.Title.length > 22 ? d.Title.substring(0, 22) + '…' : d.Title;
             });
-            var values = data.map(function (d) { return parseInt(d.BorrowCount); });
+            let values = data.map(function (d) { return parseInt(d.BorrowCount); });
 
             makeChart('chartTopBorrowed', {
                 type: 'bar',
@@ -126,14 +124,14 @@ function loadStatusBreakdown() {
         data: { action: 'getborrowStats' },
         dataType: 'json',
         success: function (data) {
-            var labels = data.map(function (d) { return d.Status; });
-            var values = data.map(function (d) { return parseInt(d.Total); });
-            var colors = {
+            let labels = data.map(function (d) { return d.Status; });
+            let values = data.map(function (d) { return parseInt(d.Total); });
+            let colors = {
                 'Borrowed': '#4e73df',
                 'Returned': '#1cc88a',
                 'Overdue':  '#e74a3b'
             };
-            var bgColors = labels.map(function (l) { return colors[l] || '#aaa'; });
+            let bgColors = labels.map(function (l) { return colors[l] || '#aaa'; });
 
             makeChart('chartStatusBreakdown', {
                 type: 'doughnut',
@@ -157,8 +155,8 @@ function loadMatTypes() {
         data: { action: 'getMatType' },
         dataType: 'json',
         success: function (data) {
-            var labels = data.map(function (d) { return d.TypeName; });
-            var values = data.map(function (d) { return parseInt(d.Total); });
+            let labels = data.map(function (d) { return d.TypeName; });
+            let values = data.map(function (d) { return parseInt(d.Total); });
 
             makeChart('chartMaterialTypes', {
                 type: 'doughnut',
@@ -182,8 +180,8 @@ function loadGenreStats() {
         data: { action: 'getGenreStats' },
         dataType: 'json',
         success: function (data) {
-            var labels = data.map(function (d) { return d.Genre; });
-            var values = data.map(function (d) { return parseInt(d.BorrowCount); });
+            let labels = data.map(function (d) { return d.Genre; });
+            let values = data.map(function (d) { return parseInt(d.BorrowCount); });
 
             makeChart('chartGenre', {
                 type: 'bar',
@@ -220,7 +218,7 @@ function loadTopMembers() {
                 $('#topMembersBody').html('<tr><td colspan="3" style="color:#aaa;">No data yet</td></tr>');
                 return;
             }
-            var rows = '';
+            let rows = '';
             data.forEach(function (m, i) {
                 rows += '<tr>' +
                     '<td class="rank">' + (i + 1) + '</td>' +
@@ -244,7 +242,7 @@ function loadRecentActivity() {
                 $('#activityFeed').html('<div class="activity-item" style="color:#aaa;">No activity yet</div>');
                 return;
             }
-            var html = '';
+            let html = '';
             data.forEach(function (a) {
                 html += '<div class="activity-item">' +
                     '<span class="activity-action a-' + a.Action + '">' + a.Action + '</span>' +

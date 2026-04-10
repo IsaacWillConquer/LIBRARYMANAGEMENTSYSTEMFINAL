@@ -1,6 +1,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; }
+body {
+     font-family: Arial, sans-serif; background: #f5f5f5; color: #222;
+    }
 
 header {
     background: #1a2744;
@@ -11,29 +13,53 @@ header {
     align-items: center;
     justify-content: space-between;
 }
-header h1 { font-size: 1rem; }
+
+header h1 { 
+    font-size: 1rem; 
+}
+
 header a, header button.nav-btn {
     color: #ccc; font-size: .85rem; text-decoration: none;
     background: none; border: none; cursor: pointer;
     font-family: Arial, sans-serif; margin-left: 14px;
 }
-header a:hover, header button.nav-btn:hover { color: #fff; }
+
+header a:hover, header button.nav-btn:hover {
+    color: #fff; 
+    }
+
 .btn-logout {
     background: #fff; color: #1a2744; border: none;
     border-radius: 3px; padding: 4px 10px;
     font-size: .82rem; cursor: pointer; margin-left: 14px;
 }
-.btn-logout:hover { background: #ddd; }
 
-.welcome { background: #243358; color: #ccc; padding: 8px 16px; font-size: .85rem; }
-.welcome strong { color: #fff; }
+.btn-logout:hover {
+     background: #ddd; 
+    }
 
-#error_text   { display:none; color: #c0392b; padding: 8px 16px; background: #fdecea; }
-#success_text { display:none; color: #1a7a4a; padding: 8px 16px; background: #edf7f1; }
+.welcome {
+    background: #243358; color: #ccc; padding: 8px 16px; font-size: .85rem;
+}
+.welcome strong {
+     color: #fff;
+    }
 
-main { padding: 16px; max-width: 1100px; margin: 0 auto; }
+#error_text{
+    display:none; color: #c0392b; padding: 8px 16px; background: #fdecea; 
+}
 
-h2 { font-size: .95rem; margin-bottom: 8px; color: #1a2744; }
+#success_text {
+    display:none; color: #1a7a4a; padding: 8px 16px; background: #edf7f1;
+}
+
+main {
+    padding: 16px; max-width: 1100px; margin: 0 auto;
+}
+
+h2 {
+    font-size: .95rem; margin-bottom: 8px; color: #1a2744;
+}
 
 table {
     width: 100%;
@@ -42,6 +68,7 @@ table {
     margin-bottom: 20px;
     font-size: .85rem;
 }
+
 table th {
     background: #1a2744;
     color: #fff;
@@ -49,61 +76,106 @@ table th {
     text-align: left;
     font-size: .8rem;
 }
-table td { padding: 7px 10px; border-bottom: 1px solid #eee; }
-table tr:last-child td { border-bottom: none; }
-table tr:hover td { background: #f9f9f9; }
+
+table td {
+    padding: 7px 10px; border-bottom: 1px solid #eee;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+table tr:hover td {
+    background: #f9f9f9;
+}
 
 button.action-btn {
     font-family: Arial, sans-serif; font-size: .78rem;
     padding: 3px 9px; border-radius: 3px; cursor: pointer;
     border: 1px solid #ccc; background: #fff; margin-right: 4px;
 }
-button.action-btn:hover { background: #eee; }
+
+button.action-btn:hover {
+     background: #eee; 
+    }
+
+
 button.cancel-btn {
     font-family: Arial, sans-serif; font-size: .78rem;
     padding: 3px 9px; border-radius: 3px; cursor: pointer;
     border: 1px solid #ddd; background: none; color: #c0392b;
 }
-button.cancel-btn:hover { background: #fdecea; }
 
-.tab-bar { display: flex; gap: 0; border-bottom: 2px solid #ccc; margin-bottom: 10px; }
+
+button.cancel-btn:hover {
+    background: #fdecea;
+}
+
+.tab-bar {
+    display: flex; gap: 0; border-bottom: 2px solid #ccc; margin-bottom: 10px;
+}
+
 .tab-btn {
     background: none; border: none; border-bottom: 2px solid transparent;
     margin-bottom: -2px; padding: 6px 14px;
     font-family: Arial, sans-serif; font-size: .85rem; font-weight: bold;
     color: #888; cursor: pointer;
 }
-.tab-btn.active { color: #1a2744; border-bottom-color: #1a2744; }
-.tab-btn:hover  { color: #1a2744; }
 
-/* notifications */
+.tab-btn.active {
+    color: #1a2744; border-bottom-color: #1a2744;
+}
+
+.tab-btn:hover  {
+    color: #1a2744;
+}
+
+/* NOTIFS */
+
 #notificationsPanel {
     display: none; position: fixed;
     top: 52px; right: 14px; width: 300px;
     background: #fff; border: 1px solid #ccc;
     box-shadow: 0 4px 10px rgba(0,0,0,.12); z-index: 100;
 }
+
 .notif-head {
     background: #1a2744; color: #fff;
     padding: 9px 14px; display: flex;
     align-items: center; justify-content: space-between;
     font-size: .85rem; font-weight: bold;
 }
+
 .btn-markread {
     background: rgba(255,255,255,.2); color: #fff; border: none;
     padding: 3px 8px; font-size: .75rem; cursor: pointer;
     font-family: Arial, sans-serif; border-radius: 3px;
 }
-.notif-body { max-height: 260px; overflow-y: auto; }
+
+.notif-body {
+    max-height: 260px; overflow-y: auto;
+}
+
 .notif-row {
     padding: 8px 14px; font-size: .82rem;
     border-bottom: 1px solid #eee; color: #555;
 }
-.notif-row.unread { font-weight: bold; color: #222; background: #f5f8ff; }
-.notif-row:last-child { border-bottom: none; }
-.notif-date { font-size: .7rem; color: #aaa; margin-top: 2px; }
 
-.notif-wrap { position: relative; display: inline-block; }
+.notif-row.unread {
+    font-weight: bold; color: #222; background: #f5f8ff;
+}
+
+.notif-row:last-child {
+    border-bottom: none;
+}
+
+.notif-date {
+    font-size: .7rem; color: #aaa; margin-top: 2px;
+}
+
+.notif-wrap {
+    position: relative; display: inline-block;
+}
+
 #unreadBadge {
     background: #c0392b; color: #fff; font-size: .62rem; font-weight: bold;
     border-radius: 50%; width: 15px; height: 15px;
@@ -114,9 +186,29 @@ button.cancel-btn:hover { background: #fdecea; }
 .status-pill {
     font-size: .72rem; font-weight: bold; padding: 2px 7px; border-radius: 3px;
 }
-.s-borrowed  { background: #dce8f7; color: #1a4a8a; }
-.s-overdue   { background: #fdecea; color: #c0392b; }
-.s-pending   { background: #fef3e2; color: #a05c00; }
-.s-approved  { background: #edf7f1; color: #1a7a4a; }
-.s-rejected  { background: #fdecea; color: #c0392b; }
-.s-cancelled { background: #f0f0f0; color: #888; }
+
+.s-borrowed{
+     background: #dce8f7; color: #1a4a8a; 
+    }
+
+.s-overdue{ 
+    background: #fdecea; color: #c0392b; 
+}
+.s-pending{ 
+    background: #fef3e2; color: #a05c00; 
+}
+.s-approved{ 
+    background: #edf7f1; color: #1a7a4a; 
+}
+.s-rejected{ 
+    background: #fdecea; color: #c0392b; 
+}
+.s-cancelled { 
+    background: #f0f0f0; color: #888; 
+}
+
+
+.foot {
+    background: #1a2744; color: #778; text-align: center;
+    padding: 10px; font-size: .78rem;
+}

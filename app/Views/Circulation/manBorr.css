@@ -1,0 +1,339 @@
+/* staff.css — Nyle's LMS */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background: #f4f4f4;
+    color: #333;
+}
+
+/* ── logout text (hidden by default) ── */
+#logoutText {
+    display: none !important;
+    position: fixed; inset: 0;
+    background: rgba(255,255,255,.9);
+    align-items: center; justify-content: center;
+    font-size: 1.2rem; color: #555;
+    z-index: 9999;
+}
+
+/* ── header ── */
+header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header h1 { font-size: 1.3rem; }
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.header-right span { font-size: .85rem; opacity: .85; }
+
+/* ── buttons ── */
+.btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: .8rem;
+    background: transparent;
+    color: #fff;
+}
+.btn-ghost {
+    background: transparent;
+    border-color: rgba(255,255,255,.4);
+    color: #fff;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+.btn-logout {
+    padding: 6px 12px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .8rem;
+}
+.btn-logout:hover { background: #a93226; }
+
+.btn-approve {
+    padding: 4px 10px;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+}
+.btn-approve:hover { background: #219150; }
+
+.btn-reject {
+    padding: 4px 10px;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+}
+.btn-reject:hover { background: #c0392b; }
+
+.btn-claim {
+    padding: 4px 10px;
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+}
+.btn-claim:hover { background: #1f6fa0; }
+
+.btn-return {
+    padding: 4px 10px;
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+}
+.btn-return:hover { background: #7d3c98; }
+
+.btn-warn {
+    padding: 4px 10px;
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+}
+.btn-warn:hover { background: #ca6f1e; }
+
+.btn-danger {
+    padding: 4px 10px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .78rem;
+}
+.btn-danger:hover { background: #a93226; }
+
+/* ── notifications ── */
+.notif { position: relative; }
+
+#unreadBadge {
+    display: none;
+    position: absolute;
+    top: -4px; right: -4px;
+    background: #e74c3c;
+    color: #fff;
+    font-size: .65rem;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    align-items: center; justify-content: center;
+}
+
+#notificationsPanel {
+    display: none;
+    position: absolute;
+    top: 54px; right: 24px;
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    z-index: 500;
+    max-height: 360px;
+    overflow-y: auto;
+}
+.notif-head {
+    padding: 10px 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .85rem;
+}
+.btn-markread {
+    font-size: .75rem;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+    color: #555;
+}
+.notif-row {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: .82rem;
+    color: #444;
+}
+.notif-row.unread { background: #eef5ff; font-weight: 600; }
+.notif-date { font-size: .72rem; color: #aaa; margin-top: 3px; }
+
+/* ── subbar ── */
+.subbar {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 24px;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #555;
+}
+
+/* ── messages ── */
+#msg-ok, #msg-err {
+    display: none;
+    padding: 10px 24px;
+    font-size: .85rem;
+    font-weight: bold;
+}
+#msg-ok  { background: #d4edda; color: #155724; }
+#msg-err { background: #f8d7da; color: #721c24; }
+
+/* ── main ── */
+main { padding: 20px 24px; }
+
+/* ── tabs ── */
+.page-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+.page-tab {
+    padding: 7px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: .82rem;
+    color: #555;
+}
+.page-tab:hover { background: #f0f0f0; }
+.page-tab.active {
+    background: #1a1a2e;
+    color: #fff;
+    border-color: #1a1a2e;
+}
+
+/* ── panes ── */
+.page-pane { display: none; }
+.page-pane.active { display: block; }
+
+/* ── search input ── */
+.tbl-search {
+    width: 280px;
+    padding: 7px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: .85rem;
+    margin-bottom: 12px;
+    display: block;
+}
+.tbl-search:focus { outline: none; border-color: #1a1a2e; }
+
+/* ── tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+thead { background: #1a1a2e; color: #fff; }
+th {
+    padding: 10px 12px;
+    text-align: left;
+    font-size: .82rem;
+    font-weight: 600;
+}
+td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: .82rem;
+    vertical-align: middle;
+}
+tbody tr:hover { background: #fafafa; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* ── modals ── */
+.modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 800;
+    align-items: center;
+    justify-content: center;
+}
+/* jquery fadeIn sets display:block, so we flex it via a trick */
+.modal-overlay[style*="display: block"],
+.modal-overlay[style*="display:block"] {
+    display: flex !important;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px 28px;
+    width: 420px;
+    max-width: 94vw;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+}
+.modal-box h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+}
+.modal-box p { margin-bottom: 10px; font-size: .88rem; color: #444; }
+.modal-box label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: .85rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+.modal-box input[type="date"],
+.modal-box textarea {
+    padding: 7px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: .85rem;
+    width: 100%;
+    font-family: inherit;
+}
+.modal-box textarea { min-height: 80px; resize: vertical; }
+.modal-box input:focus,
+.modal-box textarea:focus { outline: none; border-color: #1a1a2e; }
+
+.modal-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: flex-end;
+}
+
+.fine-preview {
+    background: #fff3cd;
+    color: #856404;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: .83rem;
+    margin: 8px 0;
+}

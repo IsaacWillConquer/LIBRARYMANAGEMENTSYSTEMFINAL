@@ -18,67 +18,67 @@ $fname = $_SESSION['FullName'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
-    <title>Staff - Add Member</title>
+    <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <title>Staff - Member Management</title>
 </head>
 <body>
 
-    <h1>Library Management System</h1>
 
-    <div id="navigation">
-        <h2>Member Management</h2>
+<header>
+    <h1>Nyle's Library Management System</h1>
+    <div class="header-right">
+        <span><?php echo $role; ?> — <?php echo htmlspecialchars($fname); ?></span>
+        <a class="btn btn-ghost" href="app/Views/Dashboards/adminDashboard.php">← Dashboard</a>
+        <button class="btn-logout" onclick="logout()">Logout</button>
     </div>
+</header>
 
-    <button id="toggleBtn">Add Member</button>
+<div class="subbar"><span>Member Management</span></div>
 
-    <div id="memberForm">
-        <div id="error_text" style="color:red; display:none;"></div>
+<main>
+    <div id="error_text"></div>
 
+    <button class="btn-primary" id="toggleBtn" style="margin-bottom:10px;">+ Add Member</button>
+
+    <div id="memberForm" class="form-box" style="display:none;">
         <h3>Add Member</h3>
-
-        <input type="text" id="fname" placeholder="First Name"><br><br>
-        <input type="text" id="lname" placeholder="Last Name"><br><br>
-        <input type="email" id="email" placeholder="Email"><br><br>
-
-        <label>Status</label>
-        <select id="addStatus"></select><br><br>
-
-        <button onclick="addMember()">Save</button>
-        <button onclick="$('#memberForm').hide()">Cancel</button>
+        <div class="form-row"><label>First Name</label><input type="text" id="fname" placeholder="First Name"></div>
+        <div class="form-row"><label>Last Name</label><input type="text" id="lname" placeholder="Last Name"></div>
+        <div class="form-row"><label>Email</label><input type="email" id="email" placeholder="Email"></div>
+        <div class="form-row"><label>Status</label><select id="addStatus"></select></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn-primary" onclick="addMember()">Save</button>
+            <button class="btn btn-ghost" style="color:#555;border-color:#ccc;" onclick="$('#memberForm').hide()">Cancel</button>
+        </div>
     </div>
 
-    <div id="editForm" style="display:none;">
+    <div id="editForm" class="form-box" style="display:none;">
         <h3>Edit Member</h3>
-
         <input type="hidden" id="editMemberID">
-        <input type="text" id="editFname" placeholder="First Name"><br><br>
-        <input type="text" id="editLname" placeholder="Last Name"><br><br>
-        <input type="email" id="editEmail" placeholder="Email"><br><br>
-
-        <button onclick="updMember()">Update</button>
-        <button onclick="$('#editForm').hide()">Cancel</button>
+        <div class="form-row"><label>First Name</label><input type="text" id="editFname" placeholder="First Name"></div>
+        <div class="form-row"><label>Last Name</label><input type="text" id="editLname" placeholder="Last Name"></div>
+        <div class="form-row"><label>Email</label><input type="email" id="editEmail" placeholder="Email"></div>
+        <div class="form-row"><label>Status</label><select id="editStatus"></select></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn-primary" onclick="updMember()">Update</button>
+            <button class="btn btn-ghost" style="color:#555;border-color:#ccc;" onclick="$('#editForm').hide()">Cancel</button>
+        </div>
     </div>
 
-    <input type="text" id="searchInput" placeholder="Search members..." onkeyup="doMemberSearch(this.value.trim())">
+    <input type="text" class="tbl-search" id="searchInput" placeholder="Search members..." onkeyup="doMemberSearch(this.value.trim())">
 
-    <table id="memberTable" border="1">
+    <table id="memberTable">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Default Pass</th>
-                <th>Date Created</th>
-                <th>Actions</th>
+                <th>ID</th><th>Name</th><th>Email</th><th>Status</th>
+                <th>Default Pass</th><th>Date Created</th><th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
+</main>
 
-    <button onclick="location.href='app/Views/Dashboards/adminDashboard.php'">Go Back</button>
-
-    <script src="app/Views/Auth/logAuth.js"></script>
-    <script src="app/Views/Admin/logMember.js"></script>
-
+<script src="app/Views/Auth/logAuth.js"></script>
+<script src="app/Views/Admin/logMember.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var allPendingClaims = [];
+let allPendingClaims = [];
 
 $(document).ready(function () {
     loadMyRequests();
@@ -20,7 +20,7 @@ $(document).ready(function () {
     let matSearchTimer;
     $('#matSearch').on('keyup', function () {
         clearTimeout(matSearchTimer);
-        var q = $(this).val().trim();
+        let q = $(this).val().trim();
         matSearchTimer = setTimeout(function () { doMatSearch(q); }, 300);
     });
 
@@ -29,11 +29,20 @@ $(document).ready(function () {
     });
 });
 
+
+
 function showTab(tab, btn) {
     $('#paneTrending, #paneRecommended, #paneAll').hide();
-    if (tab === 'trending')    $('#paneTrending').show();
+    
+    if (tab === 'trending') $('#paneTrending').show();
+
+
     if (tab === 'recommended') $('#paneRecommended').show();
-    if (tab === 'all')         $('#paneAll').show();
+
+
+    if (tab === 'all') $('#paneAll').show();
+
+
     $('.tab-btn').removeClass('active');
     if (btn) $(btn).addClass('active');
 }
@@ -43,8 +52,6 @@ function showSuccess(msg) {
     $('#error_text').hide(); $('#success_text').text(msg).fadeIn();
     setTimeout(function () { $('#success_text').fadeOut(); }, 3000);
 }
-
-// ── catalog ───────────────────────────────────────────────────────
 
 function loadCatalog() {
     $.ajax({
@@ -65,11 +72,11 @@ function renderMatTable(selector, mats) {
         $(selector + ' tbody').html('<tr><td colspan="6" style="color:#aaa;text-align:center;">No materials found</td></tr>');
         return;
     }
-    var rows = '';
+    let rows = '';
     mats.forEach(function (m) {
-        var isEbook   = m.TypeName === 'EBook';
-        var availCell = isEbook ? '<em style="color:#aaa;">Digital</em>' : m.AvailableQuantity;
-        var btn       = isEbook
+        let isEbook   = m.TypeName === 'EBook';
+        let availCell = isEbook ? '<em style="color:#aaa;">Digital</em>' : m.AvailableQuantity;
+        let btn = isEbook
             ? '<button class="action-btn" onclick="openEbookReader(' + m.MaterialID + ', \'' + escapeAttr(m.Title) + '\')">Read</button>'
             : '<button class="action-btn" onclick="confirmBorrow(' + m.MaterialID + ', \'' + escapeAttr(m.Title) + '\')">Borrow</button>';
 
@@ -93,7 +100,6 @@ function confirmBorrow(matID, title) {
     });
 }
 
-// ── ebook reader ──────────────────────────────────────────────────
 
 function openEbookReader(matID, title) {
     $.ajax({
@@ -102,14 +108,12 @@ function openEbookReader(matID, title) {
         data: { action: 'accessEbook', materialID: matID },
         dataType: 'json',
         success: function (res) {
-            if (!res.success) { showError(res.message); return; }
-            var mat = res.material;
-            $('#readerTitle').text(mat.Title);
-            $('#readerAuthor').text('by ' + mat.Author + (mat.Genre ? ' · ' + mat.Genre : ''));
-            $('#readerDesc').text(mat.Description || '');
-            $('#readerFrame').attr('src', 'assets/sample.pdf');
-            $('#ebookReaderModal').fadeIn(150);
-            loadCurrentlyReading();
+        if (!res.success) {
+             showError(res.message); return; 
+        }
+        
+        window.open('/LIBRARYMANAGEMENTSYSTEMFINAL/' + res.material.FilePath, '_blank');
+                
         }
     });
 }
@@ -119,7 +123,6 @@ function closeEbookReader() {
     $('#readerFrame').attr('src', '');
 }
 
-// ── currently reading ─────────────────────────────────────────────
 
 function loadCurrentlyReading() {
     $.ajax({
@@ -130,7 +133,7 @@ function loadCurrentlyReading() {
         success: function (data) {
             if (!data || data.length === 0) { $('#currentlyReadingSection').hide(); return; }
             $('#currentlyReadingSection').show();
-            var html = '';
+            let html = '';
             data.forEach(function (e) {
                 html += '<div class="reading-card" onclick="openEbookReader(' + e.MaterialID + ', \'' + escapeAttr(e.Title) + '\')">' +
                     '<div class="reading-title">' + e.Title + '</div>' +
@@ -141,8 +144,6 @@ function loadCurrentlyReading() {
         }
     });
 }
-
-// ── my requests ───────────────────────────────────────────────────
 
 function loadMyRequests() {
     $.ajax({
@@ -155,11 +156,11 @@ function loadMyRequests() {
                 $('#myRequestsTable tbody').html('<tr><td colspan="5" style="color:#aaa;text-align:center;">No requests yet</td></tr>');
                 return;
             }
-            var rows = '';
+            let rows = '';
             data.forEach(function (r) {
-                var cancelBtn = r.Status === 'Pending'
+                let cancelBtn = r.Status === 'Pending'
                     ? '<button class="cancel-btn" onclick="cancelRequest(' + r.RequestID + ')">Cancel</button>' : '';
-                var pill = '<span class="status-pill s-' + r.Status.toLowerCase() + '">' + r.Status + '</span>';
+                let pill = '<span class="status-pill s-' + r.Status.toLowerCase() + '">' + r.Status + '</span>';
                 rows += '<tr><td>' + r.Title + '</td><td>' + r.TypeName + '</td><td>' + r.RequestDate +
                     '</td><td>' + pill + '</td><td>' + cancelBtn + '</td></tr>';
             });
@@ -182,8 +183,6 @@ function cancelRequest(reqID) {
     });
 }
 
-// ── my borrows ────────────────────────────────────────────────────
-
 function loadMyBorrows() {
     $.ajax({
         url: 'app/Controllers/borrowController.php',
@@ -195,12 +194,14 @@ function loadMyBorrows() {
                 $('#myBorrowsTable tbody').html('<tr><td colspan="5" style="color:#aaa;text-align:center;">No active borrows</td></tr>');
                 return;
             }
-            var rows = '';
+
+
+            let rows = '';
             data.forEach(function (b) {
-                var pill    = '<span class="status-pill s-' + b.Status.toLowerCase() + '">' + b.Status + '</span>';
-                var dueNote = '';
+                let pill    = '<span class="status-pill s-' + b.Status.toLowerCase() + '">' + b.Status + '</span>';
+                let dueNote = '';
                 if (b.Status === 'Overdue') {
-                    var diff = Math.floor((new Date() - new Date(b.DueDate)) / 86400000);
+                    let diff = Math.floor((new Date() - new Date(b.DueDate)) / 86400000);
                     dueNote  = ' <span style="color:#c0392b;font-size:.75rem;">(' + diff + 'd overdue)</span>';
                 }
                 rows += '<tr><td>' + b.Title + '</td><td>' + b.TypeName + '</td><td>' + (b.BorrowDate || '—') +
@@ -223,19 +224,21 @@ function loadPendingClaims() {
     });
 }
 
+
 function renderPendingClaims(data) {
     if (!data || data.length === 0) {
         $('#pendingClaimsTable tbody').html('<tr><td colspan="5" style="color:#aaa;text-align:center;">No books to claim</td></tr>');
         return;
     }
-    var rows = '';
+
+    let rows = '';
     data.forEach(function (c) {
-        var today     = new Date().toISOString().split('T')[0];
-        var deadStyle = c.ClaimDeadline && c.ClaimDeadline < today ? 'color:red;font-weight:bold;' : '';
-        var deadline  = c.ClaimDeadline || 'Not set';
-        var countdown = '';
+        let today     = new Date().toISOString().split('T')[0];
+        let deadStyle = c.ClaimDeadline && c.ClaimDeadline < today ? 'color:red;font-weight:bold;' : '';
+        let deadline  = c.ClaimDeadline || 'Not set';
+        let countdown = '';
         if (c.ClaimDeadline) {
-            var diff  = Math.ceil((new Date(c.ClaimDeadline) - new Date()) / 86400000);
+            let diff  = Math.ceil((new Date(c.ClaimDeadline) - new Date()) / 86400000);
             countdown = diff > 0
                 ? ' <span style="color:#1a7a4a;font-size:.75rem;">(' + diff + 'd left)</span>'
                 : ' <span style="color:#c0392b;font-size:.75rem;">(expired)</span>';
@@ -252,7 +255,7 @@ function renderPendingClaims(data) {
 }
 
 function filterPendingClaims() {
-    var q = $('#claimSearch').val().toLowerCase();
+    let q = $('#claimSearch').val().toLowerCase();
     renderPendingClaims(!q ? allPendingClaims : allPendingClaims.filter(function (c) {
         return c.Title.toLowerCase().includes(q);
     }));
@@ -279,14 +282,20 @@ function openCdPopup(title, author, type, stock, desc, deadline) {
 }
 function closeCdPopup() { $('#claimDetailPopup').fadeOut(150); }
 
-// ── donate ────────────────────────────────────────────────────────
 
-function openDonateModal() { $('#donateModal').fadeIn(150); }
-function closeDonateModal() { $('#donateModal').fadeOut(150); $('#donateForm')[0].reset(); }
+
+
+function openDonateModal() {
+     $('#donateModal').fadeIn(150); 
+}
+
+function closeDonateModal() {
+     $('#donateModal').fadeOut(150); $('#donateForm')[0].reset(); 
+}
 
 function submitDonation() {
-    var title  = $('#donateTitle').val().trim();
-    var author = $('#donateAuthor').val().trim();
+    let title  = $('#donateTitle').val().trim();
+    let author = $('#donateAuthor').val().trim();
     if (!title || !author) { alert('Title and author are required'); return; }
     $.ajax({
         url: 'app/Controllers/borrowController.php',
@@ -302,40 +311,45 @@ function submitDonation() {
     });
 }
 
-// ── notifications ─────────────────────────────────────────────────
+
 
 function toggleNotifications() {
-    var $p = $('#notificationsPanel');
+    let $p = $('#notificationsPanel');
     if ($p.is(':hidden')) { loadNotifications(); $p.fadeIn(200); } else $p.fadeOut(200);
 }
+
+
 
 function loadUnreadCount() {
     $.ajax({
         url: 'app/Controllers/notificationController.php',
         method: 'GET', data: { action: 'getUnreadCount' }, dataType: 'json',
         success: function (data) {
-            var $b = $('#unreadBadge');
+            let $b = $('#unreadBadge');
             if (data.count > 0) $b.text(data.count).css('display', 'flex'); else $b.hide();
         }
     });
 }
+
+
 
 function loadNotifications() {
     $.ajax({
         url: 'app/Controllers/notificationController.php',
         method: 'GET', data: { action: 'getNotifications' }, dataType: 'json',
         success: function (data) {
-            var $body = $('#notifBody');
+            let $body = $('#notifBody');
             if (!data || data.length === 0) { $body.html('<div class="notif-row">No notifications</div>'); return; }
-            var html = '';
+            let html = '';
             data.forEach(function (n) {
-                var cls = n.IsRead == 0 ? 'notif-row unread' : 'notif-row';
+                let cls = n.IsRead == 0 ? 'notif-row unread' : 'notif-row';
                 html += '<div class="' + cls + '">' + n.Message + '<div class="notif-date">' + n.DateCreated + '</div></div>';
             });
             $body.html(html);
         }
     });
 }
+
 
 function markAllRead() {
     $.ajax({
@@ -345,10 +359,9 @@ function markAllRead() {
     });
 }
 
-// ── search + type filter ──────────────────────────────────────────
 
 function doMatSearch(q) {
-    var type = $('#typeFilter').val();
+    let type = $('#typeFilter').val();
     if (!q && !type) { loadCatalog(); return; }
     $.ajax({
         url: 'app/Controllers/borrowController.php',

@@ -299,3 +299,56 @@ function returnBook($recordID, $staffID) {
         'rate' => $rate ?? 5.00
     ];
 }
+
+
+//TODO
+//FIX ERROR in ts
+function markLostDamaged($recordID, $staffID, $condition) {
+    global $conn;
+
+    if (!in_array($condition, ['Lost', 'Damaged'])) {
+        return ['success' => false, 'message' => 'Invalid condition'];
+    }
+
+    $stmt = $conn->prepare("
+        SELECT br.*, m.MaterialID, m.Title, m.ReplacementCost
+        FROM borrowrecords br
+        JOIN materials m ON br.MaterialID = m.MaterialID
+        WHERE br.RecordID = ? AND br.Status IN ('Borrowed', 'Overdue')
+    ");
+    $stmt->bind_param('i', $recordID);
+    $stmt->execute();
+    $record = $stmt->get_result()->fetch_assoc();
+
+    if (!$record) return ['success' => false, 'message' => 'Record not found or already processed'];
+
+    $replacementCost = floatval($record['ReplacementCost'] ?? 0);
+
+    $stmt = $conn->prepare("
+        UPDATE borrowrecords
+        SET Status = ?, ReturnDate = NOW(), OverdueFine = ?, ReturnProcessedBy = ?
+        WHERE RecordID = ?
+    ");
+    $stmt->bind_param('sdii', $condition, $replacementCost, $staffID, $recordID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("
+        UPDATE materials
+        SET TotalQuantity = TotalQuantity - 1
+        WHERE MaterialID = ? AND TotalQuantity > 0
+    ");
+    $stmt->bind_param('i', $record['MaterialID']);
+    $stmt->execute();
+
+    logCirculationAction($staffID, $record['MemberID'], $record['MaterialID'], $condition);
+
+    $fineMsg = $replacementCost > 0 ? ' A replacement fine of ₱' . number_format($replacementCost, 2) . ' has been applied.' : '';
+    $msg = '"' . $record['Title'] . '" has been marked as ' . strtolower($condition) . '.' . $fineMsg;
+    createNotification($record['MemberID'], 'Member', $msg);
+
+    return [
+        'success' => true,
+        'message' => 'Marked as ' . $condition . ($replacementCost > 0 ? '. Replacement fine: ₱' . number_format($replacementCost, 2) : ''),
+        'fine' => $replacementCost
+    ];
+}

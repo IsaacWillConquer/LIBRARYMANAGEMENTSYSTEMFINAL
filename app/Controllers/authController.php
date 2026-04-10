@@ -6,8 +6,8 @@
 //means that account is new
 
 ob_start();
-
 session_start();
+
 
 include __DIR__ . "/../Models/authOperations.php";
 require_once __DIR__ . "/../../config/dbConn.php";
@@ -28,6 +28,8 @@ switch ($action) {
         echo json_encode(['success' => false, 'message' => 'Unknown action.']);
         break;
 }
+
+
 
 function login() {
     $email = trim($_POST['email'] ?? '');
@@ -57,6 +59,13 @@ function login() {
         $_SESSION['Role'] = $staff['Role'];
         $_SESSION['FullName'] = $staff['FirstName'] . ' ' . $staff['LastName'];
         $_SESSION['DefaultPassword'] = $staff['DefaultPassword'];
+
+        $_SESSION['DBRole'] = match($staff['Role']) {
+            'Admin' => 'admin',
+            'CirculationLibrarian'=> 'circulation',
+            'DataAnalyst'=> 'analyst',
+            default => 'member'
+        };
 
         logLogin('Staff', $staff['StaffID'], $email, 'Success', $ip);
 
@@ -107,6 +116,8 @@ function login() {
     $_SESSION['Role'] = 'Member';
     $_SESSION['FullName'] = $member['FirstName'] . ' ' . $member['LastName'];
     $_SESSION['DefaultPassword'] = $member['DefaultPassword'];
+    $_SESSION['DBRole'] = 'member';
+
 
     logLogin('Member', $member['MemberID'], $email, 'Success', $ip);
 

@@ -4,16 +4,20 @@ require_once __DIR__ . "/../../config/dbConn.php";
 
 $conn = getConnection();
 
+
+//Change to weekly to lazy to refactor
 function borrowMontly() {
     global $conn;
 
-    // last 6 months
+
+    //7 days
     $res = $conn->query("
-        SELECT DATE_FORMAT(BorrowDate, '%b %Y') AS Month,
-               DATE_FORMAT(BorrowDate, '%Y-%m') AS MonthSort,
+        SELECT DATE_FORMAT(BorrowDate, '%b %d') AS Month,
+               DATE(BorrowDate) AS MonthSort,
                COUNT(*) AS Total
         FROM borrowrecords
-        WHERE BorrowDate >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+        
+        WHERE BorrowDate >= DATE_SUB(NOW(), INTERVAL 7 DAY) 
         GROUP BY MonthSort, Month
         ORDER BY MonthSort ASC
     ");

@@ -18,75 +18,69 @@ $fname = $_SESSION['FullName'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
-    <title>Admin - Add Staff</title>
+    <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <title>Admin - Staff Management</title>
 </head>
 <body>
-    <h1>Library Management System</h1>
 
-    <div id="navigation">
-        <h2>Staff Management</h2>
+
+<header>
+    <h1>Nyle's Library Management System</h1>
+    <div class="header-right">
+        <span><?php echo $role; ?> — <?php echo htmlspecialchars($fname); ?></span>
+        <a class="btn btn-ghost" href="app/Views/Dashboards/adminDashboard.php">← Dashboard</a>
+        <button class="btn-logout" onclick="logout()">Logout</button>
     </div>
+</header>
 
-    <button id="toggleBtn">Add Staff</button>
+<div class="subbar"><span>Staff Management</span></div>
 
-    <div id="staffForm">
-        <div id="error_text" style="color:red; display:none;"></div>
+<main>
+    <div id="error_text"></div>
 
+    <button class="btn-primary" id="toggleBtn" style="margin-bottom:10px;">+ Add Staff</button>
+
+    <div id="staffForm" class="form-box" style="display:none;">
         <h3>Add Staff</h3>
-
-        <input type="text" id="fname" placeholder="First Name"><br><br>
-        <input type="text" id="lname" placeholder="Last Name"><br><br>
-        <input type="email" id="email" placeholder="Email"><br><br>
-
-        <label>Role</label>
-        <select id="addRole"></select><br><br>
-
-        <label>Status</label>
-        <select id="addStatus"></select><br><br>
-
-        <button onclick="addStaff()">Save</button>
-        <button onclick="$('#staffForm').hide()">Cancel</button>
+        <div class="form-row"><label>First Name</label><input type="text" id="fname" placeholder="First Name"></div>
+        <div class="form-row"><label>Last Name</label><input type="text" id="lname" placeholder="Last Name"></div>
+        <div class="form-row"><label>Email</label><input type="email" id="email" placeholder="Email"></div>
+        <div class="form-row"><label>Role</label><select id="addRole"></select></div>
+        <div class="form-row"><label>Status</label><select id="addStatus"></select></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn-primary" onclick="addStaff()">Save</button>
+            <button class="btn btn-ghost" style="color:#555;border-color:#ccc;" onclick="$('#staffForm').hide()">Cancel</button>
+        </div>
     </div>
 
-    <div id="editForm" style="display:none;">
+    <div id="editForm" class="form-box" style="display:none;">
         <h3>Edit Staff</h3>
-
         <input type="hidden" id="editStaffID">
-        <input type="text" id="editFname" placeholder="First Name"><br><br>
-        <input type="text" id="editLname" placeholder="Last Name"><br><br>
-        <input type="email" id="editEmail" placeholder="Email"><br><br>
-
-        <label>Role</label>
-        <select id="editRole"></select><br><br>
-
-        <label>Status</label>
-        <select id="editStatus"></select><br><br>
-
-        <button onclick="updStaff()">Update</button>
-        <button onclick="$('#editForm').hide()">Cancel</button>
+        <div class="form-row"><label>First Name</label><input type="text" id="editFname" placeholder="First Name"></div>
+        <div class="form-row"><label>Last Name</label><input type="text" id="editLname" placeholder="Last Name"></div>
+        <div class="form-row"><label>Email</label><input type="email" id="editEmail" placeholder="Email"></div>
+        <div class="form-row"><label>Role</label><select id="editRole"></select></div>
+        <div class="form-row"><label>Status</label><select id="editStatus"></select></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn-primary" onclick="updStaff()">Update</button>
+            <button class="btn btn-ghost" style="color:#555;border-color:#ccc;" onclick="$('#editForm').hide()">Cancel</button>
+        </div>
     </div>
 
-    <input type="text" id="searchInput" placeholder="Search staff..." onkeyup="doStaffSearch(this.value.trim())">
+    <input type="text" class="tbl-search" id="searchInput" placeholder="Search staff..." onkeyup="doStaffSearch(this.value.trim())">
 
-    <table id="staffTable" border="1">
+    <table id="staffTable">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Default Pass</th>
-                <th>Date Created</th>
-                <th>Actions</th>
+                <th>ID</th><th>Name</th><th>Email</th><th>Role</th>
+                <th>Status</th><th>Default Pass</th><th>Date Created</th><th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
+</main>
 
-    <button onclick="location.href='app/Views/Dashboards/adminDashboard.php'">Go Back</button>
-
-    <script src="app/Views/Auth/logAuth.js"></script>
-    <script src="app/Views/Admin/logStaff.js"></script>
+<script src="app/Views/Auth/logAuth.js"></script>
+<script src="app/Views/Admin/logStaff.js"></script>
 </body>
 </html>

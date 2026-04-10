@@ -10,51 +10,52 @@ header('Content-Type: application/json');
 
 mustBeStaff();
 
-$role   = $_SESSION['Role'];
-$action = $_POST['action'] ?? $_GET['action'] ?? '';
+    $role   = $_SESSION['Role'];
+    $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
-if ($role !== 'Admin' && $role !== 'DataAnalyst') {
+
+    if ($role !== 'Admin' && $role !== 'DataAnalyst') {
+        ob_end_clean();
+        echo json_encode(['success' => false, 'message' => 'Access denied']);
+        exit();
+    }
+
     ob_end_clean();
-    echo json_encode(['success' => false, 'message' => 'Access denied']);
-    exit();
-}
+    switch ($action) {
 
-ob_end_clean();
-switch ($action) {
+        case 'getSummary':
+            echo json_encode(summaryStats());
+            break;
 
-    case 'getSummary':
-        echo json_encode(summaryStats());
-        break;
+        case 'getBorrowsMonthly':
+            echo json_encode(borrowMontly());
+            break;
 
-    case 'getBorrowsMonthly':
-        echo json_encode(borrowMontly());
-        break;
+        case 'getTopBorrow':
+            echo json_encode(topBorrow());
+            break;
 
-    case 'getTopBorrow':
-        echo json_encode(topBorrow());
-        break;
+        case 'getborrowStats':
+            echo json_encode(borrowStats());
+            break;
 
-    case 'getborrowStats':
-        echo json_encode(borrowStats());
-        break;
+        case 'getMatType':
+            echo json_encode(matType());
+            break;
 
-    case 'getMatType':
-        echo json_encode(matType());
-        break;
+        case 'getGenreStats':
+            echo json_encode(genreStats());
+            break;
 
-    case 'getGenreStats':
-        echo json_encode(genreStats());
-        break;
+        case 'getTopMembers':
+            echo json_encode(topMembers());
+            break;
 
-    case 'getTopMembers':
-        echo json_encode(topMembers());
-        break;
+        case 'getRecentActivity':
+            echo json_encode(recentActivity());
+            break;
 
-    case 'getRecentActivity':
-        echo json_encode(recentActivity());
-        break;
-
-    default:
-        echo json_encode(['success' => false, 'message' => 'Invalid action']);
-        break;
-}
+        default:
+            echo json_encode(['success' => false, 'message' => 'Invalid action']);
+            break;
+    }

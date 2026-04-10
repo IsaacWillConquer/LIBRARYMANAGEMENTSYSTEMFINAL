@@ -1,0 +1,64 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f0f2f5; color: #222; font-size: .85rem; min-height: 100vh; display: flex; flex-direction: column; }
+
+header {
+    background: #1a2744; color: #fff;
+    padding: 0 24px; height: 50px;
+    display: flex; align-items: center;
+}
+header h1 { font-size: 1rem; }
+
+.page-body {
+    flex: 1; display: flex; align-items: flex-start;
+    gap: 0; padding: 40px 24px; max-width: 1000px;
+    margin: 0 auto; width: 100%;
+}
+
+.info-side { flex: 1; padding-right: 40px; }
+.info-side h2 { font-size: 1.1rem; color: #1a2744; margin-bottom: 6px; }
+.info-side .tagline { color: #555; font-size: .88rem; margin-bottom: 20px; line-height: 1.6; }
+
+.info-card {
+    background: #fff; border-radius: 5px; padding: 14px 16px;
+    margin-bottom: 12px; border-left: 3px solid #4e73df;
+}
+.info-card.green  { border-left-color: #1cc88a; }
+.info-card.teal   { border-left-color: #36b9cc; }
+.info-card.orange { border-left-color: #f6c23e; }
+.info-card h4 { font-size: .84rem; color: #1a2744; margin-bottom: 5px; }
+.info-card p, .info-card ul { font-size: .81rem; color: #555; line-height: 1.7; }
+.info-card ul { padding-left: 16px; }
+
+.hours-row { display: flex; justify-content: space-between; font-size: .81rem; padding: 3px 0; border-bottom: 1px solid #f0f0f0; }
+.hours-row:last-child { border-bottom: none; }
+
+.login-side { width: 320px; flex-shrink: 0; }
+.login-box { background: #fff; border-radius: 5px; padding: 24px 22px; }
+.login-box h3 { font-size: .95rem; color: #1a2744; margin-bottom: 16px; font-weight: bold; }
+.login-box label { display: block; font-size: .78rem; font-weight: bold; color: #666; margin-bottom: 3px; margin-top: 10px; }
+.login-box input {
+    width: 100%; padding: 7px 9px; border: 1px solid #ccc; border-radius: 3px;
+    font-size: .84rem; font-family: Arial, sans-serif;
+}
+.login-box input:focus { outline: none; border-color: #4e73df; }
+
+#loginBtn {
+    width: 100%; margin-top: 16px; background: #1a2744; color: #fff;
+    border: none; border-radius: 3px; padding: 9px;
+    font-size: .88rem; font-family: Arial, sans-serif; cursor: pointer;
+}
+#loginBtn:hover { background: #243358; }
+
+#error_text {
+    display: none; margin-top: 10px; padding: 7px 9px;
+    border-radius: 3px; font-size: .82rem;
+    background: #fdecea; color: #c0392b;
+}
+#error_text.success { background: #edf7f1; color: #1a7a4a; }
+
+.login-note { margin-top: 14px; font-size: .77rem; color: #999; text-align: center; line-height: 1.6; }
+
+footer {
+    background: #1a2744; color: #778; text-align: center;
+    padding: 10px; font-size: .78rem;
+}

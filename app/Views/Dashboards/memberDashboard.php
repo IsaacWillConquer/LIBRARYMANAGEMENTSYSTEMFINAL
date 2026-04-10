@@ -18,9 +18,10 @@ $fname = $_SESSION['FullName'];
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
     <link rel="stylesheet" href="app/Views/Member/memberDashboard.css">
+
     <title>Member Dashboard</title>
+
     <style>
-    
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,.5); z-index: 200;
@@ -38,17 +39,10 @@ $fname = $_SESSION['FullName'];
         }
         .modal-box textarea { height: 70px; resize: vertical; }
         .modal-btns { margin-top: 16px; display: flex; gap: 8px; justify-content: flex-end; }
-        .btn-primary {
-            background: #1a2744; color: #fff; border: none; border-radius: 3px;
-            padding: 6px 14px; font-size: .82rem; cursor: pointer; font-family: Arial, sans-serif;
-        }
+        .btn-primary { background: #1a2744; color: #fff; border: none; border-radius: 3px; padding: 6px 14px; font-size: .82rem; cursor: pointer; font-family: Arial, sans-serif; }
         .btn-primary:hover { background: #243358; }
-        .btn-ghost {
-            background: none; border: 1px solid #ccc; border-radius: 3px;
-            padding: 6px 14px; font-size: .82rem; cursor: pointer; font-family: Arial, sans-serif;
-        }
+        .btn-ghost { background: none; border: 1px solid #ccc; border-radius: 3px; padding: 6px 14px; font-size: .82rem; cursor: pointer; font-family: Arial, sans-serif; }
 
-        /* ebook reader modal - fullscreen style */
         #ebookReaderModal {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,.85); z-index: 300;
@@ -65,29 +59,47 @@ $fname = $_SESSION['FullName'];
         .reader-header-info { flex: 1; }
         .reader-header h3 { margin: 0; font-size: .95rem; }
         .reader-header p  { margin: 2px 0 0; font-size: .78rem; color: #aac; }
-        .reader-close {
-            background: none; border: none; color: #fff; font-size: 1.2rem;
-            cursor: pointer; padding: 0 4px; line-height: 1;
-        }
+        .reader-close { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; padding: 0 4px; line-height: 1; }
         #readerFrame { flex: 1; width: 100%; border: none; }
 
-        /* currently reading cards */
         #currentlyReadingSection { margin-bottom: 20px; }
         #currentlyReadingCards { display: flex; gap: 10px; flex-wrap: wrap; }
         .reading-card {
             background: #fff; border: 1px solid #e0e4ec; border-radius: 4px;
-            padding: 10px 14px; cursor: pointer; width: 200px;
-            transition: box-shadow .15s;
+            padding: 10px 14px; cursor: pointer; width: 200px; transition: box-shadow .15s;
         }
         .reading-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.1); }
         .reading-title { font-size: .85rem; font-weight: bold; color: #1a2744; margin-bottom: 4px; }
         .reading-meta  { font-size: .75rem; color: #888; }
 
-        /* claim popup */
         .claim-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.5); z-index: 200; }
         .claim-popup-box { background: #fff; padding: 20px; border-radius: 5px; width: 400px; margin: 100px auto; }
         .claim-popup-box h3 { margin: 0 0 12px; color: #1a2744; font-size: .95rem; }
         .claim-popup-box p  { font-size: .84rem; margin: 6px 0; color: #444; }
+
+        /* info banner */
+        .info-banner {
+            background: #243358; color: #ccd;
+            padding: 10px 16px; font-size: .82rem;
+            display: flex; gap: 24px; flex-wrap: wrap;
+        }
+        .info-banner span { display: flex; align-items: center; gap: 5px; }
+        .info-banner strong { color: #fff; }
+
+        /* about section */
+        .about-section {
+            background: #fff; border-radius: 5px; padding: 16px 18px;
+            margin-bottom: 20px; border-left: 4px solid #4e73df;
+        }
+        .about-section h3 { font-size: .9rem; color: #1a2744; margin-bottom: 10px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+        .about-item { font-size: .82rem; color: #555; }
+        .about-item strong { color: #1a2744; display: block; margin-bottom: 4px; }
+
+        footer {
+            background: #1a2744; color: rgb(255, 255, 255); text-align: center;
+            padding: 10px; font-size: .78rem;
+        }
     </style>
 </head>
 <body>
@@ -110,7 +122,6 @@ $fname = $_SESSION['FullName'];
 <div id="error_text"></div>
 <div id="success_text"></div>
 
-<!-- notifications panel -->
 <div id="notificationsPanel">
     <div class="notif-head">
         Notifications
@@ -121,7 +132,9 @@ $fname = $_SESSION['FullName'];
     </div>
 </div>
 
-<!-- ebook reader modal -->
+
+
+
 <div id="ebookReaderModal">
     <div class="reader-box">
         <div class="reader-header">
@@ -136,7 +149,8 @@ $fname = $_SESSION['FullName'];
     </div>
 </div>
 
-<!-- claim detail popup -->
+
+
 <div class="claim-popup" id="claimDetailPopup">
     <div class="claim-popup-box">
         <h3 id="cdTitle"></h3>
@@ -149,7 +163,10 @@ $fname = $_SESSION['FullName'];
     </div>
 </div>
 
-<!-- donate modal -->
+
+
+
+
 <div class="modal-overlay" id="donateModal">
     <div class="modal-box">
         <h3>Donate a Book</h3>
@@ -157,26 +174,55 @@ $fname = $_SESSION['FullName'];
             <label>Title *<input type="text" id="donateTitle" placeholder="Book title"></label>
             <label>Author *<input type="text" id="donateAuthor" placeholder="Author name"></label>
             <label>Genre<input type="text" id="donateGenre" placeholder="e.g. Fiction, Technology"></label>
+
             <label>Condition
+
                 <select id="donateCond">
                     <option value="New">New</option>
                     <option value="Good" selected>Good</option>
                     <option value="Fair">Fair</option>
                     <option value="Poor">Poor</option>
                 </select>
+
             </label>
-            <label>Description / Notes<textarea id="donateDesc" placeholder="Any notes about the book..."></textarea></label>
+
+            <label>Description / Notes
+                <textarea id="donateDesc" placeholder="Any notes about the book..."></textarea>
+            </label>
+
         </form>
         <div class="modal-btns">
             <button class="btn-primary" onclick="submitDonation()">Submit Donation</button>
             <button class="btn-ghost" onclick="closeDonateModal()">Cancel</button>
         </div>
+
     </div>
 </div>
 
 <main>
 
-    <!-- currently reading - hidden until data loads -->
+    <div class="about-section">
+        <h3>About This Library</h3>
+        <div class="about-grid">
+
+            <div class="about-item">
+                <strong>How to Borrow</strong>
+                Find a book below and click <em>Borrow</em>. A librarian will review and approve your request. Once approved, claim the book at the library within 3 days.
+            </div>
+
+            <div class="about-item">
+                <strong>EBooks</strong>
+                EBooks are available digitally — click <em>Read</em> to open them instantly. No borrowing process required.
+            </div>
+
+            <div class="about-item">
+                <strong>Overdue & Fines</strong>
+                Books not returned by the due date incur a ₱5/day fine. Return your books on time to avoid fines.
+            </div>
+
+        </div>
+    </div>
+
     <div id="currentlyReadingSection" style="display:none;">
         <h2>Continue Reading</h2>
         <div id="currentlyReadingCards"></div>
@@ -185,26 +231,56 @@ $fname = $_SESSION['FullName'];
     <h2>My Active Borrows</h2>
     <table id="myBorrowsTable">
         <thead>
-            <tr><th>Title</th><th>Type</th><th>Borrow Date</th><th>Due Date</th><th>Status</th></tr>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Borrow Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
         </thead>
-        <tbody><tr><td colspan="5">Loading...</td></tr></tbody>
+        <tbody>
+            <tr>
+                <td colspan="5">Loading...</td>
+            </tr>
+        </tbody>
     </table>
 
     <h2>Books to Claim at Library</h2>
-    <input type="text" id="claimSearch" placeholder="Search by title..." oninput="filterPendingClaims()" style="margin-bottom:8px;padding:5px 8px;border:1px solid #ccc;border-radius:3px;font-size:.83rem;width:240px;">
     <table id="pendingClaimsTable">
         <thead>
-            <tr><th>Title</th><th>Type</th><th>Approved Date</th><th>Claim Deadline</th><th>Action</th></tr>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Approved Date</th>
+                <th>Claim Deadline</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        <tbody><tr><td colspan="5">Loading...</td></tr></tbody>
+        <tbody>
+            <tr>
+                <td colspan="5">Loading...</td>
+            </tr>
+        </tbody>
     </table>
 
     <h2>My Requests</h2>
     <table id="myRequestsTable">
         <thead>
-            <tr><th>Title</th><th>Type</th><th>Request Date</th><th>Status</th><th>Action</th></tr>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        <tbody><tr><td colspan="5">Loading...</td></tr></tbody>
+
+        <tbody>
+            <tr>
+                <td colspan="5">Loading...</td>
+            </tr>
+        </tbody>
     </table>
 
     <h2>Browse Materials</h2>
@@ -224,31 +300,77 @@ $fname = $_SESSION['FullName'];
         <button class="tab-btn" onclick="showTab('all', this)">All Available</button>
     </div>
 
+
+
+
     <div id="paneTrending">
         <table id="trendingTable">
-            <thead><tr><th>Title</th><th>Author</th><th>Type</th><th>Genre</th><th>Available</th><th>Action</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Genre</th>
+                    <th>Available</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
             <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
         </table>
     </div>
 
+
+
+
+
     <div id="paneRecommended" style="display:none;">
         <table id="recommendedTable">
-            <thead><tr><th>Title</th><th>Author</th><th>Type</th><th>Genre</th><th>Available</th><th>Action</th></tr></thead>
-            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Genre</th>
+                    <th>Available</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6">Loading...</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
     <div id="paneAll" style="display:none;">
         <table id="allTable">
-            <thead><tr><th>Title</th><th>Author</th><th>Type</th><th>Genre</th><th>Available</th><th>Action</th></tr></thead>
-            <tbody><tr><td colspan="6">Loading...</td></tr></tbody>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Genre</th>
+                    <th>Available</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6">Loading...</td>
+                </tr>
+            </tbody>
         </table>
     </div>
+
+<footer>
+    &copy; <?php echo date('Y'); ?> Library Management System
+</footer>
 
 </main>
 
 <script src="app/Views/Auth/logAuth.js"></script>
-<script src="app/Views/Member/logBorrow.js?v=5"></script>
+<script src="app/Views/Member/logBorrow.js?v=6"></script>
 
 </body>
 </html>

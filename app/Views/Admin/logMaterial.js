@@ -1,24 +1,27 @@
 const CTRL = 'app/Controllers/materialController.php';
-var searchTimer;
+let searchTimer;
 
 $(document).ready(function () {
     loadMaterials();
 
+    $('#modalOverlay').hide();
     $('#formBook, #formEbook, #formJournal, #editForm').hide();
 
     $('#btnAddBook').click(function () {
-        $('#editForm, #formEbook, #formJournal').hide();
-        $('#formBook').fadeToggle(300);
+        showModal('formBook');
     });
 
     $('#btnAddEbook').click(function () {
-        $('#editForm, #formBook, #formJournal').hide();
-        $('#formEbook').fadeToggle(300);
+        showModal('formEbook');
     });
 
     $('#btnAddJournal').click(function () {
-        $('#editForm, #formBook, #formEbook').hide();
-        $('#formJournal').fadeToggle(300);
+        showModal('formJournal');
+    });
+
+    // close overlay when clicking outside the box
+    $('#modalOverlay').click(function (e) {
+        if ($(e.target).is('#modalOverlay')) hideAllForms();
     });
 
     $('#searchInput').on('keyup', function () {
@@ -30,16 +33,24 @@ $(document).ready(function () {
     });
 });
 
-function hideAllForms() {
+function showModal(formID) {
     $('#formBook, #formEbook, #formJournal, #editForm').hide();
+    $('#' + formID).show();
+    $('#modalOverlay').fadeIn(200);
+}
+
+function hideAllForms() {
+    $('#modalOverlay').fadeOut(200);
+    $('#formBook, #formEbook, #formJournal, #editForm').hide();
+    hideError();
 }
 
 function showError(msg) {
-    $('#error_text').text(msg).fadeIn();
+    $('#error_text').text(msg).show();
 }
 
 function hideError() {
-    $('#error_text').hide();
+    $('#error_text').hide().text('');
 }
 
 function loadMaterials() {
@@ -50,78 +61,20 @@ function loadMaterials() {
         cache: false,
         dataType: 'json',
         success: function (data) {
-            let bookRows = '';
-            data.books.forEach(m => {
-                bookRows += `<tr>
-                    <td>${m.MaterialID}</td>
-                    <td>Book</td>
-                    <td>${m.Title}</td>
-                    <td>${m.Author}</td>
-                    <td>${m.ISBN ?? 'N/A'}</td>
-                    <td>${m.Publisher}</td>
-                    <td>${m.Genre ?? 'N/A'}</td>
-                    <td>${m.TotalQuantity}</td>
-                    <td>${m.AvailableQuantity}</td>
-                    <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
-                    <td>${m.DateAdded}</td>
-                    <td>
-                        <button onclick="loadEdit(${m.MaterialID})">Edit</button>
-                        <button onclick="archiveMaterial(${m.MaterialID})">Archive</button>
-                    </td>
-                </tr>`;
-            });
-            $('#materialTable tbody').html(bookRows);
-
-            let ebookRows = '';
-            data.ebooks.forEach(m => {
-                ebookRows += `<tr>
-                    <td>${m.MaterialID}</td>
-                    <td>EBook</td>
-                    <td>${m.Title}</td>
-                    <td>${m.Author}</td>
-                    <td>${m.ISBN ?? 'N/A'}</td>
-                    <td>${m.Publisher}</td>
-                    <td>${m.Genre ?? 'N/A'}</td>
-                    <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
-                    <td>${m.DateAdded}</td>
-                    <td>
-                        <button onclick="loadEdit(${m.MaterialID})">Edit</button>
-                        <button onclick="archiveMaterial(${m.MaterialID})">Archive</button>
-                    </td>
-                </tr>`;
-            });
-            $('#ebookTable tbody').html(ebookRows);
-
-            let journalRows = '';
-            data.journals.forEach(m => {
-                journalRows += `<tr>
-                    <td>${m.MaterialID}</td>
-                    <td>Journal</td>
-                    <td>${m.Title}</td>
-                    <td>${m.Author}</td>
-                    <td>${m.ISBN ?? 'N/A'}</td>
-                    <td>${m.Publisher}</td>
-                    <td>${m.JournalType ?? 'N/A'}</td>
-                    <td>${m.TotalQuantity}</td>
-                    <td>${m.AvailableQuantity}</td>
-                    <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
-                    <td>${m.DateAdded}</td>
-                    <td>
-                        <button onclick="loadEdit(${m.MaterialID})">Edit</button>
-                        <button onclick="archiveMaterial(${m.MaterialID})">Archive</button>
-                    </td>
-                </tr>`;
-            });
-            $('#journalTable tbody').html(journalRows);
+            renderMaterials(data);
         }
     });
 }
 
+function buildActions(id) {
+    return `<button class="btn-edit" onclick="loadEdit(${id})">Edit</button><button class="btn-archive" onclick="archiveMaterial(${id})">Archive</button>`;
+}
+
 function addBook() {
     hideError();
-    let title = $('#bookTitle').val().trim();
-    let author = $('#bookAuthor').val().trim();
-    let publisher = $('#bookPublisher').val().trim();
+    var title = $('#bookTitle').val().trim();
+    var author = $('#bookAuthor').val().trim();
+    var publisher = $('#bookPublisher').val().trim();
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
@@ -145,7 +98,6 @@ function addBook() {
         dataType: 'json',
         success: function (res) {
             if (res.success) {
-                alert(res.message);
                 hideAllForms();
                 loadMaterials();
                 clearBookForm();
@@ -164,9 +116,9 @@ function clearBookForm() {
 
 function addEbook() {
     hideError();
-    let title = $('#ebookTitle').val().trim();
-    let author = $('#ebookAuthor').val().trim();
-    let publisher = $('#ebookPublisher').val().trim();
+    var title = $('#ebookTitle').val().trim();
+    var author = $('#ebookAuthor').val().trim();
+    var publisher = $('#ebookPublisher').val().trim();
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
@@ -190,7 +142,6 @@ function addEbook() {
         dataType: 'json',
         success: function (res) {
             if (res.success) {
-                alert(res.message);
                 hideAllForms();
                 loadMaterials();
                 clearEbookForm();
@@ -208,9 +159,9 @@ function clearEbookForm() {
 
 function addJournal() {
     hideError();
-    let title = $('#journalTitle').val().trim();
-    let author = $('#journalAuthor').val().trim();
-    let publisher = $('#journalPublisher').val().trim();
+    var title = $('#journalTitle').val().trim();
+    var author = $('#journalAuthor').val().trim();
+    var publisher = $('#journalPublisher').val().trim();
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
@@ -236,7 +187,6 @@ function addJournal() {
         dataType: 'json',
         success: function (res) {
             if (res.success) {
-                alert(res.message);
                 hideAllForms();
                 loadMaterials();
                 clearJournalForm();
@@ -275,31 +225,29 @@ function loadEdit(id) {
             $('#editJournalType').val(m.JournalType ?? '');
             $('#editJournalInterval').val(m.JournalInterval ?? '');
 
-            hideAllForms();
             $('#editForm').data('typeID', m.TypeID);
             $('#ebookFields, #journalFields').hide();
-
             if (m.TypeID == 2) $('#ebookFields').show();
             if (m.TypeID == 3) $('#journalFields').show();
 
-            $('#editForm').fadeIn(300);
+            showModal('editForm');
         }
     });
 }
 
 function updMaterial() {
     hideError();
-    let materialID = $('#editMaterialID').val();
-    let title = $('#editTitle').val().trim();
-    let author = $('#editAuthor').val().trim();
-    let publisher = $('#editPublisher').val().trim();
-    let typeID = $('#editForm').data('typeID');
+    var materialID = $('#editMaterialID').val();
+    var title = $('#editTitle').val().trim();
+    var author = $('#editAuthor').val().trim();
+    var publisher = $('#editPublisher').val().trim();
+    var typeID = $('#editForm').data('typeID');
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
     if (!publisher) return showError('Publisher is required');
 
-    let data = {
+    var data = {
         action: 'updMaterial',
         materialID: materialID,
         title: title,
@@ -327,8 +275,7 @@ function updMaterial() {
         dataType: 'json',
         success: function (res) {
             if (res.success) {
-                alert(res.message);
-                $('#editForm').hide();
+                hideAllForms();
                 loadMaterials();
             } else {
                 showError(res.message);
@@ -338,40 +285,35 @@ function updMaterial() {
 }
 
 function archiveMaterial(id) {
-    if (!confirm('Archive this material? Its data will be saved to archives.')) return;
+    if (!confirm('Archive this material?')) return;
     $.ajax({
         url: CTRL,
         method: 'POST',
         data: { action: 'archiveMaterial', materialID: id },
         dataType: 'json',
         success: function (res) {
-            alert(res.message);
             if (res.success) loadMaterials();
+            else alert(res.message);
         }
     });
 }
 
 function doMaterialSearch(q) {
-    if (q === '') {
-        loadMaterials();
-        return;
-    }
+    if (q === '') { loadMaterials(); return; }
     $.ajax({
         url: CTRL,
         method: 'GET',
         data: { action: 'search', q: q },
         cache: false,
         dataType: 'json',
-        success: function (data) {
-            renderMaterials(data);
-        }
+        success: function (data) { renderMaterials(data); }
     });
 }
 
 function renderMaterials(data) {
-    let bookRows = '';
+    var bookRows = '';
     if (data.books && data.books.length > 0) {
-        data.books.forEach(m => {
+        data.books.forEach(function(m) {
             bookRows += `<tr>
                 <td>${m.MaterialID}</td><td>Book</td><td>${m.Title}</td>
                 <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
@@ -379,40 +321,34 @@ function renderMaterials(data) {
                 <td>${m.TotalQuantity}</td><td>${m.AvailableQuantity}</td>
                 <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                 <td>${m.DateAdded}</td>
-                <td>
-                    <button onclick="loadEdit(${m.MaterialID})">Edit</button>
-                    <button onclick="archiveMaterial(${m.MaterialID})">Archive</button>
-                </td>
+                <td>${buildActions(m.MaterialID)}</td>
             </tr>`;
         });
     } else {
-        bookRows = '<tr><td colspan="12">No books found</td></tr>';
+        bookRows = '<tr><td colspan="12" style="text-align:center;color:#aaa;">No books found</td></tr>';
     }
     $('#materialTable tbody').html(bookRows);
 
-    let ebookRows = '';
+    var ebookRows = '';
     if (data.ebooks && data.ebooks.length > 0) {
-        data.ebooks.forEach(m => {
+        data.ebooks.forEach(function(m) {
             ebookRows += `<tr>
                 <td>${m.MaterialID}</td><td>EBook</td><td>${m.Title}</td>
                 <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
                 <td>${m.Publisher}</td><td>${m.Genre ?? 'N/A'}</td>
                 <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                 <td>${m.DateAdded}</td>
-                <td>
-                    <button onclick="loadEdit(${m.MaterialID})">Edit</button>
-                    <button onclick="archiveMaterial(${m.MaterialID})">Archive</button>
-                </td>
+                <td>${buildActions(m.MaterialID)}</td>
             </tr>`;
         });
     } else {
-        ebookRows = '<tr><td colspan="10">No ebooks found</td></tr>';
+        ebookRows = '<tr><td colspan="10" style="text-align:center;color:#aaa;">No ebooks found</td></tr>';
     }
     $('#ebookTable tbody').html(ebookRows);
 
-    let journalRows = '';
+    var journalRows = '';
     if (data.journals && data.journals.length > 0) {
-        data.journals.forEach(m => {
+        data.journals.forEach(function(m) {
             journalRows += `<tr>
                 <td>${m.MaterialID}</td><td>Journal</td><td>${m.Title}</td>
                 <td>${m.Author}</td><td>${m.ISBN ?? 'N/A'}</td>
@@ -420,14 +356,11 @@ function renderMaterials(data) {
                 <td>${m.TotalQuantity}</td><td>${m.AvailableQuantity}</td>
                 <td>₱${parseFloat(m.ReplacementCost ?? 0).toFixed(2)}</td>
                 <td>${m.DateAdded}</td>
-                <td>
-                    <button onclick="loadEdit(${m.MaterialID})">Edit</button>
-                    <button onclick="archiveMaterial(${m.MaterialID})">Archive</button>
-                </td>
+                <td>${buildActions(m.MaterialID)}</td>
             </tr>`;
         });
     } else {
-        journalRows = '<tr><td colspan="12">No journals found</td></tr>';
+        journalRows = '<tr><td colspan="12" style="text-align:center;color:#aaa;">No journals found</td></tr>';
     }
     $('#journalTable tbody').html(journalRows);
 }

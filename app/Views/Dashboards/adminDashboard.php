@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../../../core/auth.php";
 
 mustBeStaff();
-
 adminOnly();
 
 if (isDefaultPassword()) {
@@ -10,9 +9,9 @@ if (isDefaultPassword()) {
     exit();
 }
 
-
 $role = $_SESSION['Role'];
 $fname = $_SESSION['FullName'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,24 +20,86 @@ $fname = $_SESSION['FullName'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
-    <title>Staff - Dashboard</title>
+    <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    <h1>Library Management System</h1>
-    <h2><?php echo $role; ?> Dashboard</h2>
-    <h2>Welcome <?php echo $fname; ?></h2>
 
-    <div id="navigation">
-        <h2>Dashboard</h2>
+<header>
+    <h1>Nyle's Library Management System</h1>
+    <div class="header-right">
+        <span><?php echo $role; ?> — <?php echo htmlspecialchars($fname); ?></span>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+</header>
+
+<div class="subbar">
+    <span>Admin Dashboard</span>
+    <span style="font-size:.75rem;color:#aaa;" id="dateNow"></span>
+</div>
+
+<main>
+
+    <div class="section-label">Overview</div>
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="sv" id="statMembers">—</div>
+            <div class="sl">Members</div>
+        </div>
+        <div class="stat-card green">
+            <div class="sv" id="statMaterials">—</div>
+            <div class="sl">Materials</div>
+        </div>
+        <div class="stat-card teal">
+            <div class="sv" id="statActive">—</div>
+            <div class="sl">Active Borrows</div>
+        </div>
+        <div class="stat-card red">
+            <div class="sv" id="statOverdue">—</div>
+            <div class="sl">Overdue</div>
+        </div>
+        <div class="stat-card orange">
+            <div class="sv" id="statPending">—</div>
+            <div class="sl">Pending Requests</div>
+        </div>
+        <div class="stat-card">
+            <div class="sv" id="statDonations">—</div>
+            <div class="sl">Pending Donations</div>
+        </div>
     </div>
 
-        <a href="app/Views/Admin/addStaff.php">Add Staff</a>
-        <a href="app/Views/Admin/addMember.php">Add Member</a>
-        <a href="app/Views/Admin/addMaterial.php">Add Material</a>
-        <a href="app/Views/Circulation/manageBorrows.php">Manage Borrow Requests</a>
-        <a href="app/Views/Dashboards/analystDashboard.php">Analytics</a>
-        <button onclick="logout()">Logout</button>
+    <div class="section-label">Management</div>
+    <div class="nav-grid">
+        <a class="nav-card" href="app/Views/Admin/addStaff.php">👤 Staff</a>
+        <a class="nav-card" href="app/Views/Admin/addMember.php">🪪 Members</a>
+        <a class="nav-card" href="app/Views/Admin/addMaterial.php">📚 Materials</a>
+        <a class="nav-card" href="app/Views/Circulation/manageBorrows.php">🔄 Borrow Requests</a>
+        <a class="nav-card" href="app/Views/Dashboards/analystDashboard.php">📊 Analytics</a>
+        <a class="nav-card" href="app/Views/Dashboards/logArchives.php">🗄️ Logs & Archives</a>
+    </div>  
 
-    <script src="app/Views/Auth/logAuth.js?v=2"></script>
+</main>
+
+<script src="app/Views/Auth/logAuth.js"></script>
+<script>
+document.getElementById('dateNow').textContent = new Date().toLocaleDateString('en-PH', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+});
+
+$.ajax({
+    url: 'app/Controllers/analyticsController.php',
+    method: 'GET',
+    data: { action: 'getSummary' },
+    dataType: 'json',
+    success: function(data) {
+        $('#statMembers').text(data.totalMembers);
+        $('#statMaterials').text(data.totalMaterials);
+        $('#statActive').text(data.activeBorrows);
+        $('#statOverdue').text(data.overdueCount);
+        $('#statPending').text(data.pendingReqs);
+        $('#statDonations').text(data.pendingDonations);
+    }
+});
+</script>
 </body>
 </html>

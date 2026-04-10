@@ -1,8 +1,10 @@
 <?php
-
 require_once __DIR__ . "/../../config/dbConn.php";
 
-$conn = getConnection();
+
+
+$conn = getConnection('admin');
+
 
 //get staff row by email
 function staffEmail($email) {

@@ -77,7 +77,7 @@ function getRecs($memberID) {
 
     $genreValues  = array_column($genres, 'Genre');
     $placeholders = implode(',', array_fill(0, count($genreValues), '?'));
-    $types        = str_repeat('s', count($genreValues));
+    $types = str_repeat('s', count($genreValues));
 
     $stmt = $conn->prepare("
         SELECT m.*, mt.TypeName
@@ -206,17 +206,14 @@ function submitReq($memberID, $materialID) {
     return ['success' => true, 'message' => 'Borrow request submitted. Please wait for approval.'];
 }
 
-// log ebook access and return material info for reader modal
 function accessEbook($memberID, $materialID) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT MaterialID, Title, Author, Description, Genre FROM materials WHERE MaterialID=? AND TypeID=2 AND IsArchived=0");
-    $stmt->bind_param('i', $materialID);
+    $stmt = $conn->prepare("SELECT MaterialID, Title, Author, Description, Genre, FilePath FROM materials WHERE MaterialID=? AND TypeID=2 AND IsArchived=0");    $stmt->bind_param('i', $materialID);
     $stmt->execute();
     $mat = $stmt->get_result()->fetch_assoc();
     if (!$mat) return ['success' => false, 'message' => 'EBook not found'];
 
-    // upsert - increment count each time they open it
     $stmt = $conn->prepare("
         INSERT INTO ebookaccess (MemberID, MaterialID, AccessCount, LastAccessed)
         VALUES (?, ?, 1, NOW())
@@ -228,7 +225,6 @@ function accessEbook($memberID, $materialID) {
     return ['success' => true, 'material' => $mat];
 }
 
-// last 3 ebooks this member opened
 function getCurrentlyReading($memberID) {
     global $conn;
 
@@ -244,7 +240,7 @@ function getCurrentlyReading($memberID) {
     $stmt->bind_param('i', $memberID);
     $stmt->execute();
 
-    $data   = [];
+    $data= [];
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) $data[] = $row;
     return $data;

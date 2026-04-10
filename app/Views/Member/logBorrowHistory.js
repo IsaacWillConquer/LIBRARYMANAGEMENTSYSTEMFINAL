@@ -14,17 +14,17 @@ function loadHistory() {
                 return;
             }
 
-            var rows = '';
+            let rows = '';
             data.forEach(function (b) {
-                var statusStyle = b.Status === 'Overdue' ? 'color:red;font-weight:bold;' : '';
+                let statusStyle = b.Status === 'Overdue' ? 'color:red;font-weight:bold;' : '';
                 var returnDate = b.ReturnDate ? b.ReturnDate : '-';
 
-                var fineText = '-';
+                let fineText = '-';
                 if (b.OverdueFine > 0) {
-                    var due = new Date(b.DueDate);
-                    var returned = b.ReturnDate ? new Date(b.ReturnDate) : new Date();
-                    var days = Math.floor((returned - due) / (1000 * 60 * 60 * 24));
-                    var rate = (parseFloat(b.OverdueFine) / days).toFixed(2);
+                    let due = new Date(b.DueDate);
+                    let returned = b.ReturnDate ? new Date(b.ReturnDate) : new Date();
+                    let days = Math.floor((returned - due) / (1000 * 60 * 60 * 24));
+                    let rate = (parseFloat(b.OverdueFine) / days).toFixed(2);
                     fineText = days + ' day(s) × ₱' + rate + '/day = ₱' + parseFloat(b.OverdueFine).toFixed(2);
                 }
 

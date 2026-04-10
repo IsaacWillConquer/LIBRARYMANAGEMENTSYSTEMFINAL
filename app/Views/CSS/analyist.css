@@ -1,0 +1,105 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f0f2f5; color: #222; font-size: .85rem; }
+
+header {
+    background: #1a2744; color: #fff;
+    padding: 0 20px; height: 50px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+header h1 { font-size: 1rem; }
+header span { color: #aac; font-size: .82rem; }
+
+.btn-logout {
+    background: #fff; color: #1a2744; border: none;
+    border-radius: 3px; padding: 4px 10px; font-size: .82rem;
+    cursor: pointer; font-family: Arial, sans-serif; margin-left: 12px;
+}
+.btn-back {
+    background: none; color: #aac; border: 1px solid #3a4a6a;
+    border-radius: 3px; padding: 4px 10px; font-size: .82rem;
+    cursor: pointer; font-family: Arial, sans-serif;
+    text-decoration: none;
+}
+
+.subbar {
+    background: #243358; color: #ccc;
+    padding: 7px 20px; font-size: .82rem;
+    display: flex; align-items: center; justify-content: space-between;
+}
+
+main { padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.stat-card {
+    background: #fff; border-radius: 5px;
+    padding: 14px 16px;
+    border-left: 4px solid #4e73df;
+}
+.stat-card.green  { border-left-color: #1cc88a; }
+.stat-card.red    { border-left-color: #e74a3b; }
+.stat-card.orange { border-left-color: #f6c23e; }
+.stat-card.teal   { border-left-color: #36b9cc; }
+.stat-card.purple { border-left-color: #6f42c1; }
+.stat-label { font-size: .72rem; color: #888; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+.stat-value { font-size: 1.5rem; font-weight: bold; color: #1a2744; }
+
+.section-title {
+    font-size: .9rem; font-weight: bold; color: #1a2744;
+    margin: 20px 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid #e0e4ec;
+}
+
+.chart-row { display: grid; gap: 16px; margin-bottom: 20px; }
+.chart-row.cols-1 { grid-template-columns: 1fr; }
+.chart-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.chart-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.chart-card {
+    background: #fff; border-radius: 5px;
+    padding: 16px; overflow: hidden;
+}
+.chart-card h4 {
+    font-size: .82rem; color: #555; margin-bottom: 12px;
+    font-weight: bold; text-transform: uppercase; letter-spacing: .04em;
+}
+.chart-card canvas { width: 100% !important; }
+
+.activity-feed { background: #fff; border-radius: 5px; padding: 16px; }
+.activity-feed h4 { font-size: .82rem; color: #555; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: .04em; }
+.activity-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid #f0f0f0; font-size: .82rem;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-action {
+    font-size: .7rem; font-weight: bold; padding: 2px 7px;
+    border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+}
+.a-Requested   { background: #fef3e2; color: #a05c00; }
+.a-Approved    { background: #edf7f1; color: #1a7a4a; }
+.a-Rejected    { background: #fdecea; color: #c0392b; }
+.a-Returned    { background: #dce8f7; color: #1a4a8a; }
+.a-Cancelled   { background: #f0f0f0; color: #888; }
+.a-Claimed     { background: #e8f4fd; color: #0e6ba8; }
+.a-Unclaimed   { background: #fff0e0; color: #b85c00; }
+.a-MarkedOverdue { background: #fdecea; color: #c0392b; }
+.activity-text { color: #444; line-height: 1.4; }
+.activity-time { font-size: .72rem; color: #aaa; margin-top: 1px; }
+
+.mini-table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+.mini-table th { text-align: left; color: #888; font-size: .72rem; text-transform: uppercase; padding: 0 0 6px; border-bottom: 1px solid #eee; }
+.mini-table td { padding: 6px 0; border-bottom: 1px solid #f5f5f5; }
+.mini-table tr:last-child td { border-bottom: none; }
+.rank { font-weight: bold; color: #1a2744; width: 24px; }
+
+.btn-refresh {
+    background: #1a2744; color: #fff; border: none; border-radius: 3px;
+    padding: 5px 12px; font-size: .78rem; cursor: pointer;
+    font-family: Arial, sans-serif; float: right; margin-bottom: 12px;
+}
+.btn-refresh:hover { background: #243358; }
