@@ -31,12 +31,13 @@ if ($role !== 'Admin' && $role !== 'DataAnalyst') {
 
 
 <header>
-    <h1>Nyle's Library Management System</h1>
+    <h1>Library Management System</h1>
     <div style="display:flex;align-items:center;gap:8px;">
         <span><?php echo $role; ?> — <?php echo htmlspecialchars($fname); ?></span>
         <a class="btn-back" href="app/Views/Dashboards/adminDashboard.php">← Dashboard</a>
+        <a href="app/Views/Dashboards/logArchives.php" class="btn-refresh" style="text-decoration:none;float:left;">Logs & Archives</a>
         <button class="btn-logout" onclick="logout()">Logout</button>
-        <a href="app/Views/Dashboards/logArchives.php" class="btn-refresh" style="text-decoration:none;float:left;">🗄️ Logs & Archives</a>
+
     </div>
 </header>
 

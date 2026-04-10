@@ -70,12 +70,12 @@ $fname = $_SESSION['FullName'];
 
     <div class="section-label">Management</div>
     <div class="nav-grid">
-        <a class="nav-card" href="app/Views/Admin/addStaff.php">👤 Staff</a>
-        <a class="nav-card" href="app/Views/Admin/addMember.php">🪪 Members</a>
-        <a class="nav-card" href="app/Views/Admin/addMaterial.php">📚 Materials</a>
-        <a class="nav-card" href="app/Views/Circulation/manageBorrows.php">🔄 Borrow Requests</a>
-        <a class="nav-card" href="app/Views/Dashboards/analystDashboard.php">📊 Analytics</a>
-        <a class="nav-card" href="app/Views/Dashboards/logArchives.php">🗄️ Logs & Archives</a>
+        <a class="nav-card" href="app/Views/Admin/addStaff.php">Staff</a>
+        <a class="nav-card" href="app/Views/Admin/addMember.php">Members</a>
+        <a class="nav-card" href="app/Views/Admin/addMaterial.php">Materials</a>
+        <a class="nav-card" href="app/Views/Circulation/manageBorrows.php">Borrow Requests</a>
+        <a class="nav-card" href="app/Views/Dashboards/analystDashboard.php">Analytics</a>
+        <a class="nav-card" href="app/Views/Dashboards/logArchives.php">Logs & Archives</a>
     </div>  
 
 </main>
