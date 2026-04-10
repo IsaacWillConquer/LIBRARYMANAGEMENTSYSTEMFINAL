@@ -21,12 +21,14 @@ $fname = $_SESSION['FullName'];
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
     <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <link rel="stylesheet" href="app/Views/CSS/analyist.css">
+
     <title>Admin Dashboard</title>
 </head>
 <body>
 
 <header>
-    <h1>Nyle's Library Management System</h1>
+    <h1>Library Management System</h1>
     <div class="header-right">
         <span><?php echo $role; ?> — <?php echo htmlspecialchars($fname); ?></span>
         <button class="btn-logout" onclick="logout()">Logout</button>
@@ -78,9 +80,25 @@ $fname = $_SESSION['FullName'];
         <a class="nav-card" href="app/Views/Dashboards/logArchives.php">Logs & Archives</a>
     </div>  
 
+
+
+    <div class="section-title">Recent Activity</div>
+    <div class="activity-feed">
+        <h4>Last 10 Actions</h4>
+        <div id="activityFeed"><div class="activity-item" style="color:#aaa;">Loading...</div></div>
+    </div>
+
+
+
+
+
+
+
 </main>
 
 <script src="app/Views/Auth/logAuth.js"></script>
+<script src="app/Views/Dashboards/logAnalytics.js"></script>
+
 <script>
 document.getElementById('dateNow').textContent = new Date().toLocaleDateString('en-PH', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'

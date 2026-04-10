@@ -173,6 +173,6 @@
 </main>
 
 <script src="app/Views/Auth/logAuth.js"></script>
-<script src="app/Views/Circulation/logCirculation.js?v=5"></script>
+<script src="app/Views/Circulation/logCirculation.js?v=6"></script>
 </body>
 </html>

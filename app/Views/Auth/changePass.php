@@ -7,23 +7,30 @@ if (!isset($_SESSION['StaffID']) && !isset($_SESSION['MemberID'])) {
 }
 
 if (isset($_SESSION['DefaultPassword']) && $_SESSION['DefaultPassword'] == 0) {
-    if (isset($_SESSION['StaffID'])) {
-        switch ($_SESSION['Role']) {
+    
+    switch ($_SESSION['Role']) {
             case 'Admin':
-                header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/app/Views/Dashboards/adminDashboard.php'); break;
+                $redirect = 'app/Views/Dashboards/adminDashboard.php';
+                break;
             case 'CirculationLibrarian':
-                header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/app/Views/Circulation/manageBorrows.php'); break;
+                $redirect = 'app/Views/Circulation/manageBorrows.php';
+                break;
             case 'DataAnalyst':
-                header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/app/Views/Dashboards/analystDashboard.php'); break;
+                $redirect = 'app/Views/Dashboards/analystDashboard.php';
+                break;
+            case 'Member':
+                echo json_encode(['success' => true, 'redirect' => 'app/Views/Dashboards/memberDashboard.php']);
+                break;
             default:
-                header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/index.php');
+                $redirect = '/index.php';
+                break;
         }
-    } else {
-        header('Location: /LIBRARYMANAGEMENTSYSTEMFINAL/app/Views/Dashboards/memberDashboard.php');
-    }
-    exit();
+
+        echo json_encode(['success' => true, 'redirect' => $redirect]);
+        exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +63,7 @@ if (isset($_SESSION['DefaultPassword']) && $_SESSION['DefaultPassword'] == 0) {
     </style>
 </head>
 <body>
-    <div class="brand">📚 Nyle's Library Management System</div>
+    <div class="brand">Library Management System</div>
     <div class="box">
         <h2>Change Password</h2>
         <p>You must set a new password before continuing.</p>

@@ -19,12 +19,14 @@ $fname = $_SESSION['FullName'];
     <base href="/LIBRARYMANAGEMENTSYSTEMFINAL/">
     <script src="core/jq.js"></script>
     <link rel="stylesheet" href="app/Views/CSS/generalize.css">
+    <link rel="stylesheet" href="app/Views/CSS/analyist.css">
+
     <title>Staff - Material Management</title>
 </head>
 <body>
 
 <header>
-    <h1>Nyle's Library Management System</h1>
+    <h1>Library Management System</h1>
     <div class="header-right">
         <span><?php echo $role; ?> — <?php echo htmlspecialchars($fname); ?></span>
         <a class="btn btn-ghost" href="app/Views/Dashboards/adminDashboard.php">← Dashboard</a>
@@ -34,7 +36,6 @@ $fname = $_SESSION['FullName'];
 
 <div class="subbar"><span>Material Management</span></div>
 
-<!-- modal overlay -->
 <div id="modalOverlay">
     <div id="modalBox">
         <div id="error_text"></div>

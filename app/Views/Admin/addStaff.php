@@ -11,6 +11,7 @@ if (isDefaultPassword()) {
 $role = $_SESSION['Role'];
 $fname = $_SESSION['FullName'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

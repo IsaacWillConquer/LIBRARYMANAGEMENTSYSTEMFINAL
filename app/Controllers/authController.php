@@ -121,6 +121,8 @@ function login() {
 
     logLogin('Member', $member['MemberID'], $email, 'Success', $ip);
 
+
+
     //DefaultPassword flag - if 1 means they havent changed it yet
     if ($member['DefaultPassword'] == 1) {
         echo json_encode(['success' => true, 'redirect' => 'app/Views/Auth/changepass.php']);
@@ -159,7 +161,7 @@ function changepass() {
                 $redirect = 'app/Views/Dashboards/adminDashboard.php';
                 break;
             case 'CirculationLibrarian':
-                $redirect = 'app/Views/Circulation/manageBorrow.php';
+                $redirect = 'app/Views/Circulation/manageBorrows.php';
                 break;
             case 'DataAnalyst':
                 $redirect = 'app/Views/Dashboards/analystDashboard.php';
