@@ -17,6 +17,7 @@ function loadStatuses() {
         url: CTRL,
         method: 'GET',
         data: { action: 'getStatuses' },
+
         dataType: 'json',
         success: function (data) {
             let option = data.map(s => `<option value="${s.StatusID}">${s.StatusName}</option>`).join('');
@@ -71,7 +72,9 @@ function addMember() {
     $.ajax({
         url: CTRL,
         method: 'POST',
-        data: { action: 'addMember', fname, lname, email, statusID },
+        data: { 
+            action: 'addMember', fname, lname, email, statusID 
+        },
         dataType: 'json',
         success: function (res) {
             if (res.success) {
@@ -117,7 +120,9 @@ function updMember() {
     let statusID = $('#editStatus').val();
 
     if (!fname) return showError('First Name is required');
+
     if (!lname) return showError('Last Name is required');
+    
     if (!email) return showError('Email is required');
 
     $.ajax({
@@ -174,7 +179,7 @@ function renderMemberTable(data) {
         return;
     }
 
-    var rows = '';
+    let rows = '';
     data.forEach(function (m) {
         rows += '<tr>' +
             '<td>' + m.MemberID + '</td>' +

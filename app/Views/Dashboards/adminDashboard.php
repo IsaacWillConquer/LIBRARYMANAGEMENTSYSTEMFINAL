@@ -88,12 +88,6 @@ $fname = $_SESSION['FullName'];
         <div id="activityFeed"><div class="activity-item" style="color:#aaa;">Loading...</div></div>
     </div>
 
-
-
-
-
-
-
 </main>
 
 <script src="app/Views/Auth/logAuth.js"></script>

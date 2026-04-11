@@ -29,7 +29,12 @@ $(document).ready(function () {
             url: 'app/Controllers/authController.php',
             type: 'POST',
             dataType: 'json',
-            data: { action: 'loginDaUser', email: email, password: password },
+            data: {
+                action: 'loginDaUser',
+                email: email,
+                password: password 
+            },
+            
             success: function (resp) {
                 if (resp.success === true) {
                     showError("Login successful! Redirecting...");

@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     $('#searchInput').on('keyup', function () {
         clearTimeout(searchTimer);
-        var q = $(this).val().trim();
+        let q = $(this).val().trim();
         searchTimer = setTimeout(function () {
             doMaterialSearch(q);
         }, 300);
@@ -72,9 +72,9 @@ function buildActions(id) {
 
 function addBook() {
     hideError();
-    var title = $('#bookTitle').val().trim();
-    var author = $('#bookAuthor').val().trim();
-    var publisher = $('#bookPublisher').val().trim();
+    let title = $('#bookTitle').val().trim();
+    let author = $('#bookAuthor').val().trim();
+    let publisher = $('#bookPublisher').val().trim();
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
@@ -116,9 +116,9 @@ function clearBookForm() {
 
 function addEbook() {
     hideError();
-    var title = $('#ebookTitle').val().trim();
-    var author = $('#ebookAuthor').val().trim();
-    var publisher = $('#ebookPublisher').val().trim();
+    let title = $('#ebookTitle').val().trim();
+    let author = $('#ebookAuthor').val().trim();
+    let publisher = $('#ebookPublisher').val().trim();
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
@@ -159,9 +159,9 @@ function clearEbookForm() {
 
 function addJournal() {
     hideError();
-    var title = $('#journalTitle').val().trim();
-    var author = $('#journalAuthor').val().trim();
-    var publisher = $('#journalPublisher').val().trim();
+    let title = $('#journalTitle').val().trim();
+    let author = $('#journalAuthor').val().trim();
+    let publisher = $('#journalPublisher').val().trim();
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
@@ -237,17 +237,17 @@ function loadEdit(id) {
 
 function updMaterial() {
     hideError();
-    var materialID = $('#editMaterialID').val();
-    var title = $('#editTitle').val().trim();
-    var author = $('#editAuthor').val().trim();
-    var publisher = $('#editPublisher').val().trim();
-    var typeID = $('#editForm').data('typeID');
+    let materialID = $('#editMaterialID').val();
+    let title = $('#editTitle').val().trim();
+    let author = $('#editAuthor').val().trim();
+    let publisher = $('#editPublisher').val().trim();
+    let typeID = $('#editForm').data('typeID');
 
     if (!title) return showError('Title is required');
     if (!author) return showError('Author is required');
     if (!publisher) return showError('Publisher is required');
 
-    var data = {
+    let data = {
         action: 'updMaterial',
         materialID: materialID,
         title: title,
@@ -311,7 +311,7 @@ function doMaterialSearch(q) {
 }
 
 function renderMaterials(data) {
-    var bookRows = '';
+    let bookRows = '';
     if (data.books && data.books.length > 0) {
         data.books.forEach(function(m) {
             bookRows += `<tr>
@@ -329,7 +329,7 @@ function renderMaterials(data) {
     }
     $('#materialTable tbody').html(bookRows);
 
-    var ebookRows = '';
+    let ebookRows = '';
     if (data.ebooks && data.ebooks.length > 0) {
         data.ebooks.forEach(function(m) {
             ebookRows += `<tr>
@@ -346,7 +346,7 @@ function renderMaterials(data) {
     }
     $('#ebookTable tbody').html(ebookRows);
 
-    var journalRows = '';
+    let journalRows = '';
     if (data.journals && data.journals.length > 0) {
         data.journals.forEach(function(m) {
             journalRows += `<tr>

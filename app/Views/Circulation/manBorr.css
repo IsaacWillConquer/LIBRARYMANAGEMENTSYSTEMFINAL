@@ -9,7 +9,6 @@ body {
     color: #333;
 }
 
-/* ── logout text (hidden by default) ── */
 #logoutText {
     display: none !important;
     position: fixed; inset: 0;
@@ -19,7 +18,6 @@ body {
     z-index: 9999;
 }
 
-/* ── header ── */
 header {
     background: #1a1a2e;
     color: #fff;
@@ -36,7 +34,6 @@ header h1 { font-size: 1.3rem; }
 }
 .header-right span { font-size: .85rem; opacity: .85; }
 
-/* ── buttons ── */
 .btn {
     padding: 6px 12px;
     border-radius: 4px;

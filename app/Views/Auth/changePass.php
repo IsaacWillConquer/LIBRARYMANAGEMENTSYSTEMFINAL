@@ -61,6 +61,7 @@ if (isset($_SESSION['DefaultPassword']) && $_SESSION['DefaultPassword'] == 0) {
     </div>
 
     <script>
+        
         $(document).ready(function () {
             $('#changebtn').click(function () {
                 $("#error_text").hide();

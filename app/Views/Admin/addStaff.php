@@ -73,8 +73,14 @@ $fname = $_SESSION['FullName'];
     <table id="staffTable">
         <thead>
             <tr>
-                <th>ID</th><th>Name</th><th>Email</th><th>Role</th>
-                <th>Status</th><th>Default Pass</th><th>Date Created</th><th>Actions</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Default Pass</th>
+                <th>Date Created</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
