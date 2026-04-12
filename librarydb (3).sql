@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2026 at 05:01 PM
+-- Generation Time: Apr 12, 2026 at 08:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -176,7 +176,16 @@ INSERT INTO `archives` (`ArchiveID`, `EntityType`, `EntityID`, `ArchivedData`, `
 (35, 'Member', 7, '{\"MemberID\":7,\"FirstName\":\"Member\",\"LastName\":\"Test\",\"Email\":\"Test@gmail.com\",\"Password\":\"$2y$10$5bayDrmuokkllRAPGf0iFeYjzhnq.6q6NX3AIigdTHx97EdArDGbm\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 18:06:20\"}', '2026-04-10 22:34:17'),
 (36, 'Member', 8, '{\"MemberID\":8,\"FirstName\":\"Delete\",\"LastName\":\"test\",\"Email\":\"Delete@gmail.com\",\"Password\":\"$2y$10$zwNRHwUn6NfNNVfCY\\/an\\/.sARCAJkbsG3AcLh3tvAkFni.tcBkmbG\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-10 22:36:45\"}', '2026-04-10 22:37:18'),
 (37, 'Staff', 21, '{\"StaffID\":21,\"FirstName\":\"Delete\",\"LastName\":\"Test\",\"Email\":\"Delete@gmail.com\",\"Password\":\"$2y$10$HsQNZd9Z4lk44s6gcLY\\/TO1Ylc3bzw\\/AdZsH9Pf2heE\\/VRe9LZnrS\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-10 22:38:03\"}', '2026-04-10 22:38:31'),
-(38, 'Staff', 20, '{\"StaffID\":20,\"FirstName\":\"Nyle2\",\"LastName\":\"Dalay\",\"Email\":\"Nyle2Test@gmail.com\",\"Password\":\"$2y$10$LrOxY9oOXWIbmf4aSqyarO5nmOXJNXJPyGuw3QLeLSV1UFc4NkuQi\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-10 21:47:05\"}', '2026-04-10 22:51:26');
+(38, 'Staff', 20, '{\"StaffID\":20,\"FirstName\":\"Nyle2\",\"LastName\":\"Dalay\",\"Email\":\"Nyle2Test@gmail.com\",\"Password\":\"$2y$10$LrOxY9oOXWIbmf4aSqyarO5nmOXJNXJPyGuw3QLeLSV1UFc4NkuQi\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-10 21:47:05\"}', '2026-04-10 22:51:26'),
+(39, 'Staff', 22, '{\"StaffID\":22,\"FirstName\":\"delete\",\"LastName\":\"test\",\"Email\":\"Delete@gmail.com\",\"Password\":\"$2y$10$.CCjL\\/PhQEiTeTuQEjr8LuKvzdbL9Rqm7ptpLqpOMRe5UoAHbofqi\",\"DefaultPassword\":1,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-10 23:11:09\"}', '2026-04-10 23:11:14'),
+(42, 'Member', 9, '{\"MemberID\":9,\"FirstName\":\"archive\",\"LastName\":\"mem\",\"Email\":\"del@gmail.com\",\"Password\":\"$2y$10$XvzVzBoa\\/E9\\/rwLKqNmmI.8Eiplf5DxpaRkfJ6rVwnxB9HKlBSKqG\",\"DefaultPassword\":1,\"StatusID\":1,\"DateCreated\":\"2026-04-10 23:26:27\"}', '2026-04-10 23:26:30'),
+(44, 'Member', 11, '{\"MemberID\":11,\"FirstName\":\"Nyle\",\"LastName\":\"Dalay\",\"Email\":\"Dalay@gmail.com\",\"Password\":\"$2y$10$7yaVjLbvXRd1fztU65QsA.tqVYBpw4ohppqOIi.VC.EbHpelRI8NC\",\"DefaultPassword\":1,\"StatusID\":1,\"DateCreated\":\"2026-04-10 23:27:28\"}', '2026-04-10 23:28:30'),
+(45, 'Member', 10, '{\"MemberID\":10,\"FirstName\":\"Member\",\"LastName\":\"Nyle\",\"Email\":\"Nyle@gmail.com\",\"Password\":\"$2y$10$j67CXQjAYThZXkcUzrz0N.5V7KYjCgXBYuhV.Pd1Qc0OwJ6DjOFUC\",\"DefaultPassword\":1,\"StatusID\":1,\"DateCreated\":\"2026-04-10 23:27:01\"}', '2026-04-10 23:28:33'),
+(50, 'Member', 6, '{\"MemberID\":6,\"FirstName\":\"Members\",\"LastName\":\"Adriel\",\"Email\":\"MemberAdriel@gmail.com\",\"Password\":\"$2y$10$jebp2kB1f5sHrE9AYVaES.Tx0.USv9x6pj.D9tUEIHle6UoCMJrMW\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-04 01:00:45\"}', '2026-04-10 23:32:41'),
+(52, 'Member', 5, '{\"MemberID\":5,\"FirstName\":\"Member\",\"LastName\":\"Dalay\",\"Email\":\"MemberDalay@gmail.com\",\"Password\":\"$2y$10$w65jf\\/sizhMfGUWpdD8DEuZagqhoXK5C\\/PB5NIXgiXX8uCARxycx2\",\"DefaultPassword\":0,\"StatusID\":1,\"DateCreated\":\"2026-04-03 19:46:58\"}', '2026-04-10 23:33:15'),
+(53, 'Staff', 16, '{\"StaffID\":16,\"FirstName\":\"Circ\",\"LastName\":\"Librarian\",\"Email\":\"CircLib@gmail.com\",\"Password\":\"$2y$10$pdpsQqfQjg8DKaFFWofi..X\\/s44x9bgxjasEny.lPoUgX08IXpQ2.\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-02 16:28:46\"}', '2026-04-10 23:34:12'),
+(54, 'Staff', 19, '{\"StaffID\":19,\"FirstName\":\"Nyle\",\"LastName\":\"Test\",\"Email\":\"NyleTest@gmail.com\",\"Password\":\"$2y$10$jVQzIh8O4nnL\\/BAjeNMWFeYZFogVP9bRB1UB3a7j6wTcmyPR4r6Su\",\"DefaultPassword\":0,\"RoleID\":4,\"StatusID\":1,\"DateCreated\":\"2026-04-10 21:41:20\"}', '2026-04-10 23:34:23'),
+(55, 'Staff', 16, '{\"StaffID\":16,\"FirstName\":\"Circ\",\"LastName\":\"Librarian\",\"Email\":\"CircLib@gmail.com\",\"Password\":\"$2y$10$pdpsQqfQjg8DKaFFWofi..X\\/s44x9bgxjasEny.lPoUgX08IXpQ2.\",\"DefaultPassword\":0,\"RoleID\":2,\"StatusID\":1,\"DateCreated\":\"2026-04-02 16:28:46\"}', '2026-04-10 23:34:33');
 
 -- --------------------------------------------------------
 
@@ -228,20 +237,9 @@ INSERT INTO `borrowlogs` (`LogID`, `StaffID`, `MemberID`, `MaterialID`, `Action`
 (28, 3, 1, 26, 'Approved', '2026-04-03 17:57:25'),
 (29, NULL, 1, 8, 'Requested', '2026-04-03 17:57:34'),
 (30, 3, 1, 8, 'Approved', '2026-04-03 17:57:41'),
-(31, NULL, 5, 26, 'Requested', '2026-04-03 19:48:51'),
-(32, NULL, 5, 8, 'Requested', '2026-04-03 19:49:02'),
-(33, 3, 5, 26, 'Approved', '2026-04-03 19:49:07'),
-(34, 3, 5, 8, 'Rejected', '2026-04-03 19:49:14'),
-(35, NULL, 5, 24, 'Requested', '2026-04-03 19:49:19'),
-(36, 3, 5, 24, 'Approved', '2026-04-03 19:49:26'),
-(37, NULL, 5, 7, 'Requested', '2026-04-03 19:49:44'),
-(38, 3, 5, 7, 'Approved', '2026-04-03 19:49:50'),
 (39, 3, 1, 35, 'Returned', '2026-04-03 22:28:54'),
 (40, 3, 1, 8, 'Returned', '2026-04-03 22:29:01'),
-(41, 3, 5, 24, 'Returned', '2026-04-03 22:29:07'),
 (42, 3, 1, 26, 'Returned', '2026-04-03 22:29:10'),
-(43, 3, 5, 26, 'Returned', '2026-04-03 22:29:15'),
-(44, 3, 5, 7, 'Returned', '2026-04-03 22:29:22'),
 (45, NULL, 1, 24, 'Requested', '2026-04-03 22:33:20'),
 (46, 3, 1, 24, 'Approved', '2026-04-03 22:33:26'),
 (47, NULL, 1, 25, 'Requested', '2026-04-03 22:33:45'),
@@ -266,25 +264,13 @@ INSERT INTO `borrowlogs` (`LogID`, `StaffID`, `MemberID`, `MaterialID`, `Action`
 (66, NULL, 1, 7, 'Requested', '2026-04-03 23:00:35'),
 (67, 3, 1, 7, 'Approved', '2026-04-03 23:00:44'),
 (68, 3, 1, 7, 'Returned', '2026-04-03 23:01:04'),
-(69, NULL, 6, 26, 'Requested', '2026-04-04 01:01:23'),
-(70, 3, 6, 26, 'Approved', '2026-04-04 01:01:43'),
-(71, 3, 6, 26, 'Returned', '2026-04-04 01:02:28'),
-(72, NULL, 6, 26, 'Requested', '2026-04-04 01:03:27'),
-(73, 3, 6, 26, 'Approved', '2026-04-04 01:03:31'),
 (74, NULL, 1, 26, 'Requested', '2026-04-04 01:04:02'),
-(75, 3, 6, 26, 'Returned', '2026-04-04 01:04:23'),
 (76, 3, 1, 26, 'Approved', '2026-04-04 01:04:48'),
 (77, 3, 1, 26, 'Returned', '2026-04-04 01:04:57'),
-(78, NULL, 6, 26, 'Requested', '2026-04-04 01:05:11'),
-(79, NULL, 6, 27, 'Requested', '2026-04-04 01:05:13'),
 (80, NULL, 1, 27, 'Requested', '2026-04-04 01:05:24'),
 (81, 3, 1, 27, 'Approved', '2026-04-04 01:05:42'),
-(82, 3, 6, 27, 'Approved', '2026-04-04 01:05:48'),
-(83, 3, 6, 26, 'Approved', '2026-04-04 01:05:56'),
 (84, NULL, 1, 26, 'Requested', '2026-04-04 01:06:04'),
 (85, 3, 1, 26, 'Approved', '2026-04-04 01:06:14'),
-(86, 3, 6, 26, 'Returned', '2026-04-04 01:06:24'),
-(87, 3, 6, 27, 'Returned', '2026-04-04 01:06:26'),
 (88, 3, 1, 26, 'Returned', '2026-04-04 01:06:28'),
 (89, 3, 1, 27, 'Returned', '2026-04-04 01:06:30'),
 (90, NULL, 1, 7, '', '2026-04-08 22:18:12'),
@@ -302,48 +288,13 @@ INSERT INTO `borrowlogs` (`LogID`, `StaffID`, `MemberID`, `MaterialID`, `Action`
 (102, NULL, 1, 27, '', '2026-04-08 22:18:40'),
 (103, NULL, 1, 35, '', '2026-04-08 22:18:42'),
 (104, NULL, 1, 27, '', '2026-04-08 22:18:47'),
-(105, 16, 5, 7, 'Claimed', '2026-04-09 03:15:34'),
-(106, 16, 5, 26, 'Claimed', '2026-04-09 03:15:37'),
-(107, 16, 5, 24, 'Claimed', '2026-04-09 03:16:00'),
-(108, 16, 6, 26, 'Claimed', '2026-04-09 03:16:02'),
-(109, 16, 6, 26, 'Claimed', '2026-04-09 03:16:05'),
-(110, 16, 6, 26, 'Claimed', '2026-04-09 03:16:06'),
-(111, 16, 6, 27, 'Claimed', '2026-04-09 03:16:08'),
-(112, NULL, 5, 7, 'Cancelled', '2026-04-09 03:17:00'),
-(113, NULL, 5, 26, 'Cancelled', '2026-04-09 03:17:03'),
-(114, NULL, 5, 24, 'Cancelled', '2026-04-09 03:17:05'),
-(115, 16, 6, 26, 'Returned', '2026-04-09 03:28:19'),
-(116, 16, 6, 26, 'Returned', '2026-04-09 03:28:20'),
-(117, 16, 6, 26, 'Returned', '2026-04-09 03:28:22'),
-(118, 16, 6, 27, 'Returned', '2026-04-09 03:28:24'),
-(119, 16, 5, 26, 'Returned', '2026-04-09 03:28:26'),
-(120, 16, 5, 24, 'Returned', '2026-04-09 03:28:27'),
-(121, 16, 5, 7, 'Returned', '2026-04-09 03:28:28'),
-(122, NULL, 5, 7, 'Requested', '2026-04-09 03:28:36'),
-(123, 16, 5, 7, 'Approved', '2026-04-09 03:29:04'),
-(124, 16, 5, 7, 'Claimed', '2026-04-09 03:29:29'),
-(125, NULL, 5, 7, 'Requested', '2026-04-09 03:29:39'),
-(126, 16, 5, 7, 'Approved', '2026-04-09 03:29:49'),
-(127, NULL, 5, 7, 'Cancelled', '2026-04-09 03:33:46'),
-(128, NULL, 5, 6, 'Requested', '2026-04-09 03:33:55'),
-(129, 16, 5, 6, 'Approved', '2026-04-09 03:34:06'),
-(130, NULL, 5, 6, 'Cancelled', '2026-04-09 03:34:24'),
-(131, NULL, 5, 7, 'Requested', '2026-04-09 03:34:40'),
-(132, 16, 5, 7, 'Approved', '2026-04-09 03:34:48'),
-(133, 16, 5, 7, 'Claimed', '2026-04-09 03:34:54'),
-(134, 16, 5, 7, 'Returned', '2026-04-09 03:35:06'),
-(135, 16, 5, 7, 'Returned', '2026-04-09 03:35:13'),
 (136, NULL, 1, 8, 'Requested', '2026-04-09 04:22:35'),
 (137, 16, 1, 8, 'Approved', '2026-04-09 04:22:49'),
 (138, NULL, 1, 8, 'Cancelled', '2026-04-09 04:23:56'),
-(139, NULL, 5, 7, 'Requested', '2026-04-09 04:24:11'),
-(140, 3, 5, 7, 'Approved', '2026-04-09 04:24:16'),
 (141, NULL, 1, 7, 'Requested', '2026-04-09 04:53:12'),
-(142, 3, 5, 7, 'Claimed', '2026-04-09 04:55:18'),
 (143, 3, 1, 7, 'Approved', '2026-04-09 04:57:26'),
 (144, 3, 1, 7, 'Claimed', '2026-04-09 04:57:32'),
 (145, 3, 1, 7, 'Returned', '2026-04-09 04:57:43'),
-(146, 3, 5, 7, 'Returned', '2026-04-09 04:57:45'),
 (147, NULL, 1, 8, 'Requested', '2026-04-09 04:58:13'),
 (148, 3, 1, 8, 'Approved', '2026-04-09 04:59:41'),
 (149, 3, 1, 8, 'Claimed', '2026-04-09 05:00:39'),
@@ -354,32 +305,22 @@ INSERT INTO `borrowlogs` (`LogID`, `StaffID`, `MemberID`, `MaterialID`, `Action`
 (154, NULL, 1, 7, 'Requested', '2026-04-09 05:08:00'),
 (155, 3, 1, 7, 'Approved', '2026-04-09 05:08:16'),
 (156, NULL, 1, 8, '', '2026-04-09 05:25:59'),
-(157, NULL, 5, 164, 'Requested', '2026-04-10 01:06:48'),
-(158, 16, 5, 164, 'Approved', '2026-04-10 01:09:19'),
-(159, 16, 5, 164, 'Claimed', '2026-04-10 01:09:22'),
 (160, 16, 1, 7, 'Claimed', '2026-04-10 03:05:23'),
-(161, 16, 5, 164, 'Returned', '2026-04-10 03:05:35'),
 (162, 16, 1, 7, 'Returned', '2026-04-10 03:05:38'),
 (163, NULL, 1, 162, 'Requested', '2026-04-10 12:32:34'),
 (164, 3, 1, 162, 'Approved', '2026-04-10 12:39:25'),
 (165, 16, 1, 162, 'Claimed', '2026-04-10 15:37:54'),
 (166, NULL, 1, 173, 'Requested', '2026-04-10 15:38:19'),
 (167, 3, 1, 162, 'Returned', '2026-04-10 15:41:08'),
-(168, NULL, 5, 213, 'Requested', '2026-04-10 15:41:24'),
 (169, 3, 1, 173, 'Approved', '2026-04-10 15:41:43'),
-(170, 3, 5, 213, 'Approved', '2026-04-10 15:41:47'),
 (171, 3, 1, 173, 'Claimed', '2026-04-10 15:41:58'),
 (172, 3, 1, 173, '', '2026-04-10 15:42:02'),
-(173, 3, 5, 213, 'Claimed', '2026-04-10 15:42:17'),
-(174, 3, 5, 213, '', '2026-04-10 15:42:20'),
-(175, NULL, 6, 169, 'Requested', '2026-04-10 16:59:43'),
-(176, 3, 6, 169, 'Approved', '2026-04-10 20:01:19'),
-(177, 3, 6, 169, 'Claimed', '2026-04-10 20:01:55'),
-(178, 3, 6, 169, '', '2026-04-10 20:02:01'),
 (183, NULL, 1, 7, 'Requested', '2026-04-10 21:36:24'),
 (184, 16, 1, 7, 'Approved', '2026-04-10 21:37:20'),
 (185, 16, 1, 7, 'Claimed', '2026-04-10 21:37:36'),
-(186, 16, 1, 7, 'Returned', '2026-04-10 21:37:47');
+(186, 16, 1, 7, 'Returned', '2026-04-10 21:37:47'),
+(187, NULL, 12, 7, 'Requested', '2026-04-10 23:41:22'),
+(188, NULL, 12, 8, 'Requested', '2026-04-10 23:41:25');
 
 -- --------------------------------------------------------
 
@@ -409,9 +350,6 @@ INSERT INTO `borrowrecords` (`RecordID`, `RequestID`, `MemberID`, `MaterialID`, 
 (1, 12, 1, 35, 3, '2026-04-03 17:53:01', '2026-04-15', '2026-04-03 22:28:54', 'Returned', 0.00, 3),
 (2, 14, 1, 26, 3, '2026-04-03 17:57:25', '2026-04-15', '2026-04-03 22:29:10', 'Returned', 0.00, 3),
 (3, 15, 1, 8, 3, '2026-04-03 17:57:41', '2026-04-15', '2026-04-03 22:29:01', 'Returned', 0.00, 3),
-(4, 16, 5, 26, 3, '2026-04-03 19:49:07', '2026-04-15', '2026-04-03 22:29:15', 'Returned', 0.00, 3),
-(5, 18, 5, 24, 3, '2026-04-03 19:49:26', '2026-04-15', '2026-04-03 22:29:07', 'Returned', 0.00, 3),
-(6, 19, 5, 7, 3, '2026-04-03 19:49:50', '2026-04-15', '2026-04-03 22:29:22', 'Returned', 0.00, 3),
 (7, 20, 1, 24, 3, '2026-04-03 22:33:26', '2026-04-15', '2026-04-03 22:34:04', 'Returned', 0.00, 3),
 (8, 21, 1, 25, 3, '2026-04-03 22:33:57', '2026-04-15', '2026-04-03 22:34:07', 'Returned', 0.00, 3),
 (9, 22, 1, 27, 3, '2026-04-03 22:34:00', '2026-04-15', '2026-04-03 22:34:03', 'Returned', 0.00, 3),
@@ -420,32 +358,15 @@ INSERT INTO `borrowrecords` (`RecordID`, `RequestID`, `MemberID`, `MaterialID`, 
 (12, 25, 1, 24, 3, '2026-04-03 22:39:22', '2026-04-15', '2026-04-03 22:56:29', 'Returned', 0.00, 3),
 (13, 26, 1, 27, 3, '2026-04-03 22:43:38', '2026-04-15', '2026-04-03 22:56:34', 'Returned', 0.00, 3),
 (14, 27, 1, 7, 3, '2026-04-03 23:00:44', '2026-04-15', '2026-04-03 23:01:04', 'Returned', 0.00, 3),
-(15, 28, 6, 26, 3, '2026-04-04 01:01:42', '2026-04-16', '2026-04-04 01:02:28', 'Returned', 0.00, 3),
-(16, 29, 6, 26, 3, '2026-04-04 01:03:31', '2026-04-16', '2026-04-04 01:04:23', 'Returned', 0.00, 3),
 (17, 30, 1, 26, 3, '2026-04-04 01:04:48', '2026-04-16', '2026-04-04 01:04:57', 'Returned', 0.00, 3),
 (18, 33, 1, 27, 3, '2026-04-04 01:05:42', '2026-04-16', '2026-04-04 01:06:30', 'Returned', 0.00, 3),
-(19, 32, 6, 27, 3, '2026-04-04 01:05:48', '2026-04-16', '2026-04-04 01:06:26', 'Returned', 0.00, 3),
-(20, 31, 6, 26, 3, '2026-04-04 01:05:56', '2026-04-16', '2026-04-04 01:06:24', 'Returned', 0.00, 3),
 (21, 34, 1, 26, 3, '2026-04-04 01:06:14', '2026-04-16', '2026-04-04 01:06:28', 'Returned', 0.00, 3),
-(22, 19, 5, 7, 16, '2026-04-09 03:15:34', '2026-04-22', '2026-04-09 03:28:28', 'Returned', 0.00, 16),
-(23, 16, 5, 26, 16, '2026-04-09 03:15:36', '2026-04-22', '2026-04-09 03:28:26', 'Returned', 0.00, 16),
-(24, 18, 5, 24, 16, '2026-04-09 03:16:00', '2026-04-22', '2026-04-09 03:28:27', 'Returned', 0.00, 16),
-(25, 28, 6, 26, 16, '2026-04-09 03:16:02', '2026-04-22', '2026-04-09 03:28:19', 'Returned', 0.00, 16),
-(26, 29, 6, 26, 16, '2026-04-09 03:16:05', '2026-04-22', '2026-04-09 03:28:20', 'Returned', 0.00, 16),
-(27, 31, 6, 26, 16, '2026-04-09 03:16:06', '2026-04-22', '2026-04-09 03:28:22', 'Returned', 0.00, 16),
-(28, 32, 6, 27, 16, '2026-04-09 03:16:08', '2026-04-22', '2026-04-09 03:28:24', 'Returned', 0.00, 16),
-(29, 35, 5, 7, 16, '2026-04-09 03:29:29', '2026-04-22', '2026-04-09 03:35:06', 'Returned', 0.00, 16),
-(30, 38, 5, 7, 16, '2026-04-09 03:34:54', '2026-04-22', '2026-04-09 03:35:13', 'Returned', 0.00, 16),
-(31, 40, 5, 7, 3, '2026-04-09 04:55:18', '2026-04-22', '2026-04-09 04:57:45', 'Returned', 0.00, 3),
 (32, 41, 1, 7, 3, '2026-04-09 04:57:32', '2026-04-22', '2026-04-09 04:57:43', 'Returned', 0.00, 3),
 (33, 42, 1, 8, 3, '2026-04-09 05:00:39', '2026-04-22', '2026-04-09 05:07:53', 'Returned', 0.00, 3),
 (34, 43, 1, 8, 3, '2026-04-09 05:07:55', '2026-04-22', '2026-04-09 05:25:59', 'Lost', 0.00, NULL),
-(35, 45, 5, 164, 16, '2026-04-10 01:09:22', '2026-04-23', '2026-04-10 03:05:35', 'Returned', 0.00, 16),
 (36, 44, 1, 7, 16, '2026-04-10 03:05:23', '2026-04-23', '2026-04-10 03:05:38', 'Returned', 0.00, 16),
 (37, 46, 1, 162, 16, '2026-04-10 15:37:54', '2026-04-24', '2026-04-10 15:41:08', 'Returned', 0.00, 3),
 (38, 47, 1, 173, 3, '2026-04-10 15:41:58', '2026-04-24', '2026-04-10 15:42:02', 'Lost', 0.00, 3),
-(39, 48, 5, 213, 3, '2026-04-10 15:42:17', '2026-04-24', '2026-04-10 15:42:20', 'Damaged', 0.00, 3),
-(40, 49, 6, 169, 3, '2026-04-10 20:01:55', '2026-04-24', '2026-04-10 20:02:01', 'Lost', 430.00, 3),
 (42, 51, 1, 7, 16, '2026-04-10 21:37:36', '2026-04-24', '2026-04-10 21:37:47', 'Returned', 0.00, 16);
 
 -- --------------------------------------------------------
@@ -487,10 +408,6 @@ INSERT INTO `borrowrequests` (`RequestID`, `MemberID`, `MaterialID`, `Status`, `
 (13, 1, 26, 'Rejected', '2026-04-03 17:53:13', 3, '2026-04-03 17:56:48', NULL, NULL, NULL),
 (14, 1, 26, 'Cancelled', '2026-04-03 17:57:22', 3, '2026-04-03 17:57:25', NULL, NULL, NULL),
 (15, 1, 8, 'Cancelled', '2026-04-03 17:57:34', 3, '2026-04-03 17:57:41', NULL, NULL, NULL),
-(16, 5, 26, 'Cancelled', '2026-04-03 19:48:51', 3, '2026-04-03 19:49:07', NULL, '2026-04-09 03:15:36', NULL),
-(17, 5, 8, 'Rejected', '2026-04-03 19:49:02', 3, '2026-04-03 19:49:14', NULL, NULL, NULL),
-(18, 5, 24, 'Cancelled', '2026-04-03 19:49:19', 3, '2026-04-03 19:49:26', NULL, '2026-04-09 03:16:00', NULL),
-(19, 5, 7, 'Cancelled', '2026-04-03 19:49:44', 3, '2026-04-03 19:49:50', NULL, '2026-04-09 03:15:34', NULL),
 (20, 1, 24, 'Cancelled', '2026-04-03 22:33:20', 3, '2026-04-03 22:33:26', NULL, NULL, NULL),
 (21, 1, 25, 'Cancelled', '2026-04-03 22:33:45', 3, '2026-04-03 22:33:57', NULL, NULL, NULL),
 (22, 1, 27, 'Cancelled', '2026-04-03 22:33:48', 3, '2026-04-03 22:34:00', NULL, NULL, NULL),
@@ -499,29 +416,19 @@ INSERT INTO `borrowrequests` (`RequestID`, `MemberID`, `MaterialID`, `Status`, `
 (25, 1, 24, 'Cancelled', '2026-04-03 22:39:17', 3, '2026-04-03 22:39:22', NULL, NULL, NULL),
 (26, 1, 27, 'Cancelled', '2026-04-03 22:43:29', 3, '2026-04-03 22:43:38', NULL, NULL, NULL),
 (27, 1, 7, 'Cancelled', '2026-04-03 23:00:35', 3, '2026-04-03 23:00:44', NULL, NULL, NULL),
-(28, 6, 26, 'Approved', '2026-04-04 01:01:23', 3, '2026-04-04 01:01:42', NULL, '2026-04-09 03:16:02', NULL),
-(29, 6, 26, 'Approved', '2026-04-04 01:03:27', 3, '2026-04-04 01:03:31', NULL, '2026-04-09 03:16:05', NULL),
 (30, 1, 26, 'Cancelled', '2026-04-04 01:04:02', 3, '2026-04-04 01:04:48', NULL, NULL, NULL),
-(31, 6, 26, 'Approved', '2026-04-04 01:05:11', 3, '2026-04-04 01:05:56', NULL, '2026-04-09 03:16:06', NULL),
-(32, 6, 27, 'Approved', '2026-04-04 01:05:13', 3, '2026-04-04 01:05:48', NULL, '2026-04-09 03:16:08', NULL),
 (33, 1, 27, 'Cancelled', '2026-04-04 01:05:24', 3, '2026-04-04 01:05:42', NULL, NULL, NULL),
 (34, 1, 26, 'Cancelled', '2026-04-04 01:06:04', 3, '2026-04-04 01:06:14', NULL, NULL, NULL),
-(35, 5, 7, 'Approved', '2026-04-09 03:28:36', 16, '2026-04-09 03:29:04', NULL, '2026-04-09 03:29:29', NULL),
-(36, 5, 7, 'Cancelled', '2026-04-09 03:29:39', 16, '2026-04-09 03:29:49', NULL, NULL, NULL),
-(37, 5, 6, 'Cancelled', '2026-04-09 03:33:55', 16, '2026-04-09 03:34:06', NULL, NULL, NULL),
-(38, 5, 7, 'Approved', '2026-04-09 03:34:40', 16, '2026-04-09 03:34:48', NULL, '2026-04-09 03:34:54', NULL),
 (39, 1, 8, 'Cancelled', '2026-04-09 04:22:35', 16, '2026-04-09 04:22:49', NULL, NULL, NULL),
-(40, 5, 7, 'Approved', '2026-04-09 04:24:11', 3, '2026-04-09 04:24:16', '2026-04-12', '2026-04-09 04:55:18', NULL),
 (41, 1, 7, 'Approved', '2026-04-09 04:53:12', 3, '2026-04-09 04:57:26', '2026-04-13', '2026-04-09 04:57:32', NULL),
 (42, 1, 8, 'Approved', '2026-04-09 04:58:13', 3, '2026-04-09 04:59:41', '2026-04-11', '2026-04-09 05:00:39', NULL),
 (43, 1, 8, 'Approved', '2026-04-09 05:00:51', 3, '2026-04-09 05:06:29', '2026-04-17', '2026-04-09 05:07:55', NULL),
 (44, 1, 7, 'Approved', '2026-04-09 05:08:00', 3, '2026-04-09 05:08:16', '2026-04-16', '2026-04-10 03:05:23', NULL),
-(45, 5, 164, 'Approved', '2026-04-10 01:06:48', 16, '2026-04-10 01:09:19', '2026-04-12', '2026-04-10 01:09:22', NULL),
 (46, 1, 162, 'Approved', '2026-04-10 12:32:34', 3, '2026-04-10 12:39:25', '2026-04-13', '2026-04-10 15:37:54', NULL),
 (47, 1, 173, 'Approved', '2026-04-10 15:38:19', 3, '2026-04-10 15:41:43', '2026-04-16', '2026-04-10 15:41:58', NULL),
-(48, 5, 213, 'Approved', '2026-04-10 15:41:24', 3, '2026-04-10 15:41:47', '2026-04-16', '2026-04-10 15:42:17', NULL),
-(49, 6, 169, 'Approved', '2026-04-10 16:59:43', 3, '2026-04-10 20:01:19', '2026-04-13', '2026-04-10 20:01:55', NULL),
-(51, 1, 7, 'Approved', '2026-04-10 21:36:24', 16, '2026-04-10 21:37:20', '2026-04-16', '2026-04-10 21:37:36', NULL);
+(51, 1, 7, 'Approved', '2026-04-10 21:36:24', 16, '2026-04-10 21:37:20', '2026-04-16', '2026-04-10 21:37:36', NULL),
+(52, 12, 7, 'Pending', '2026-04-10 23:41:22', NULL, NULL, NULL, NULL, NULL),
+(53, 12, 8, 'Pending', '2026-04-10 23:41:25', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -543,13 +450,6 @@ CREATE TABLE `donations` (
   `DateSubmitted` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `donations`
---
-
-INSERT INTO `donations` (`DonationID`, `MemberID`, `Title`, `Author`, `Genre`, `Description`, `BookCondition`, `Status`, `ReviewedBy`, `ReviewedDate`, `DateSubmitted`) VALUES
-(1, 5, 'Donation', 'Test', 'Horror', 'i love this book ngl', 'Fair', 'Accepted', 3, '2026-04-10 22:40:47', '2026-04-10 22:40:43');
-
 -- --------------------------------------------------------
 
 --
@@ -569,9 +469,9 @@ CREATE TABLE `ebookaccess` (
 --
 
 INSERT INTO `ebookaccess` (`AccessID`, `MemberID`, `MaterialID`, `AccessCount`, `LastAccessed`) VALUES
-(1, 5, 26, 3, '2026-04-10 19:55:50'),
 (3, 1, 26, 14, '2026-04-10 22:49:28'),
-(16, 1, 180, 2, '2026-04-10 21:36:15');
+(16, 1, 180, 2, '2026-04-10 21:36:15'),
+(21, 12, 183, 1, '2026-04-10 23:41:30');
 
 -- --------------------------------------------------------
 
@@ -802,7 +702,13 @@ INSERT INTO `loginlogs` (`LogID`, `UserType`, `UserID`, `Email`, `Status`, `IPAd
 (206, 'Member', 1, 'MemberNyle@gmail.com', 'Success', '::1', '2026-04-10 22:49:22'),
 (207, 'Staff', NULL, 'AdminNyle@gmail.com', 'Failed', '::1', '2026-04-10 22:49:46'),
 (208, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:49:49'),
-(209, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:55:55');
+(209, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-10 22:55:55'),
+(210, 'Member', 5, 'MemberDalay@gmail.com', 'Success', '::1', '2026-04-10 23:29:05'),
+(211, 'Member', NULL, 'NyleDalay@gmail.com', 'Failed', '::1', '2026-04-10 23:40:42'),
+(212, 'Member', 12, 'NyleDalay@gmail.com', 'Success', '::1', '2026-04-10 23:40:47'),
+(213, 'Member', 12, 'NyleDalay@gmail.com', 'Success', '::1', '2026-04-10 23:41:08'),
+(214, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-12 14:20:57'),
+(215, 'Staff', 3, 'AdminNyle@gmail.com', 'Success', '::1', '2026-04-12 14:21:20');
 
 -- --------------------------------------------------------
 
@@ -838,7 +744,9 @@ INSERT INTO `materiallogs` (`LogID`, `StaffID`, `MaterialID`, `Action`, `LogTime
 (13, 3, 36, 'Archived', '2026-04-03 18:12:43'),
 (14, 3, 35, 'Archived', '2026-04-03 18:12:54'),
 (15, 3, 218, 'Added', '2026-04-10 22:39:25'),
-(16, 3, 218, 'Archived', '2026-04-10 22:39:32');
+(16, 3, 218, 'Archived', '2026-04-10 22:39:32'),
+(17, 3, 169, 'Updated', '2026-04-10 23:03:28'),
+(18, 3, 169, 'Updated', '2026-04-10 23:25:17');
 
 -- --------------------------------------------------------
 
@@ -903,7 +811,7 @@ INSERT INTO `materials` (`MaterialID`, `TypeID`, `Title`, `Author`, `ISBN`, `Des
 (166, 1, 'Man\'s Search for Meaning', 'Viktor Frankl', '9780807014271', 'Psychiatrist\'s memoir of life in Nazi death camps.', 'Psychology', '1946-01-01', 'Beacon Press', 5, 5, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 0, NULL, 350.00),
 (167, 1, 'The Power of Now', 'Eckhart Tolle', '9781577314806', 'A guide to spiritual enlightenment.', 'Self-Help', '1997-01-01', 'New World Library', 5, 5, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 0, NULL, 370.00),
 (168, 1, 'Rich Dad Poor Dad', 'Robert Kiyosaki', '9781612680194', 'What the rich teach their kids about money.', 'Finance', '1997-04-01', 'Warner Books', 5, 5, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 0, NULL, 410.00),
-(169, 1, 'The Lean Startup', 'Eric Ries', '9780307887894', 'How entrepreneurs use continuous innovation.', 'Business', '2011-09-13', 'Crown Business', 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 0, NULL, 430.00),
+(169, 1, 'The Lean Startup', 'Eric Ries', '9780307887894', 'How entrepreneurs use continuous innovation.', 'Business', '2011-09-13', 'Crown Business', 4, 4, '', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 3, '2026-04-10 00:53:51', 0, NULL, 430.00),
 (170, 1, 'Good to Great', 'Jim Collins', '9780066620992', 'Why some companies make the leap and others don\'t.', 'Business', '2001-10-16', 'HarperBusiness', 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 0.00),
 (171, 1, 'Educated', 'Tara Westover', '9780399590504', 'A memoir about a woman who grew up in a survivalist family.', 'Memoir', '2018-02-20', 'Random House', 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 0.00),
 (172, 1, 'Becoming', 'Michelle Obama', '9781524763138', 'An intimate memoir by the former First Lady.', 'Memoir', '2018-11-13', 'Crown', 5, 5, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2026-04-10 00:53:51', 1, '2026-04-10 18:34:46', 0.00),
@@ -993,8 +901,7 @@ CREATE TABLE `memberlogs` (
 --
 
 INSERT INTO `memberlogs` (`LogID`, `StaffID`, `AffectedMemberID`, `Action`, `LogTime`) VALUES
-(5, 3, 5, 'Created', '2026-04-03 19:46:58'),
-(6, 3, 6, 'Created', '2026-04-04 01:00:45');
+(40, 3, 12, 'Created', '2026-04-10 23:33:33');
 
 -- --------------------------------------------------------
 
@@ -1019,8 +926,7 @@ CREATE TABLE `members` (
 
 INSERT INTO `members` (`MemberID`, `FirstName`, `LastName`, `Email`, `Password`, `DefaultPassword`, `StatusID`, `DateCreated`) VALUES
 (1, 'Member', 'Nyle', 'MemberNyle@gmail.com', '$2y$10$UC.N4kY1VfgMG58Q1lqvvucPApGn9/PqGb5vWNksd6AhUuzGG7LiW', 0, 1, '2026-04-01 01:04:33'),
-(5, 'Member', 'Dalay', 'MemberDalay@gmail.com', '$2y$10$w65jf/sizhMfGUWpdD8DEuZagqhoXK5C/PB5NIXgiXX8uCARxycx2', 0, 1, '2026-04-03 19:46:58'),
-(6, 'Member', 'Adriel', 'MemberAdriel@gmail.com', '$2y$10$jebp2kB1f5sHrE9AYVaES.Tx0.USv9x6pj.D9tUEIHle6UoCMJrMW', 0, 1, '2026-04-04 01:00:45');
+(12, 'Nyle', 'Dalay', 'NyleDalay@gmail.com', '$2y$10$c4npp0FtFR.a/czT9Zbvx.EkphhoEESENxq7c1vFjsQt1gKiGBJY2', 0, 1, '2026-04-10 23:33:33');
 
 -- --------------------------------------------------------
 
@@ -1173,9 +1079,8 @@ CREATE TABLE `stafflogs` (
 --
 
 INSERT INTO `stafflogs` (`LogID`, `AdminID`, `AffectedStaffID`, `Action`, `LogTime`) VALUES
-(22, 3, 16, 'Created', '2026-04-02 16:28:46'),
-(25, 3, 18, 'Created', '2026-04-10 01:00:13'),
-(26, 3, 19, 'Created', '2026-04-10 21:41:20');
+(38, 3, 23, 'Created', '2026-04-10 23:39:08'),
+(39, 3, 24, 'Created', '2026-04-10 23:39:47');
 
 -- --------------------------------------------------------
 
@@ -1222,8 +1127,8 @@ CREATE TABLE `staffs` (
 INSERT INTO `staffs` (`StaffID`, `FirstName`, `LastName`, `Email`, `Password`, `DefaultPassword`, `RoleID`, `StatusID`, `DateCreated`) VALUES
 (3, 'Admin', 'Nyle', 'AdminNyle@gmail.com', '$2b$10$3FkQO8a5Mp3iXt7umHho6.itaHGmOTnYQQnU9mRrKZeZunl1ckQtS', 0, 1, 1, '2026-04-01 01:04:09'),
 (16, 'Circ', 'Librarian', 'CircLib@gmail.com', '$2y$10$pdpsQqfQjg8DKaFFWofi..X/s44x9bgxjasEny.lPoUgX08IXpQ2.', 0, 2, 1, '2026-04-02 16:28:46'),
-(18, 'Anly', 'Librarian', 'AnalLibrarian@gmail.com', '$2y$10$r0emjoj5cRLucFtHO.izM.elzMrbTL5zOG.lSbVqpaW0o0Zuw4Th2', 0, 4, 1, '2026-04-10 01:00:13'),
-(19, 'Nyle', 'Test', 'NyleTest@gmail.com', '$2y$10$jVQzIh8O4nnL/BAjeNMWFeYZFogVP9bRB1UB3a7j6wTcmyPR4r6Su', 0, 4, 1, '2026-04-10 21:41:20');
+(23, 'Isaac', 'Oldton', 'IsaacLibrarian@gmail.com', '$2y$10$F7Owc301CeIb7Zg6e9nhq.UtRfUenIW57d2.vmT10eEWZjEs/t2yq', 1, 4, 1, '2026-04-10 23:39:08'),
+(24, 'Lelouch', 'Britania', 'LelouchLibrarian@gmail.com', '$2y$10$dFePCH5Qt2J9snpo/I7.7uOmcmw7RNk3JLzF4WdP5HqhLnjQPZRzS', 1, 2, 1, '2026-04-10 23:39:47');
 
 -- --------------------------------------------------------
 
@@ -1400,13 +1305,13 @@ ALTER TABLE `staffstatus`
 -- AUTO_INCREMENT for table `archives`
 --
 ALTER TABLE `archives`
-  MODIFY `ArchiveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `ArchiveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `borrowlogs`
 --
 ALTER TABLE `borrowlogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `borrowrecords`
@@ -1418,7 +1323,7 @@ ALTER TABLE `borrowrecords`
 -- AUTO_INCREMENT for table `borrowrequests`
 --
 ALTER TABLE `borrowrequests`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `donations`
@@ -1430,19 +1335,19 @@ ALTER TABLE `donations`
 -- AUTO_INCREMENT for table `ebookaccess`
 --
 ALTER TABLE `ebookaccess`
-  MODIFY `AccessID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `AccessID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `loginlogs`
 --
 ALTER TABLE `loginlogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `materiallogs`
 --
 ALTER TABLE `materiallogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -1460,13 +1365,13 @@ ALTER TABLE `materialtypes`
 -- AUTO_INCREMENT for table `memberlogs`
 --
 ALTER TABLE `memberlogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `memberstatus`
@@ -1490,7 +1395,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `stafflogs`
 --
 ALTER TABLE `stafflogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `staffroles`
@@ -1502,7 +1407,7 @@ ALTER TABLE `staffroles`
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `StaffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `StaffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `staffstatus`
